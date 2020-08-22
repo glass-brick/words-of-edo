@@ -220,6 +220,33 @@ const spells = {
     condition: "cutting",
     description: "The monk shapes a huge amount of energy in an edge shaped form, causing terrible cuts in the monster",
   },
+  tagasu: {
+    name: "tagasu",
+    level: 1,
+    displayName: "Tagasu",
+    damage: 0,
+    special: "",
+    condition: "boost",
+    description: "The monk sets a small amount of spiritual energy aside to supplement his next spell",
+  },
+  shime_tagasu: {
+    name: "shime_tagasu",
+    level: 2,
+    displayName: "Shime Tagasu",
+    damage: 0,
+    special: "",
+    condition: "boost",
+    description: "The monk sets a fair amount of spiritual energy aside to supplement his next spell",
+  },
+  odan_shime_tagasu: {
+    name: "odan_shime_tagasu",
+    level: 3,
+    displayName: "Odan Shime Tagasu",
+    damage: 0,
+    special: "",
+    condition: "boost",
+    description: "The monk sets a huge amount of spiritual energy aside to supplement his next spell",
+  },
 };
 
 const monsters = {
