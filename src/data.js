@@ -3,6 +3,7 @@ import monsterPrototype from "./assets/monster_prototype.png";
 const spells = {
   roku: {
     name: "roku",
+    level: 1,
     displayName: "Roku",
     damage: 15,
     special: "",
@@ -11,6 +12,7 @@ const spells = {
   },
   odan_roku: {
     name: "odan_roku",
+    level: 2,
     displayName: "Odan Roku",
     damage: 37,
     special: "",
@@ -19,6 +21,7 @@ const spells = {
   },
   odan_roku_goten: {
     name: "odan_roku_goten",
+    level: 3,
     displayName: "Odan Roku Goten",
     damage: 73,
     special: "",
@@ -27,6 +30,7 @@ const spells = {
   },
   mamoku: {
     name: "mamoku",
+    level: 1,
     displayName: "Mamoku",
     damage: 0,
     special: "defense_response",
@@ -35,6 +39,7 @@ const spells = {
   },
   shime_mamoku: {
     name: "shime_mamoku",
+    level: 2,
     displayName: "Shime Mamoku",
     damage: 0,
     special: "defense_response",
@@ -43,11 +48,12 @@ const spells = {
   },
   odan_shime_mamoku: {
     name: "odan_shime_mamoku",
+    level: 3,
     displayName: "Odan Shime Mamoku",
     damage: 0,
     special: "defense_response",
     condition: "defense",
-    descrition: "A grand sacred ward protects the monk from the most powerful of magics ",
+    descrition: "A grand sacred ward protects the monk from the most powerful of magics",
   },
 };
 
