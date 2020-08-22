@@ -1,5 +1,7 @@
 import React, { useEffect, useState, useCallback } from "react";
 import "./Battle.scss";
+import data from "./data.js";
+import useBattleState from "./useBattleState";
 
 function Room({
   wordToTell,
@@ -73,6 +75,8 @@ function Room({
 }
 
 export default function Battle(props) {
+  const state = useBattleState({ monster: data.monsters[0] });
+
   return (
     <div className="battle">
       <header className="top-menu">
@@ -94,9 +98,9 @@ export default function Battle(props) {
           Objective: Don't burn the house
         </div>
         <ul className="bottom-menu__log">
-          <li>An evil demon appears!</li>
-          <li>Fire causes structural damage!</li>
-          <li>The demon looks weakened...</li>
+          {state.log.map((line, i) => (
+            <li key={i}>{line}</li>
+          ))}
         </ul>
       </div>
     </div>
