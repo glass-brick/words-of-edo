@@ -78,8 +78,14 @@ const monsters = {
   },
 };
 
+const utils = {
+  minStartingDistance: 4,
+  maxStartingDistance: 7,
+}
+
 export default {
   monsters,
   spells,
+  utils,
   spellList: Object.values(spells),
 };
