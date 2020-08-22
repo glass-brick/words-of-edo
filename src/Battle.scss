@@ -5,37 +5,6 @@
   flex-direction: column;
   position: relative;
 
-  .room {
-    flex-grow: 1;
-
-    background-color: darkslategrey;
-
-    position: relative;
-    &__speech {
-      background-color: white;
-      border: 1px solid black;
-      border-radius: 10px;
-      padding: 20px;
-      &__said {
-      }
-      &__leftover {
-        color: gray;
-      }
-    }
-    &__player {
-      position: absolute;
-      left: 0;
-      bottom: 0;
-      height: 50%;
-    }
-    &__enemy {
-      position: absolute;
-      right: 0;
-      top: 0;
-      height: 50%;
-    }
-  }
-
   .bottom-menu {
     position: absolute;
     bottom: 1em;
