@@ -15,7 +15,7 @@ const data = {
       damage: 15,
       special: "",
       condition: "fire",
-      descrition: "Small yet damaging sparks emanate from the monk",
+      description: "Small yet damaging sparks emanate from the monk",
     },
   ],
 };
