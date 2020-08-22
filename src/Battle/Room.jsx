@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./Room.scss";
 import data from "../data.js";
+import priest from "../assets/priest.png";
 
 export default function Room({
   onComplete = () => {},
@@ -64,6 +65,7 @@ export default function Room({
             <span className="room__speech__said">{input}</span>
           </div>
         )}
+        <img alt="Priest" src={priest} />
       </div>
       <div className="room__enemy">
         {enemyWord && (
