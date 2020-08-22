@@ -1,17 +1,22 @@
 .dropdown-portal {
   position: absolute;
   &__list {
-    padding: 10px 20px;
+    padding: 6px 20px 10px;
     background-color: black;
     color: white;
     list-style: none;
     &__item {
+      padding-top: 4px;
       &:not(:last-child) {
         border-bottom: 1px solid white;
-        padding-bottom: 5px;
-        margin-bottom: 5px;
+        padding-bottom: 4px;
       }
     }
+  }
+  &__submenu {
+    position: absolute;
+    background-color: white;
+    padding: 4px;
   }
 }
 
