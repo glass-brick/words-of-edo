@@ -18,6 +18,8 @@ const data = {
       descrition: "Small yet damaging sparks emanate from the monk",
     },
   ],
+  minStartingDistance: 4,
+  maxStartingDistance: 7,
 };
 
 export default data;
