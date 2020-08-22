@@ -32,7 +32,7 @@ export default function useBattleState({ monster }) {
   function onCompleteWord(spellUsed) {
     if (spellUsed) {
       let damage = spellUsed.damage ? spellUsed.damage : 0;
-      setMonsterHP(monsterHp - damage);
+      setMonsterHP(Math.round(monsterHp - damage));
 
       // specials logic
       // Specials refer to extra effects on creatures
@@ -40,7 +40,7 @@ export default function useBattleState({ monster }) {
         switch (spellUsed.special) {
           case "defense_response":
             // Defense does nothing against a spell that is not being cast
-            if (monsterDistance.enemyWord) {
+            if (enemyWord) {
               setDefense(spellUsed.level);
             }
             break;
@@ -60,7 +60,11 @@ export default function useBattleState({ monster }) {
 
   function onCompleteEnemyWord(spellUsed) {
     let damage = getPlayerDamageFunction(spellUsed.damage, monsterDistance);
-    setHP(hp - damage);
+    if(defense && spellUsed.level <= defense){
+      damage *= data.utils.defenseMultiplier;
+    }
+    
+    setHP(Math.round(hp - damage));
     setEnemyWord(null);
   }
 
@@ -77,7 +81,7 @@ export default function useBattleState({ monster }) {
         setEnemyWord(monster.spells[0]);
       } else {
         // Moves
-        setMonsterDistance(monsterDistance - monster.speed);
+        setMonsterDistance(Math.round(monsterDistance - monster.speed));
       }
     } // if it's attacking, it has its own logic
   }

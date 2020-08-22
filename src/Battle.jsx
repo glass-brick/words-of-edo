@@ -27,6 +27,7 @@ export default function Battle({ monster = data.monsters.monster_prototype }) {
         onEnemyComplete={state.onCompleteEnemyWord}
         onKeyStroke={state.onKeyStroke}
         monster={monster}
+        monsterDistance = {state.monsterDistance}
       />
 
       <div className="bottom-menu">
@@ -34,7 +35,7 @@ export default function Battle({ monster = data.monsters.monster_prototype }) {
         <div className="bottom-menu__objective-data">
           Enemy HP: {state.monsterHp}
         </div>
-        <div className="bottom-menu__objective">TBD</div>
+        <div className="bottom-menu__objective">TBD DEBUG {state.monsterDistance}</div>
         <ul className="bottom-menu__log">
           {state.log.map((line, i) => (
             <li key={i}>{line}</li>

@@ -137,6 +137,7 @@ const monsters = {
 const utils = {
   minStartingDistance: 4,
   maxStartingDistance: 7,
+  defenseMultiplier: 0.3,
 };
 
 export default {
