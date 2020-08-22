@@ -17,6 +17,20 @@ const data = {
       condition: "fire",
       description: "Small yet damaging sparks emanate from the monk",
     },
+    {
+      name: "odan roku",
+      damage: 37,
+      special: "",
+      condition: "fire",
+      description: "A burst of fire emanates from the monk",
+    },
+    {
+      name: "odan roku goten",
+      damage: 73,
+      special: "",
+      condition: "fire",
+      description: "The king of all flames erupts from the monk",
+    },
   ],
 };
 
