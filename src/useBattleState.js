@@ -29,8 +29,10 @@ export default function useBattleState({ monster }) {
   const [log, addToLog] = useLog(5);
 
   function onCompleteWord(spellUsed) {
-    let damage = spellUsed.damage ? spellUsed.damage : 0;
-    setMonsterHP(monsterHp - damage);
+    if (spellUsed) {
+      let damage = spellUsed.damage ? spellUsed.damage : 0;
+      setMonsterHP(monsterHp - damage);
+    }
   }
 
   function onCompleteEnemyWord(spellUsed) {
