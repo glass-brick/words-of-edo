@@ -63,7 +63,7 @@ const spells = {
     damage: 12,
     special: "",
     condition: "water",
-    descrition: "Magically imbued water drops emanate from the monk",
+    description: "Magically imbued water drops emanate from the monk",
   },
   odan_katara: {
     name: "odan_katara",
@@ -72,7 +72,7 @@ const spells = {
     damage: 30,
     special: "",
     condition: "water",
-    descrition: "A powerful stream of water emanates from the monk",
+    description: "A powerful stream of water emanates from the monk",
   },
   odan_katara_goten: {
     name: "odan_katara_goten",
@@ -81,7 +81,8 @@ const spells = {
     damage: 64,
     special: "",
     condition: "water",
-    descrition: "A single droplet of water with the strength of a tremendous wave emanates from the monk",
+    description:
+      "A single droplet of water with the strength of a tremendous wave emanates from the monk",
   },
   watama: {
     name: "watama",
@@ -90,7 +91,7 @@ const spells = {
     damage: 13,
     special: "",
     condition: "psi",
-    descrition: "A spirit of headache infiltrates the monster's thoughts",
+    description: "A spirit of headache infiltrates the monster's thoughts",
   },
   iteru_watama: {
     name: "iteru_watama",
@@ -99,7 +100,7 @@ const spells = {
     damage: 33,
     special: "",
     condition: "psi",
-    descrition: "An evil spirit of migraine infiltrates the monster's mind",
+    description: "An evil spirit of migraine infiltrates the monster's mind",
   },
   gomoku_iteru_watama: {
     name: "gomoku_iteru_watama",
@@ -108,7 +109,8 @@ const spells = {
     damage: 59,
     special: "",
     condition: "psi",
-    descrition: "A sealed demon infiltrates the monster's mind, causing excruciating pain",
+    description:
+      "A sealed demon infiltrates the monster's mind, causing excruciating pain",
   },
 };
 
@@ -135,7 +137,7 @@ const monsters = {
 const utils = {
   minStartingDistance: 4,
   maxStartingDistance: 7,
-}
+};
 
 export default {
   monsters,
