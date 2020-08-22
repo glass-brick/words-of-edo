@@ -23,6 +23,30 @@ const spells = {
     condition: "fire",
     description: "The king of all flames erupts from the monk",
   },
+  mamoku: {
+    name: "mamoku",
+    displayName: "Mamoku",
+    damage: 0,
+    special: "defense_response",
+    condition: "defense",
+    descrition: "A simple ward protects the monk",
+  },
+  shime_mamoku: {
+    name: "shime_mamoku",
+    displayName: "Shime Mamoku",
+    damage: 0,
+    special: "defense_response",
+    condition: "defense",
+    descrition: "A ward made of many sacred words protects the monk",
+  },
+  odan_shime_mamoku: {
+    name: "odan_shime_mamoku",
+    displayName: "Odan Shime Mamoku",
+    damage: 0,
+    special: "defense_response",
+    condition: "defense",
+    descrition: "A grand sacred ward protects the monk from the most powerful of magics ",
+  },
 };
 
 const monsters = {
