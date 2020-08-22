@@ -1,3 +1,16 @@
+.dropdown-button {
+  padding: 4px;
+  border: none;
+  color: magenta;
+  cursor: pointer;
+  display: inline-block;
+
+  &--disabled {
+    color: white;
+    cursor: not-allowed;
+  }
+}
+
 .dropdown-portal {
   position: absolute;
   &__list {
@@ -18,8 +31,4 @@
     background-color: white;
     padding: 4px;
   }
-}
-
-.dropdown-button {
-  margin-right: 2px;
 }

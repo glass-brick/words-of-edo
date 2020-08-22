@@ -1,5 +1,6 @@
 import React, { useRef, useState } from "react";
 import { createPortal } from "react-dom";
+import cx from "classnames";
 import "./Dropdown.scss";
 
 export default function Dropdown({ title, options = [] }) {
@@ -19,12 +20,13 @@ export default function Dropdown({ title, options = [] }) {
   const subMenuData = options.find((option) => option.name === subMenu);
 
   return (
-    <button
+    <div
       ref={buttonRef}
       onMouseLeave={() => setOpen(false)}
-      onMouseEnter={() => setOpen(true)}
-      disabled={disabled}
-      className="dropdown-button"
+      onMouseOver={() => disabled || setOpen(true)}
+      className={cx("dropdown-button", {
+        "dropdown-button--disabled": disabled,
+      })}
     >
       <span>{title}</span>
       {open &&
@@ -65,6 +67,6 @@ export default function Dropdown({ title, options = [] }) {
           </>,
           document.getElementById("portal-root")
         )}
-    </button>
+    </div>
   );
 }
