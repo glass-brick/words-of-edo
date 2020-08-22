@@ -8,6 +8,14 @@ const data = {
       msperkeystroke: 750,
       spells: "roku",
     },
+    {
+      name: "monster_prototype_2attacks",
+      speed: 0.026,
+      hp: 400,
+      attackchance: 0.15,
+      msperkeystroke: 750,
+      spells: ["roku","odan roku"],
+    },
   ],
   spells: [
     {
