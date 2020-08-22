@@ -8,7 +8,7 @@ const spells = {
     damage: 15,
     special: "",
     condition: "fire",
-    descrition: "Small yet damaging sparks emanate from the monk",
+    description: "Small yet damaging sparks emanate from the monk",
   },
   odan_roku: {
     name: "odan_roku",
@@ -35,7 +35,7 @@ const spells = {
     damage: 0,
     special: "defense_response",
     condition: "defense",
-    descrition: "A simple ward protects the monk",
+    description: "A simple ward protects the monk",
   },
   shime_mamoku: {
     name: "shime_mamoku",
@@ -44,7 +44,7 @@ const spells = {
     damage: 0,
     special: "defense_response",
     condition: "defense",
-    descrition: "A ward made of many sacred words protects the monk",
+    description: "A ward made of many sacred words protects the monk",
   },
   odan_shime_mamoku: {
     name: "odan_shime_mamoku",
@@ -53,7 +53,8 @@ const spells = {
     damage: 0,
     special: "defense_response",
     condition: "defense",
-    descrition: "A grand sacred ward protects the monk from the most powerful of magics",
+    description:
+      "A grand sacred ward protects the monk from the most powerful of magics",
   },
   katara: {
     name: "katara",
@@ -131,7 +132,14 @@ const monsters = {
   },
 };
 
+const utils = {
+  minStartingDistance: 4,
+  maxStartingDistance: 7,
+}
+
 export default {
   monsters,
   spells,
+  utils,
+  spellList: Object.values(spells),
 };
