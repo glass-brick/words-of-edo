@@ -11,6 +11,7 @@ const spells = {
   },
   odan_roku: {
     name: "odan_roku",
+    displayName: "Odan Roku",
     damage: 37,
     special: "",
     condition: "fire",
@@ -18,6 +19,7 @@ const spells = {
   },
   odan_roku_goten: {
     name: "odan_roku_goten",
+    displayName: "Odan Roku Goten",
     damage: 73,
     special: "",
     condition: "fire",
