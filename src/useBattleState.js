@@ -37,12 +37,29 @@ export default function useBattleState({ monster }) {
       // specials logic
       // Specials refer to extra effects on creatures
       if (spellUsed.special) {
+        let finalDistance;
         switch (spellUsed.special) {
           case "defense_response":
             // Defense does nothing against a spell that is not being cast
             if (enemyWord) {
               setDefense(spellUsed.level);
             }
+            break;
+          case "push":
+            finalDistance = monsterDistance + spellUsed.displayName.length * monster.speed * 1.5;
+            if (finalDistance > data.utils.maxStartingDistance){
+              finalDistance = data.utils.maxStartingDistance;
+              addToLog('It can\'t go any further');
+            }
+            setMonsterDistance(finalDistance);
+            break;
+          case "pull":
+            finalDistance = monsterDistance - spellUsed.displayName.length * monster.speed * 1.5;
+            if (finalDistance < data.utils.minStartingDistance){
+              finalDistance = data.utils.minStartingDistance;
+              addToLog('It can\'t go any closer');
+            }
+            setMonsterDistance(finalDistance);
             break;
         }
       }
@@ -63,7 +80,7 @@ export default function useBattleState({ monster }) {
     if(defense && spellUsed.level <= defense){
       damage *= data.utils.defenseMultiplier;
     }
-    
+
     setHP(Math.round(hp - damage));
     setEnemyWord(null);
   }
@@ -81,7 +98,7 @@ export default function useBattleState({ monster }) {
         setEnemyWord(monster.spells[0]);
       } else {
         // Moves
-        setMonsterDistance(Math.round(monsterDistance - monster.speed));
+        setMonsterDistance(monsterDistance - monster.speed);
       }
     } // if it's attacking, it has its own logic
   }
