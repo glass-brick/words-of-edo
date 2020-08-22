@@ -26,44 +26,18 @@ function useLog(maxLines) {
 export default function useBattleState({ monster }) {
   const [hp, setHP] = useState(1000);
   const [monsterHp, setMonsterHP] = useState(monster.hp);
-  const [monsterDistance, setMonsterDistance] = useState(data.utils.maxStartingDistance);
+  const [monsterDistance, setMonsterDistance] = useState(data.maxStartingDistance);
   const [enemyWord, setEnemyWord] = useState(null);
   const [log, addToLog] = useLog(5);
-  const [defense, setDefense] = useState(null);
 
   function onCompleteWord(spellUsed) {
-    if(spellUsed){
-      let damage = spellUsed.damage ? spellUsed.damage : 0;
-      setMonsterHP(monsterHp - damage);
-
-      // specials logic
-      // Specials refer to extra effects on creatures
-      if(spellUsed.special){
-        switch(spellUsed.special){
-          case 'defense_response':
-            // Defense does nothing against a spell that is not being cast
-            if(monsterDistance.enemyWord){
-              setDefense(spellUsed.level);
-            }
-          break;
-        }
-      }
-
-      if(spellUsed.condition) {
-        switch(spellUsed.condition) {
-          case 'fire':
-            addToLog("The house seems damaged");
-            // TODO add fire damage to house
-          break;
-        }
-      }
-    }
+    let damage = spellUsed.damage ? spellUsed.damage : 0;
+    setMonsterHP(monsterHp - damage);
   }
 
   function onCompleteEnemyWord(spellUsed) {
     let damage = getPlayerDamageFunction(spellUsed.damage, monsterDistance);
     setHP(hp - damage);
-    setEnemyWord(null);
   }
 
   function getPlayerDamageFunction(baseDamage, distance) {
