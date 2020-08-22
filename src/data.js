@@ -50,4 +50,5 @@ const monsters = {
 export default {
   monsters,
   spells,
+  spellList: Object.values(spells),
 };

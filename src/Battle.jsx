@@ -15,13 +15,16 @@ function Room({
 
   useEffect(() => {
     const handler = (e) => {
-      console.log(e);
       if (e.code.startsWith("Key") || e.code === "Space") {
         onKeyStroke();
         setInput((input) => `${input}${e.key}`);
       }
       if (e.code === "Enter") {
-        onComplete(input);
+        const matchedSpell = data.spellList.find(
+          (spell) => spell.displayName.toLowerCase() === input.toLowerCase()
+        );
+        // matchedSpell can be null
+        onComplete(matchedSpell);
         setInput("");
       }
     };
@@ -54,9 +57,11 @@ function Room({
   return (
     <div className="room">
       <div className="room__player">
-        <div className="room__speech">
-          <span className="room__speech__said">{input}</span>
-        </div>
+        {input && (
+          <div className="room__speech">
+            <span className="room__speech__said">{input}</span>
+          </div>
+        )}
       </div>
       <div className="room__enemy">
         {enemyWord && (
@@ -81,7 +86,7 @@ function Header(props) {
   return (
     <header className="top-menu">
       <Dropdown title="Items" />
-      <Dropdown title="Spells" options={Object.values(data.spells)} />
+      <Dropdown title="Spells" options={data.spellList} />
     </header>
   );
 }
