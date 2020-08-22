@@ -3,9 +3,12 @@ import Battle from "./Battle";
 
 function App() {
   return (
-    <div className="App">
-      <Battle />
-    </div>
+    <>
+      <div className="App">
+        <Battle />
+      </div>
+      <div id="portal-root"></div>
+    </>
   );
 }
 
