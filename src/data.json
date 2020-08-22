@@ -1,0 +1,21 @@
+{
+  "monsters": [
+    {
+      "monster_name": "monster_prototype",
+      "monster_speed": 0.026,
+      "monster_hp": 400,
+      "monster_attackchance": 0.15,
+      "monster_msperkeystroke": 750,
+      "monster_spells": "roku"
+    }
+  ],
+  "spells": [
+    {
+      "spell_name": "roku",
+      "spell_damage": 15,
+      "spell_special": "",
+      "spell_condition": "fire",
+      "spell_descrition": "Small yet damaging sparks emanate from the monk"
+    }
+  ]
+}
