@@ -8,9 +8,9 @@ function useLog(maxLines) {
     (newItem) =>
       setLog((log) => {
         if (log.length > maxLines) {
-          setLog([...log.slice(1), newItem]);
+          return [...log.slice(1), newItem];
         } else {
-          setLog([...log, newItem]);
+          return [...log, newItem];
         }
       }),
     [maxLines]
