@@ -17,6 +17,9 @@ export default function Room({
         onKeyStroke();
         setInput((input) => `${input}${e.key}`);
       }
+      if (e.code === "Backspace") {
+        setInput((input) => input.slice(0, -1));
+      }
       if (e.code === "Enter") {
         const matchedSpell = data.spellList.find(
           (spell) => spell.displayName.toLowerCase() === input.toLowerCase()
@@ -34,7 +37,8 @@ export default function Room({
 
   const [enemyInput, setEnemyInput] = useState("");
 
-  const leftoverEnemyWord = enemyWord && enemyWord.substring(enemyInput.length);
+  const leftoverEnemyWord =
+    enemyWord && enemyWord.displayName.substring(enemyInput.length);
 
   useEffect(() => {
     let id;
@@ -43,14 +47,14 @@ export default function Room({
         setEnemyInput((enemyInput) => `${enemyInput}${leftoverEnemyWord[0]}`);
         if (leftoverEnemyWord.length === 1) {
           setEnemyInput("");
-          onEnemyComplete();
+          onEnemyComplete(enemyWord);
         }
       }, monster.msperkeystroke);
     }
     return () => {
       if (id) clearTimeout(id);
     };
-  }, [monster, leftoverEnemyWord, onEnemyComplete]);
+  }, [enemyWord, monster, leftoverEnemyWord, onEnemyComplete]);
 
   return (
     <div className="room">

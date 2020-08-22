@@ -2,11 +2,7 @@ import { useState, useCallback } from "react";
 import data from "./data.js";
 
 function useLog(maxLines) {
-  const [log, setLog] = useState([
-    "A demon appears!",
-    "Fire causes structural damage!",
-    "The demon looks weakened...",
-  ]);
+  const [log, setLog] = useState(["A demon appears!"]);
 
   const addToLog = useCallback(
     (newItem) =>
@@ -26,7 +22,9 @@ function useLog(maxLines) {
 export default function useBattleState({ monster }) {
   const [hp, setHP] = useState(1000);
   const [monsterHp, setMonsterHP] = useState(monster.hp);
-  const [monsterDistance, setMonsterDistance] = useState(data.maxStartingDistance);
+  const [monsterDistance, setMonsterDistance] = useState(
+    data.maxStartingDistance
+  );
   const [enemyWord, setEnemyWord] = useState(null);
   const [log, addToLog] = useLog(5);
 
@@ -38,6 +36,7 @@ export default function useBattleState({ monster }) {
   function onCompleteEnemyWord(spellUsed) {
     let damage = getPlayerDamageFunction(spellUsed.damage, monsterDistance);
     setHP(hp - damage);
+    setEnemyWord(null);
   }
 
   function getPlayerDamageFunction(baseDamage, distance) {
@@ -45,14 +44,15 @@ export default function useBattleState({ monster }) {
   }
 
   function onKeyStroke() {
-    if (!enemyWord) { // If we have an enemy word it is attacking
+    if (!enemyWord) {
+      // If we have an enemy word it is attacking
       // tries to attack
-      if(Math.random() < monster.attackchance) {
+      if (Math.random() < monster.attackchance) {
         // Starts attacking
-        setEnemyWord(monster.spells[0].name);
+        setEnemyWord(monster.spells[0]);
       } else {
         // Moves
-        setMonsterDistance(monsterDistance - monster.speed)
+        setMonsterDistance(monsterDistance - monster.speed);
       }
     } // if it's attacking, it has its own logic
   }
@@ -62,9 +62,15 @@ export default function useBattleState({ monster }) {
     monsterHp,
     monsterDistance,
     log,
-    onCompleteWord: (spellUsed) => {onCompleteWord(spellUsed)},
-    onCompleteEnemyWord: (spellUsed) => {onCompleteEnemyWord(spellUsed)},
-    onKeyStroke: () => {onKeyStroke()},
+    onCompleteWord: (spellUsed) => {
+      onCompleteWord(spellUsed);
+    },
+    onCompleteEnemyWord: (spellUsed) => {
+      onCompleteEnemyWord(spellUsed);
+    },
+    onKeyStroke: () => {
+      onKeyStroke();
+    },
     enemyWord,
   };
 }
