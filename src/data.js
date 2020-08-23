@@ -328,6 +328,7 @@ const utils = {
   minStartingDistance: 4,
   maxStartingDistance: 7,
   defenseMultiplier: 0.3,
+  mirrorMultiplier: 0.6,
 };
 
 const missions = [
