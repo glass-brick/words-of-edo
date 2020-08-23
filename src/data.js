@@ -379,8 +379,34 @@ const missions = [
     monster: monsters.aka_manto,
     title: "It's in the bathroom...",
     description:
-      "A strange being is offering toilet paper in the bathroom stalls,",
+      "A strange being is offering toilet paper in the bathroom stalls",
     image: akaManto,
+  },
+  {
+    monster: monsters.aka_manto,
+    title: "The library must be saved",
+    description:
+      "The library is being haunted by a demon",
+    image: akaManto,
+    type: 'protect_library',
+    objectiveHP: 1000,
+  },
+  {
+    monster: monsters.aka_manto,
+    title: "My house!",
+    description:
+      "My living is being haunted by a demon",
+    image: akaManto,
+    type: 'protect_house',
+    objectiveHP: 1000,
+  },
+  {
+    monster: monsters.aka_manto,
+    title: "This person is possessed, don't kill them",
+    description: "I want... you",
+    image: akaManto,
+    type: 'protect_people',
+    objectiveHP: 1000,
   },
 ];
 
