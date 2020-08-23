@@ -74,6 +74,9 @@ export default function useBattleState({ mission, onMissionEnd }) {
             }
             setMonsterDistance(finalDistance);
             break;
+          case 'self_heal':
+            setHP(hp + spellUsed.level * data.utils.healAmount);
+            break;
         }
       }
 
