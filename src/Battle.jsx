@@ -5,21 +5,15 @@ import useBattleState from "./useBattleState";
 import Dropdown from "./Battle/Dropdown";
 import Room from "./Battle/Room";
 
-function Header(props) {
-  return (
-    <header className="top-menu">
-      <Dropdown title="Items" />
-      <Dropdown title="Spells" options={data.spellList} />
-    </header>
-  );
-}
-
 export default function Battle({ mission, onMissionEnd }) {
   const state = useBattleState({ mission, onMissionEnd });
 
   return (
     <div className="battle">
-      <Header />
+      <header className="top-menu">
+        <Dropdown title="Items" />
+        <Dropdown title="Spells" options={data.spellList} />
+      </header>
 
       <Room
         enemyWord={state.enemyWord}
