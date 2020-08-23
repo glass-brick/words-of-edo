@@ -5,7 +5,7 @@ import data from "./data";
 
 function Game() {
   const [monk, setMonk] = useState(data.monk);
-  const [currentMission, setCurrentMission] = useState(null);
+  const [currentMission, setCurrentMission] = useState(data.missions[0]);
   const [transition, setTransition] = useState(false);
 
   useEffect(() => {

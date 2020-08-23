@@ -1,26 +1,32 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Battle.scss";
-import data from "./data.js";
 import useBattleState from "./useBattleState";
-import Dropdown from "./Battle/Dropdown";
 import Room from "./Battle/Room";
-import {Howl, Howler} from 'howler';
+import SpellBook from "./Battle/SpellBook";
 
 export default function Battle({ monk, mission, onMissionEnd }) {
   const state = useBattleState({ monk, mission, onMissionEnd });
   let missionObjName;
-  if( mission.type == 'protect_house' ) missionObjName = 'House'; 
-  if( mission.type == 'protect_library' ) missionObjName = 'Library'; 
-  if( mission.type == 'protect_people' ) missionObjName = 'People'; 
-  let missionObj = mission.type ? `${missionObjName}: ${Math.round(state.objectiveHP / 10)}%` : '';
+  if (mission.type === "protect_house") missionObjName = "House";
+  if (mission.type === "protect_library") missionObjName = "Library";
+  if (mission.type === "protect_people") missionObjName = "People";
+  let missionObj = mission.type
+    ? `${missionObjName}: ${Math.round(state.objectiveHP / 10)}%`
+    : "";
 
+  const [spellBookOpen, setSpellBookOpen] = useState(false);
 
   return (
     <div className="battle">
       <header className="top-menu">
-        <Dropdown title="Items" />
-        <Dropdown title="Spells" options={monk.spells} />
+        <button onClick={() => setSpellBookOpen(true)}>Spells</button>
       </header>
+
+      <SpellBook
+        spells={monk.spells}
+        show={spellBookOpen}
+        onClose={() => setSpellBookOpen(false)}
+      />
 
       <Room
         enemyWord={state.enemyWord}

@@ -43,7 +43,7 @@ export default function Room({
     document.addEventListener("keydown", handler);
 
     return () => document.removeEventListener("keydown", handler);
-  }, [input, onComplete, onKeyStroke]);
+  }, [input, monk.spells, onComplete, onKeyStroke]);
 
   const [enemyInput, setEnemyInput] = useState("");
 
