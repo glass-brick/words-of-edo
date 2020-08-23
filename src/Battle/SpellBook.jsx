@@ -39,8 +39,10 @@ export default function SpellBook({ spells, show, onClose }) {
       }
     };
     document.addEventListener("click", handler);
+    document.addEventListener("keydown", handler);
     return () => {
       document.removeEventListener("click", handler);
+      document.removeEventListener("keydown", handler);
     };
   }, [onClose, show]);
   return (

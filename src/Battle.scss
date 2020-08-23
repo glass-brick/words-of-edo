@@ -9,6 +9,14 @@
 
   .top-menu {
     background: $darkblue;
+
+    &__button {
+      cursor: pointer;
+      color: $yellow;
+      &:hover {
+        color: $darkyellow;
+      }
+    }
   }
 
   .bottom-menu {
