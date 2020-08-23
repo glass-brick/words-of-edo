@@ -342,7 +342,7 @@ const monsters = {
     hp: 400,
     attackchance: 0.15,
     msperkeystroke: 750,
-    spells: [{spell:spells.roku, chances :1}],
+    spells: [{ spell: spells.roku, chances: 1 }],
     sprite: monsterPrototype,
   },
   aka_manto: {
@@ -351,10 +351,12 @@ const monsters = {
     hp: 400,
     attackchance: 0.11,
     msperkeystroke: 800,
-    spells: [{spell:spells.kurae, chances :0.3},
-      {spell:spells.odan_kurae, chances :0.5},
-      {spell:spells.odan_kurae_tsuyi, chances :0.2}],
-    sprite: akaManto,
+    spells: [
+      { spell: spells.kurae, chances: 0.3 },
+      { spell: spells.odan_kurae, chances: 0.5 },
+      { spell: spells.odan_kurae_tsuyi, chances: 0.2 },
+    ],
+    sprite: monsterPrototype,
   },
 };
 
@@ -408,10 +410,16 @@ const missions = [
   },
 ];
 
+const monk = {
+  hp: 1000,
+  spells: [spells.roku, spells.mamoku, spells.nakae],
+};
+
 export default {
   monsters,
   missions,
   spells,
   utils,
+  monk,
   spellList: Object.values(spells),
 };

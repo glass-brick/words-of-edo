@@ -11,6 +11,7 @@ export default function Room({
   onKeyStroke,
   monster,
   monsterDistance,
+  monk,
 }) {
   const scale = monsterDistance * -0.1875 + 2.3125;
   const enemyRef = useRef(null);
@@ -30,7 +31,7 @@ export default function Room({
         setInput((input) => input.slice(0, -1));
       }
       if (e.code === "Enter") {
-        const matchedSpell = data.spellList.find(
+        const matchedSpell = monk.spells.find(
           (spell) => spell.displayName.toLowerCase() === input.toLowerCase()
         );
         // matchedSpell can be null

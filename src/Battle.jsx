@@ -5,20 +5,19 @@ import useBattleState from "./useBattleState";
 import Dropdown from "./Battle/Dropdown";
 import Room from "./Battle/Room";
 
-export default function Battle({ mission, onMissionEnd }) {
-  const state = useBattleState({ mission, onMissionEnd });
+export default function Battle({ monk, mission, onMissionEnd }) {
+  const state = useBattleState({ monk, mission, onMissionEnd });
   let missionObjName;
   if( mission.type == 'protect_house' ) missionObjName = 'House'; 
   if( mission.type == 'protect_library' ) missionObjName = 'Library'; 
   if( mission.type == 'protect_people' ) missionObjName = 'People'; 
   let missionObj = mission.type ? `${missionObjName}: ${Math.round(state.objectiveHP / 10)}%` : '';
-  console.log(mission.objectiveHP);
 
   return (
     <div className="battle">
       <header className="top-menu">
         <Dropdown title="Items" />
-        <Dropdown title="Spells" options={data.spellList} />
+        <Dropdown title="Spells" options={monk.spells} />
       </header>
 
       <Room
@@ -28,10 +27,13 @@ export default function Battle({ mission, onMissionEnd }) {
         onKeyStroke={state.onKeyStroke}
         monster={mission.monster}
         monsterDistance={state.monsterDistance}
+        monk={monk}
       />
 
       <div className="bottom-menu">
-        <div className="bottom-menu__hp">HP: {state.hp}/1000</div>
+        <div className="bottom-menu__hp">
+          HP: {state.hp}/{monk.hp}
+        </div>
         <div className="bottom-menu__objective-data">
           Enemy HP: {state.monsterHp}
         </div>

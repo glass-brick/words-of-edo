@@ -20,9 +20,9 @@ function useLog(maxLines) {
   return [log, addToLog];
 }
 
-export default function useBattleState({ mission, onMissionEnd }) {
+export default function useBattleState({ monk, mission, onMissionEnd }) {
   const { monster } = mission;
-  const [hp, setHP] = useState(1000);
+  const [hp, setHP] = useState(monk.hp);
   const [monsterHp, setMonsterHP] = useState(monster.hp);
   const [monsterDistance, setMonsterDistance] = useState(
     data.utils.maxStartingDistance
@@ -42,7 +42,7 @@ export default function useBattleState({ mission, onMissionEnd }) {
       setDefense(null);
       let damage = spellUsed.damage ? spellUsed.damage : 0;
       let boosted = false;
-      if(boost && boost >= spellUsed.level) {
+      if (boost && boost >= spellUsed.level) {
         damage *= data.utils.boostMultiplier;
         boosted = true;
         setBoost(null);
@@ -59,18 +59,19 @@ export default function useBattleState({ mission, onMissionEnd }) {
             // Defense does nothing against a spell that is not being cast
             if (enemyWord) {
               setDefense(spellUsed.level);
-              if(boosted) setDefenseBoosted(boosted);
+              if (boosted) setDefenseBoosted(boosted);
             }
             break;
           case "defense_mirror":
             // Defense does nothing against a spell that is not being cast
             if (enemyWord) {
               setDefenseMirror(spellUsed.level);
-              if(boosted) setDefenseBoosted(boosted);
+              if (boosted) setDefenseBoosted(boosted);
             }
             break;
           case "push":
-            finalDistance = monsterDistance + 
+            finalDistance =
+              monsterDistance +
               spellUsed.displayName.length * monster.speed * 1.5 * boostValue;
             if (finalDistance > data.utils.maxStartingDistance) {
               finalDistance = data.utils.maxStartingDistance;
@@ -88,10 +89,14 @@ export default function useBattleState({ mission, onMissionEnd }) {
             }
             setMonsterDistance(finalDistance);
             break;
-          case 'self_heal':
-            setHP(Math.round(hp + spellUsed.level * data.utils.healAmount * boostValue));
+          case "self_heal":
+            setHP(
+              Math.round(
+                hp + spellUsed.level * data.utils.healAmount * boostValue
+              )
+            );
             break;
-          case 'boost':
+          case "boost":
             setBoost(spellUsed.level);
             break;
         }
@@ -125,12 +130,14 @@ export default function useBattleState({ mission, onMissionEnd }) {
     let damage = getPlayerDamageFunction(spellUsed.damage, monsterDistance);
     let boosted = defenseBoosted ? data.utils.boostMultiplier : 1;
     if (defense && spellUsed.level <= defense) {
-      damage *= (data.utils.defenseMultiplier / boosted);
-      setDefense(null)
+      damage *= data.utils.defenseMultiplier / boosted;
+      setDefense(null);
     }
     if (defenseMirror && spellUsed.level <= defenseMirror) {
-      setMonsterHP(Math.round(monsterHp - data.utils.mirrorMultiplier * damage * boosted));
-      setDefenseMirror(null)
+      setMonsterHP(
+        Math.round(monsterHp - data.utils.mirrorMultiplier * damage * boosted)
+      );
+      setDefenseMirror(null);
     }
 
     setHP(Math.round(hp - damage));
@@ -148,15 +155,15 @@ export default function useBattleState({ mission, onMissionEnd }) {
       if (Math.random() < monster.attackchance) {
         // choose attack
         let finalAttack = null;
-        if(monster.spells.length === 1){
+        if (monster.spells.length === 1) {
           finalAttack = monster.spells[0].spell;
         } else {
           let randomChoice = Math.random();
           let advance = 0;
-          monster.spells.forEach(attack => {
-            if(attack.chances + advance < randomChoice){
+          monster.spells.forEach((attack) => {
+            if (attack.chances + advance < randomChoice) {
               finalAttack = attack.spell;
-            }else{
+            } else {
               advance += attack.chances;
             }
           });
