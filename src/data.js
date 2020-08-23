@@ -339,7 +339,7 @@ const monsters = {
   monster_prototype: {
     name: "monster_prototype",
     speed: 0.026,
-    hp: 400,
+    hp: 40,
     attackchance: 0.15,
     msperkeystroke: 750,
     spells: [{ spell: spells.roku, chances: 1 }],
@@ -349,14 +349,100 @@ const monsters = {
     name: "aka_manto",
     speed: 0.045,
     hp: 400,
-    attackchance: 0.11,
-    msperkeystroke: 800,
+    attackchance: 0.13,
+    msperkeystroke: 250,
     spells: [
-      { spell: spells.kurae, chances: 0.3 },
-      { spell: spells.odan_kurae, chances: 0.5 },
-      { spell: spells.odan_kurae_tsuyi, chances: 0.2 },
+      {spell:spells.odan_nakae, chances :0.7}, {spell:spells.odan_kurae_tsuyi, chances :0.3},
     ],
     sprite: monsterPrototype,
+  },
+  akakuchi: {
+    name: "akakuchi",
+    speed: 0.055,
+    hp: 650,
+    attackchance: 0.1,
+    msperkeystroke: 300,
+    spells: [
+      {spell:spells.odan_nakae, chances :0.7}, {spell:spells.odan_nakae_tsuyi, chances :0.3},
+    ],
+    sprite: akakuchi,
+  },
+  nekomata: {
+    name: "nekomata",
+    speed: 0.04,
+    hp: 350,
+    attackchance: 0.13,
+    msperkeystroke: 250,
+    spells: [
+      {spell:spells.odan_roku, chances :0.8}, {spell:spells.odan_roku_goten, chances :0.2},
+    ],
+    sprite: nekomata,
+  },
+  nure_onna: {
+    name: "nure_onna",
+    speed: 0.015,
+    hp: 750,
+    attackchance: 0.13,
+    msperkeystroke: 375,
+    spells: [
+      {spell:spells.kurae, chances :0.9}, {spell:spells.odan_kurae_tsuyi, chances :0.1},
+    ],
+    sprite: nureOnna,
+  },
+  tsuchigumo: {
+    name: "tsuchigumo",
+    speed: 0.03,
+    hp: 500,
+    attackchance: 0.1,
+    msperkeystroke: 200,
+    spells: [
+      {spell:spells.odan_shime_tagasu, chances :0.3}, {spell:spells.odan_kurae_tsuyi, chances :0.7},
+    ],
+    sprite: tsuchigumo,
+  },
+  ushi_oni: {
+    name: "ushi_oni",
+    speed: 0.028,
+    hp: 575,
+    attackchance: 0.14,
+    msperkeystroke: 300,
+    spells: [
+      {spell:spells.odan_katara, chances :0.55}, {spell:spells.iteru_watama, chances :0.45},
+    ],
+    sprite: ushiOni,
+  },
+  yama_uba: {
+    name: "yama_uba",
+    speed: 0.07,
+    hp: 325,
+    attackchance: 0.21,
+    msperkeystroke: 330,
+    spells: [
+      {spell:spells.kurae, chances :0.8}, {spell:spells.tagasu, chances :0.2},
+    ],
+    sprite: yamaUba,
+  },
+  yume_no_seirei: {
+    name: "yume_no_seirei",
+    speed: 0.09,
+    hp: 950,
+    attackchance: 0.1,
+    msperkeystroke: 350,
+    spells: [
+      {spell:spells.odan_roku, chances :0.32}, {spell:spells.odan_kurae, chances :0.33}, {spell:spells.odan_katara, chances :0.35},
+    ],
+    sprite: yumeNoSeirei,
+  },
+  yurei: {
+    name: "yurei",
+    speed: 0.055,
+    hp: 425,
+    attackchance: 0.12,
+    msperkeystroke: 225,
+    spells: [
+      {spell:spells.odan_katara_goten, chances :0.4}, {spell:spells.gomoku_iteru_watama, chances :0.6},
+    ],
+    sprite: yurei,
   },
 };
 
@@ -374,7 +460,8 @@ const missions = [
     title: "Save my children!",
     description: "They're possessed by a spooky ghost!",
     type: 'kill',
-    image: akaManto,    
+    image: akaManto,
+    rewards: {spells: [spells.odan_roku]}
   },
   {
     monster: monsters.aka_manto,

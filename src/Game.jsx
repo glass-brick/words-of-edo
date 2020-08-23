@@ -28,7 +28,24 @@ function Game() {
           <Battle
             monk={monk}
             mission={currentMission}
-            onMissionEnd={() => {
+            onMissionEnd={(results) => {
+              if(results.rewards){
+                if(results.rewards.spells){
+                  // here we check if the monk already has these spells 
+                  let newSpells = [];
+                  results.rewards.spells.forEach(spell => {
+                    let monkHasIt = false;
+                    monk.spells.forEach(monkSpell => {
+                      if( monkSpell.name === spell.name){
+                        monkHasIt = true;
+                        return ;
+                      }
+                    })
+                    if( !monkHasIt ) newSpells.push(spell);
+                  });
+                  setMonk({...monk, spells: [...monk.spells, ...newSpells]});
+                }
+              }
               if (!transition) setTransition(true);
               setTimeout(() => {
                 setCurrentMission(null);

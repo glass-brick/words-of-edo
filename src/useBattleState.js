@@ -1,8 +1,11 @@
 /* eslint-disable default-case */
 import { useState, useCallback, useEffect } from "react";
 import data from "./data.js";
+
+// Music & Sound
 import { Howl, Howler } from "howler";
 import musicSrc from "./assets/tin_tintin.mp3";
+import musicSrc2 from "./assets/tin_tin_tin_tin_TIN_TIN_TIN_TIN.mp3";
 
 function useLog(maxLines) {
   const [log, setLog] = useState(["A demon appears!"]);
@@ -22,8 +25,11 @@ function useLog(maxLines) {
   return [log, addToLog];
 }
 
+const possibleMusic = [musicSrc, musicSrc2];
+
+let musicChoice = Math.floor(Math.random() * possibleMusic.length);
 const music = new Howl({
-  src: [musicSrc],
+  src: [possibleMusic[musicChoice]],
   loop: true,
 });
 
@@ -180,8 +186,12 @@ export default function useBattleState({ monk, mission, onMissionEnd }) {
 
   useEffect(() => {
     if (monsterHp <= 0 || hp <= 0) {
+      // HACK so it's not called again
+      setMonsterHP(1);
+      setHP(1);
       let missionObjectivePassed;
       let monkDead;
+      let rewards = mission.rewards;
       if(monsterHp > 0) {
         let missionObjectivePassed = true;
         switch (mission.type) {
@@ -197,6 +207,7 @@ export default function useBattleState({ monk, mission, onMissionEnd }) {
       onMissionEnd({
         missionObjectivePassed,
         monkDead,
+        rewards,
       });
       }
 });
