@@ -302,6 +302,15 @@ const spells = {
     condition: "heal",
     description: "The monk calls upon a huge amount of friendly spirits, asking them to heal his wounds",
   },
+  itochi_nio_sasu_yosu_itsuio: {
+    name: "itochi_nio_sasu_yosu_itsuio",
+    level: 3,
+    displayName: "Itochi Nio Sasu Yosu Itsuio",
+    damage: 0,
+    special: "seal_monster",
+    condition: "seal",
+    description: "The monk fills the seal with spiritual power, preparing it to chain the monster within it",
+  },
 };
 
 const monsters = {
@@ -328,6 +337,7 @@ const utils = {
   minStartingDistance: 4,
   maxStartingDistance: 7,
   defenseMultiplier: 0.3,
+  mirrorMultiplier: 0.6,
 };
 
 const missions = [

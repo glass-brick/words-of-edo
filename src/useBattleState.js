@@ -1,3 +1,4 @@
+/* eslint-disable default-case */
 import { useState, useCallback, useEffect } from "react";
 import data from "./data.js";
 
@@ -29,6 +30,7 @@ export default function useBattleState({ mission, onMissionEnd }) {
   const [enemyWord, setEnemyWord] = useState(null);
   const [log, addToLog] = useLog(5);
   const [defense, setDefense] = useState(null);
+  const [defenseMirror, setDefenseMirror] = useState(null);
 
   function onCompleteWord(spellUsed) {
     if (spellUsed) {
@@ -44,6 +46,12 @@ export default function useBattleState({ mission, onMissionEnd }) {
             // Defense does nothing against a spell that is not being cast
             if (enemyWord) {
               setDefense(spellUsed.level);
+            }
+            break;
+          case "defense_mirror":
+            // Defense does nothing against a spell that is not being cast
+            if (enemyWord) {
+              setDefenseMirror(spellUsed.level);
             }
             break;
           case "push":
@@ -84,6 +92,11 @@ export default function useBattleState({ mission, onMissionEnd }) {
     let damage = getPlayerDamageFunction(spellUsed.damage, monsterDistance);
     if (defense && spellUsed.level <= defense) {
       damage *= data.utils.defenseMultiplier;
+      setDefense(null)
+    }
+    if (defenseMirror && spellUsed.level <= defenseMirror) {
+      setMonsterHP(Math.round(monsterHp - data.utils.mirrorMultiplier * damage));
+      setDefenseMirror(null)
     }
 
     setHP(Math.round(hp - damage));
