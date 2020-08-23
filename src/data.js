@@ -332,7 +332,7 @@ const monsters = {
     spells: [{spell:spells.kurae, chances :0.3},
       {spell:spells.odan_kurae, chances :0.5},
       {spell:spells.odan_kurae_tsuyi, chances :0.2}],
-    sprite: aka_manto,
+    sprite: monsterProtoype,
   },
 };
 
@@ -349,6 +349,12 @@ const missions = [
     monster: monsters.monster_prototype,
     title: "Save my children!",
     description: "They're possessed by a spooky ghost!",
+    image: akaManto,
+  },
+  {
+    monster: monsters.aka_manto,
+    title: "It's in the bathroom...",
+    description: "A strange being is offering toilet paper in the bathroom stalls,",
     image: akaManto,
   },
 ];
