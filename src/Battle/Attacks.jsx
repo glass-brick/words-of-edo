@@ -16,8 +16,8 @@ const attackSpeeds = {
 };
 
 let Attack = ({ enemyPos }, ref) => {
-  const [attackOnPlayer, setAttackOnPlayer] = useState(null);
-  const [attackOnEnemy, setAttackOnEnemy] = useState(null);
+  const [attackOnPlayer, setAttackOnPlayer] = useState({});
+  const [attackOnEnemy, setAttackOnEnemy] = useState({});
   const [activePlayer, setActivePlayer] = useState(false);
   const [activeEnemy, setActiveEnemy] = useState(false);
 
@@ -25,7 +25,7 @@ let Attack = ({ enemyPos }, ref) => {
     let id;
     if (attackOnPlayer) {
       id = setTimeout(() => {
-        setAttackOnPlayer(null);
+        setAttackOnPlayer({});
         setActivePlayer(false);
       }, attackSpeeds[attackOnPlayer] || 1000);
     }
@@ -36,7 +36,7 @@ let Attack = ({ enemyPos }, ref) => {
     let id;
     if (attackOnEnemy) {
       id = setTimeout(() => {
-        setAttackOnEnemy(null);
+        setAttackOnEnemy({});
         setActiveEnemy(false);
       }, attackSpeeds[attackOnEnemy] || 1000);
     }
@@ -46,7 +46,7 @@ let Attack = ({ enemyPos }, ref) => {
   useImperativeHandle(ref, () => ({
     triggerAttack: (spell, playerCasted) => {
       if (playerCasted === "player") {
-        setAttackOnPlayer(spell.condition);
+        setAttackOnPlayer(spell);
         if (activePlayer) {
           setActivePlayer(false);
           setTimeout(() => setActivePlayer(true), 0);
@@ -54,7 +54,7 @@ let Attack = ({ enemyPos }, ref) => {
           setActivePlayer(true);
         }
       } else if (playerCasted === "enemy") {
-        setAttackOnEnemy(spell.condition);
+        setAttackOnEnemy(spell);
         if (activeEnemy) {
           setActiveEnemy(false);
           setTimeout(() => setActiveEnemy(true), 0);
@@ -70,8 +70,9 @@ let Attack = ({ enemyPos }, ref) => {
       {activePlayer && (
         <div
           className="attack"
-          id={attackOnPlayer}
+          id={attackOnPlayer.condition}
           style={{
+            transform: `scale(${attackOnPlayer.level / 3})`,
             top: enemyPos.top,
             left: enemyPos.left,
           }}
@@ -80,8 +81,9 @@ let Attack = ({ enemyPos }, ref) => {
       {activeEnemy && (
         <div
           className="attack"
-          id={attackOnEnemy}
+          id={attackOnEnemy.condition}
           style={{
+            transform: `scale(${attackOnEnemy.level / 3})`,
             bottom: 40,
             left: 200,
           }}
