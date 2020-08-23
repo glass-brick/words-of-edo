@@ -38,7 +38,6 @@ export default function SpellBook({ spells, show, onClose }) {
 
   useEffect(() => {
     const handler = (e) => {
-      console.log(e.target);
       if (!ref.current.contains(e.target) && show) {
         onClose();
       }

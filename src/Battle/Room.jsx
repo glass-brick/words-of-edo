@@ -3,10 +3,11 @@ import "./Room.scss";
 import data from "../data.js";
 import priest from "../assets/priest.png";
 import { createPortal } from "react-dom";
+import Attack from "./Attacks";
 
 export default function Room({
   onComplete = () => {},
-  enemyWord,
+  enemySpell,
   onEnemyComplete = () => {},
   onKeyStroke,
   monster,
@@ -18,6 +19,7 @@ export default function Room({
   const enemyPos = enemyRef.current
     ? enemyRef.current.getBoundingClientRect()
     : {};
+  const attackRef = useRef(null);
 
   const [input, setInput] = useState("");
 
@@ -35,6 +37,9 @@ export default function Room({
           (spell) => spell.displayName.toLowerCase() === input.toLowerCase()
         );
         // matchedSpell can be null
+        if (matchedSpell) {
+          attackRef.current.triggerAttack(matchedSpell, "player");
+        }
         onComplete(matchedSpell);
         setInput("");
       }
@@ -48,7 +53,7 @@ export default function Room({
   const [enemyInput, setEnemyInput] = useState("");
 
   const leftoverEnemyWord =
-    enemyWord && enemyWord.displayName.substring(enemyInput.length);
+    enemySpell && enemySpell.displayName.substring(enemyInput.length);
 
   useEffect(() => {
     let id;
@@ -56,18 +61,20 @@ export default function Room({
       id = setTimeout(() => {
         setEnemyInput((enemyInput) => `${enemyInput}${leftoverEnemyWord[0]}`);
         if (leftoverEnemyWord.length === 1) {
+          attackRef.current.triggerAttack(enemySpell, "enemy");
           setEnemyInput("");
-          onEnemyComplete(enemyWord);
+          onEnemyComplete(enemySpell);
         }
       }, monster.msperkeystroke);
     }
     return () => {
       if (id) clearTimeout(id);
     };
-  }, [enemyWord, monster, leftoverEnemyWord, onEnemyComplete]);
+  }, [enemySpell, monster, leftoverEnemyWord, onEnemyComplete]);
 
   return (
     <div className="room">
+      <Attack enemyPos={enemyPos} ref={attackRef} />
       <div
         className="room__enemy"
         ref={enemyRef}
@@ -77,13 +84,13 @@ export default function Room({
           }px) scale(${scale})`,
         }}
       >
-        {enemyWord &&
+        {enemySpell &&
           createPortal(
             <div
               className="room__speech"
               style={{
                 position: "absolute",
-                left: enemyPos.left - enemyWord.displayName.length * 5 * scale,
+                left: enemyPos.left - enemySpell.displayName.length * 5 * scale,
                 top: enemyPos.top,
               }}
             >

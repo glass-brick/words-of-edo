@@ -29,7 +29,7 @@ export default function Battle({ monk, mission, onMissionEnd }) {
       />
 
       <Room
-        enemyWord={state.enemyWord}
+        enemySpell={state.enemyWord}
         onComplete={state.onCompleteWord}
         onEnemyComplete={state.onCompleteEnemyWord}
         onKeyStroke={state.onKeyStroke}
