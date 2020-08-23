@@ -8,6 +8,14 @@ import ushiOni from "./assets/ushiOni.png";
 import yamaUba from "./assets/yamaUba.png";
 import yumeNoSeirei from "./assets/yumeNoSeirei.png";
 import yurei from "./assets/yurei.png";
+import akakuchiPortrait from "./assets/akakuchi_portrait.png";
+import nekomataPortrait from "./assets/nekomata_portrait.png";
+import nureOnnaPortrait from "./assets/nureOnna_portrait.png";
+import tsuchigumoPortrait from "./assets/tsuchigumo_portrait.png";
+import ushiOniPortrait from "./assets/ushiOni_portrait.png";
+import yamaUbaPortrait from "./assets/yamaUba_portrait.png";
+import yumeNoSeireiPortrait from "./assets/yumeNoSeirei_portrait.png";
+import yureiPortrait from "./assets/yurei_portrait.png";
 
 const spells = {
   roku: {
