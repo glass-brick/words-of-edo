@@ -1,23 +1,32 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Battle.scss";
-import data from "./data.js";
 import useBattleState from "./useBattleState";
-import Dropdown from "./Battle/Dropdown";
 import Room from "./Battle/Room";
-import {Howl, Howler} from 'howler';
+import SpellBook from "./Battle/SpellBook";
 
 export default function Battle({ monk, mission, onMissionEnd }) {
   const state = useBattleState({ monk, mission, onMissionEnd });
   let missionObj = '';
   if(mission.type === 'protect')
     missionObj = mission.type ? `${mission.displayObjective}: ${Math.round(state.objectiveHP / 10)}%` : '';
+  const [spellBookOpen, setSpellBookOpen] = useState(false);
 
   return (
     <div className="battle">
       <header className="top-menu">
-        <Dropdown title="Items" />
-        <Dropdown title="Spells" options={monk.spells} />
+        <span
+          className="top-menu__button"
+          onClick={() => setSpellBookOpen(true)}
+        >
+          Spells
+        </span>
       </header>
+
+      <SpellBook
+        spells={monk.spells}
+        show={spellBookOpen}
+        onClose={() => setSpellBookOpen(false)}
+      />
 
       <Room
         enemyWord={state.enemyWord}
@@ -36,9 +45,7 @@ export default function Battle({ monk, mission, onMissionEnd }) {
         <div className="bottom-menu__objective-data">
           Enemy HP: {state.monsterHp}
         </div>
-        <div className="bottom-menu__objective">
-          {missionObj}
-        </div>
+        <div className="bottom-menu__objective">{missionObj}</div>
         <ul className="bottom-menu__log">
           {state.log.map((line, i) => (
             <li key={i}>{line}</li>

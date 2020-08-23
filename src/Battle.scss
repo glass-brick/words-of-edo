@@ -9,6 +9,15 @@
 
   .top-menu {
     background: $darkblue;
+
+    &__button {
+      padding: 4px;
+      cursor: pointer;
+      color: $yellow;
+      &:hover {
+        color: $darkyellow;
+      }
+    }
   }
 
   .bottom-menu {

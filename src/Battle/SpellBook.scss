@@ -1,0 +1,49 @@
+@import "../index.scss";
+
+.spellbook {
+  position: absolute;
+  z-index: 10;
+  top: 40px;
+  left: 40px;
+  right: 40px;
+  bottom: 40px;
+  background: $orange;
+  border: 1px solid $darkpurple;
+  padding: 20px;
+  display: flex;
+
+  &--hidden {
+    transform: scaleX(0);
+  }
+  transition: transform 500ms ease-in-out;
+
+  &__face {
+    width: 50%;
+    height: 100%;
+    background: $yellow;
+    border-right: 1px solid $darkyellow;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: stretch;
+    &__bottom {
+      flex-grow: 1;
+      display: grid;
+      grid-template-columns: 33% 33% 33%;
+      grid-template-rows: auto;
+      & > * {
+        align-self: flex-end;
+      }
+    }
+  }
+
+  &__spell {
+    height: 30%;
+    &__title {
+    }
+    &__data {
+    }
+    &__description {
+    }
+  }
+}
