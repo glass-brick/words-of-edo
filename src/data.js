@@ -247,6 +247,33 @@ const spells = {
     condition: "boost",
     description: "The monk sets a huge amount of spiritual energy aside to supplement his next spell",
   },
+  gisoku: {
+    name: "gisoku",
+    level: 1,
+    displayName: "Gisoku",
+    damage: 0,
+    special: "defense_mirror",
+    condition: "mirror",
+    description: "The monk exposes a small fraction of his soul, binding it with the monster's. Their pain is briefly one and the same",
+  },
+  odan_gisoku: {
+    name: "odan_gisoku",
+    level: 2,
+    displayName: "Odan Gisoku",
+    damage: 0,
+    special: "defense_mirror",
+    condition: "mirror",
+    description: "The monk exposes a fair fraction of his soul, binding it with the monster's. Their pain is briefly one and the same",
+  },
+  odan_shime_gisoku: {
+    name: "odan_shime_gisku",
+    level: 3,
+    displayName: "Odan Shime Gisoku",
+    damage: 0,
+    special: "defense_mirror",
+    condition: "mirror",
+    description: "The monk exposes a large fraction of his soul, binding it with the monster's. Their pain is briefly one and the same",
+  },
 };
 
 const monsters = {
