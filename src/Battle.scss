@@ -1,3 +1,5 @@
+@import "./index.scss";
+
 .battle {
   height: 100%;
   width: 100%;
@@ -6,7 +8,7 @@
   position: relative;
 
   .top-menu {
-    background: black;
+    background: $darkblue;
   }
 
   .bottom-menu {
@@ -15,10 +17,10 @@
     right: 1em;
     width: 40em;
     height: 20em;
-    background-color: white;
+    background-color: $white;
     display: grid;
-    color: white;
-    border: 1px solid white;
+    color: $darkblue;
+    border: 1px solid $white;
 
     grid-template-columns: 1fr 3fr;
     grid-template-rows: auto auto auto;
@@ -29,7 +31,7 @@
     gap: 1px 1px;
 
     & > * {
-      background-color: black;
+      background-color: $orange;
     }
 
     &__hp {

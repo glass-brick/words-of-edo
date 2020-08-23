@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
 import Battle from "./Battle";
 import Intro from "./Intro/Intro";
+import data from "./data";
 
 function Game() {
-  const [currentMission, setCurrentMission] = useState(null);
+  const [currentMission, setCurrentMission] = useState(data.missions[0]);
   const [transition, setTransition] = useState(false);
 
   useEffect(() => {

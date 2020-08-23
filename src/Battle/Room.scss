@@ -1,7 +1,9 @@
+@import "../index.scss";
+
 .room {
   flex-grow: 1;
 
-  background-color: darkslategrey;
+  background-color: $blue;
 
   position: relative;
   &__speech {

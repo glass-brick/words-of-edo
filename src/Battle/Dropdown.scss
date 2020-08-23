@@ -1,12 +1,14 @@
+@import "../index.scss";
+
 .dropdown-button {
   padding: 4px;
   border: none;
-  color: magenta;
+  color: $yellow;
   cursor: pointer;
   display: inline-block;
 
   &--disabled {
-    color: white;
+    color: $orange;
     cursor: not-allowed;
   }
 }
