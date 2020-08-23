@@ -275,6 +275,33 @@ const spells = {
     condition: "mirror",
     description: "The monk exposes a large fraction of his soul, binding it with the monster's. Their pain is briefly one and the same",
   },
+  chisayu: {
+    name: "chisayu",
+    level: 1,
+    displayName: "Chisayu",
+    damage: 0,
+    special: "self_heal",
+    condition: "heal",
+    description: "The monk calls upon a few friendly spirits, asking them to heal his wounds",
+  },
+  odan_chisayu: {
+    name: "odan_chisayu",
+    level: 2,
+    displayName: "Odan Chisayu",
+    damage: 0,
+    special: "self_heal",
+    condition: "heal",
+    description: "The monk calls upon a considerable amount of friendly spirits, asking them to heal his wounds",
+  },
+  odan_chisayu_goten: {
+    name: "odan_chisayu_goten",
+    level: 3,
+    displayName: "Odan Chisayu Goten",
+    damage: 0,
+    special: "self_heal",
+    condition: "heal",
+    description: "The monk calls upon a huge amount of friendly spirits, asking them to heal his wounds",
+  },
 };
 
 const monsters = {
