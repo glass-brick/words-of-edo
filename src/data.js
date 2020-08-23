@@ -120,8 +120,7 @@ const spells = {
     damage: 7,
     special: "push",
     condition: "kinetic",
-    description:
-      "The monk imbues the air with some energy, pushing the monster back",
+    description: "The monk imbues the air with some energy, pushing the monster back",
   },
   torane_osumaki: {
     name: "torane_osumaki",
@@ -130,8 +129,7 @@ const spells = {
     damage: 18,
     special: "push",
     condition: "kinetic",
-    description:
-      "The monk imbues the air with plenty of energy, pushing the monster back",
+    description: "The monk imbues the air with plenty of energy, pushing the monster back",
   },
   torane_osumaki_tsuyi: {
     name: "torane_osumaki_tsuyi",
@@ -140,8 +138,7 @@ const spells = {
     damage: 30,
     special: "push",
     condition: "kinetic",
-    description:
-      "The monk imbues the air with a huge amount of energy, pushing the monster back",
+    description: "The monk imbues the air with a huge amount of energy, pushing the monster back",
   },
   himaki: {
     name: "himaki",
@@ -150,8 +147,7 @@ const spells = {
     damage: 7,
     special: "pull",
     condition: "kinetic",
-    description:
-      "The monk slightly pulls the strings of fate, pulling the monster closer",
+    description: "The monk slightly pulls the strings of fate, pulling the monster closer",
   },
   robae_himaki: {
     name: "robae_himaki",
@@ -160,8 +156,7 @@ const spells = {
     damage: 18,
     special: "pull",
     condition: "kinetic",
-    description:
-      "The monk strongly pulls the strings of fate, pulling the monster closer",
+    description: "The monk strongly pulls the strings of fate, pulling the monster closer",
   },
   robae_himaki_tsuyi: {
     name: "robae_himaki_tsuyi",
@@ -170,8 +165,7 @@ const spells = {
     damage: 30,
     special: "pull",
     condition: "kinetic",
-    description:
-      "The monk pulls the strings of fate with all his might, pulling the monster closer",
+    description: "The monk pulls the strings of fate with all his might, pulling the monster closer",
   },
   nakae: {
     name: "nakae",
@@ -180,8 +174,7 @@ const spells = {
     damage: 9,
     special: "",
     condition: "kinetic",
-    description:
-      "The monk imbues the air with some power, releasing it suddenly in the form of a spiritual punch",
+    description: "The monk imbues the air with some power, releasing it suddenly in the form of a spiritual punch",
   },
   odan_nakae: {
     name: "odan_nakae",
@@ -190,8 +183,7 @@ const spells = {
     damage: 23,
     special: "",
     condition: "kinetic",
-    description:
-      "The monk imbues the air with a fair amount of power, releasing it suddenly in the form of a strong spiritual punch",
+    description: "The monk imbues the air with a fair amount of power, releasing it suddenly in the form of a strong spiritual punch",
   },
   odan_nakae_tsuyi: {
     name: "odan_nakae_tsuyi",
@@ -200,8 +192,7 @@ const spells = {
     damage: 50,
     special: "",
     condition: "kinetic",
-    description:
-      "The monk imbues the air with a huge amount of power, releasing it suddenly in the form of an extremely powerful spiritual punch",
+    description: "The monk imbues the air with a huge amount of power, releasing it suddenly in the form of an extremely powerful spiritual punch",
   },
   kurae: {
     name: "kurae",
@@ -210,8 +201,7 @@ const spells = {
     damage: 15,
     special: "",
     condition: "cutting",
-    description:
-      "The monk shapes some of energy in an edge shaped form, causing cuts in the monster",
+    description: "The monk shapes some of energy in an edge shaped form, causing cuts in the monster",
   },
   odan_kurae: {
     name: "odan_kurae",
@@ -220,8 +210,7 @@ const spells = {
     damage: 35,
     special: "",
     condition: "cutting",
-    description:
-      "The monk shapes a fair amount of energy in an edge shaped form, causing serious cuts in the monster",
+    description: "The monk shapes a fair amount of energy in an edge shaped form, causing serious cuts in the monster",
   },
   odan_kurae_tsuyi: {
     name: "odan_kurae_tsuyi",
@@ -230,38 +219,34 @@ const spells = {
     damage: 64,
     special: "",
     condition: "cutting",
-    description:
-      "The monk shapes a huge amount of energy in an edge shaped form, causing terrible cuts in the monster",
+    description: "The monk shapes a huge amount of energy in an edge shaped form, causing terrible cuts in the monster",
   },
   tagasu: {
     name: "tagasu",
     level: 1,
     displayName: "Tagasu",
     damage: 0,
-    special: "boost",
+    special: "",
     condition: "boost",
-    description:
-      "The monk sets a small amount of spiritual energy aside to supplement his next spell",
+    description: "The monk sets a small amount of spiritual energy aside to supplement his next spell",
   },
   shime_tagasu: {
     name: "shime_tagasu",
     level: 2,
     displayName: "Shime Tagasu",
     damage: 0,
-    special: "boost",
+    special: "",
     condition: "boost",
-    description:
-      "The monk sets a fair amount of spiritual energy aside to supplement his next spell",
+    description: "The monk sets a fair amount of spiritual energy aside to supplement his next spell",
   },
   odan_shime_tagasu: {
     name: "odan_shime_tagasu",
     level: 3,
     displayName: "Odan Shime Tagasu",
     damage: 0,
-    special: "boost",
+    special: "",
     condition: "boost",
-    description:
-      "The monk sets a huge amount of spiritual energy aside to supplement his next spell",
+    description: "The monk sets a huge amount of spiritual energy aside to supplement his next spell",
   },
   gisoku: {
     name: "gisoku",
@@ -270,8 +255,7 @@ const spells = {
     damage: 0,
     special: "defense_mirror",
     condition: "mirror",
-    description:
-      "The monk exposes a small fraction of his soul, binding it with the monster's. Their pain is briefly one and the same",
+    description: "The monk exposes a small fraction of his soul, binding it with the monster's. Their pain is briefly one and the same",
   },
   odan_gisoku: {
     name: "odan_gisoku",
@@ -280,8 +264,7 @@ const spells = {
     damage: 0,
     special: "defense_mirror",
     condition: "mirror",
-    description:
-      "The monk exposes a fair fraction of his soul, binding it with the monster's. Their pain is briefly one and the same",
+    description: "The monk exposes a fair fraction of his soul, binding it with the monster's. Their pain is briefly one and the same",
   },
   odan_shime_gisoku: {
     name: "odan_shime_gisku",
@@ -290,8 +273,7 @@ const spells = {
     damage: 0,
     special: "defense_mirror",
     condition: "mirror",
-    description:
-      "The monk exposes a large fraction of his soul, binding it with the monster's. Their pain is briefly one and the same",
+    description: "The monk exposes a large fraction of his soul, binding it with the monster's. Their pain is briefly one and the same",
   },
   chisayu: {
     name: "chisayu",
@@ -300,8 +282,7 @@ const spells = {
     damage: 0,
     special: "self_heal",
     condition: "heal",
-    description:
-      "The monk calls upon a few friendly spirits, asking them to heal his wounds",
+    description: "The monk calls upon a few friendly spirits, asking them to heal his wounds",
   },
   odan_chisayu: {
     name: "odan_chisayu",
@@ -310,8 +291,7 @@ const spells = {
     damage: 0,
     special: "self_heal",
     condition: "heal",
-    description:
-      "The monk calls upon a considerable amount of friendly spirits, asking them to heal his wounds",
+    description: "The monk calls upon a considerable amount of friendly spirits, asking them to heal his wounds",
   },
   odan_chisayu_goten: {
     name: "odan_chisayu_goten",
@@ -320,8 +300,7 @@ const spells = {
     damage: 0,
     special: "self_heal",
     condition: "heal",
-    description:
-      "The monk calls upon a huge amount of friendly spirits, asking them to heal his wounds",
+    description: "The monk calls upon a huge amount of friendly spirits, asking them to heal his wounds",
   },
   itochi_nio_sasu_yosu_itsuio: {
     name: "itochi_nio_sasu_yosu_itsuio",
@@ -330,8 +309,7 @@ const spells = {
     damage: 0,
     special: "seal_monster",
     condition: "seal",
-    description:
-      "The monk fills the seal with spiritual power, preparing it to chain the monster within it",
+    description: "The monk fills the seal with spiritual power, preparing it to chain the monster within it",
   },
 };
 
@@ -345,13 +323,16 @@ const monsters = {
     spells: [spells.roku],
     sprite: monsterPrototype,
   },
-  monster_prototype_2attacks: {
-    name: "monster_prototype_2attacks",
-    speed: 0.026,
+  aka_manto: {
+    name: "aka_manto",
+    speed: 0.045,
     hp: 400,
-    attackchance: 0.15,
-    msperkeystroke: 750,
-    spells: [spells.roku, spells.odan_roku],
+    attackchance: 0.11,
+    msperkeystroke: 800,
+    spells: [{spell:spells.kurae, chances :0.3},
+      {spell:spells.odan_kurae, chances :0.5},
+      {spell:spells.odan_kurae_tsuyi, chances :0.2}],
+    sprite: aka_manto,
   },
 };
 
@@ -361,7 +342,6 @@ const utils = {
   defenseMultiplier: 0.3,
   mirrorMultiplier: 0.6,
   healAmount: 100,
-  boostMultiplier: 1.3,
 };
 
 const missions = [
