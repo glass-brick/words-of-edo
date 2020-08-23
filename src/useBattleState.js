@@ -1,8 +1,8 @@
 /* eslint-disable default-case */
 import { useState, useCallback, useEffect } from "react";
 import data from "./data.js";
-import {Howl, Howler} from 'howler';
-import musicSrc from './assets/tin_tintin.mp3';
+import { Howl, Howler } from "howler";
+import musicSrc from "./assets/tin_tintin.mp3";
 
 function useLog(maxLines) {
   const [log, setLog] = useState(["A demon appears!"]);
@@ -43,9 +43,11 @@ export default function useBattleState({ monk, mission, onMissionEnd }) {
   const [objectiveHP, setObjectiveHP] = useState(mission.objectiveHP);
 
   useEffect(() => {
-    music.volume(1)
+    music.volume(1);
     music.play();
-  }, [])
+
+    return () => music.stop();
+  }, []);
 
   function onCompleteWord(spellUsed) {
     if (spellUsed) {
@@ -117,22 +119,25 @@ export default function useBattleState({ monk, mission, onMissionEnd }) {
       if (spellUsed.condition) {
         switch (spellUsed.condition) {
           case "fire":
-            if(mission.type && (mission.type === 'protect_house' || mission.type === 'protect_library')){
-              if(objectiveHP){
+            if (
+              mission.type &&
+              (mission.type === "protect_house" ||
+                mission.type === "protect_library")
+            ) {
+              if (objectiveHP) {
                 setObjectiveHP(objectiveHP - damage);
               }
               addToLog("The house seems damaged");
             }
-          break;
+            break;
           case "water":
-            if(mission.type && mission.type === 'protect_library'){
-              if(objectiveHP){
+            if (mission.type && mission.type === "protect_library") {
+              if (objectiveHP) {
                 setObjectiveHP(objectiveHP - damage);
               }
               addToLog("The books are being destroyed!");
             }
-          break;
-
+            break;
         }
       }
     }
@@ -192,12 +197,12 @@ export default function useBattleState({ monk, mission, onMissionEnd }) {
   useEffect(() => {
     if (monsterHp <= 0 || hp <= 0) {
       let missionObjectivePassed = true;
-      switch(mission.type){
-        case 'protect_library': 
-        case 'protect_house': 
-        case 'protect_people': 
-          missionObjectivePassed = (objectiveHP > 0 ? true : false);
-        break;
+      switch (mission.type) {
+        case "protect_library":
+        case "protect_house":
+        case "protect_people":
+          missionObjectivePassed = objectiveHP > 0 ? true : false;
+          break;
       }
       onMissionEnd({
         missionObjectivePassed,
