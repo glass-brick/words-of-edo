@@ -4,7 +4,7 @@ import Intro from "./Intro/Intro";
 import data from "./data";
 
 function Game() {
-  const [currentMission, setCurrentMission] = useState(data.missions[0]);
+  const [currentMission, setCurrentMission] = useState(null);
   const [transition, setTransition] = useState(false);
 
   useEffect(() => {
