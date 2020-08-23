@@ -117,27 +117,11 @@ export default function useBattleState({ monk, mission, onMissionEnd }) {
       }
 
       if (spellUsed.condition) {
-        switch (spellUsed.condition) {
-          case "fire":
-            if (
-              mission.type &&
-              (mission.type === "protect_house" ||
-                mission.type === "protect_library")
-            ) {
-              if (objectiveHP) {
-                setObjectiveHP(objectiveHP - damage);
-              }
-              addToLog("The house seems damaged");
-            }
-            break;
-          case "water":
-            if (mission.type && mission.type === "protect_library") {
-              if (objectiveHP) {
-                setObjectiveHP(objectiveHP - damage);
-              }
-              addToLog("The books are being destroyed!");
-            }
-            break;
+        if(mission.type === 'protect' && mission.conditions && mission.conditions.includes(spellUsed.condition)) {
+          if (objectiveHP) {
+            setObjectiveHP(objectiveHP - damage);
+          }
+          addToLog(`The ${mission.type} seems damaged`);
         }
       }
     }
@@ -196,19 +180,26 @@ export default function useBattleState({ monk, mission, onMissionEnd }) {
 
   useEffect(() => {
     if (monsterHp <= 0 || hp <= 0) {
-      let missionObjectivePassed = true;
-      switch (mission.type) {
-        case "protect_library":
-        case "protect_house":
-        case "protect_people":
-          missionObjectivePassed = objectiveHP > 0 ? true : false;
-          break;
+      let missionObjectivePassed;
+      let monkDead;
+      if(monsterHp > 0) {
+        let missionObjectivePassed = true;
+        switch (mission.type) {
+          case "protect":
+            missionObjectivePassed = objectiveHP;
+            break;
+        }
+        monkDead = false;
+      } else {
+        missionObjectivePassed = false;
+        monkDead = true;
       }
       onMissionEnd({
         missionObjectivePassed,
+        monkDead,
       });
-    }
-  });
+      }
+});
 
   return {
     hp,

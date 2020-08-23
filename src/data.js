@@ -78,7 +78,7 @@ const spells = {
   odan_katara_goten: {
     name: "odan_katara_goten",
     level: 3,
-    displayName: "Oden Katara Goten",
+    displayName: "Odan Katara Goten",
     damage: 64,
     special: "",
     condition: "water",
@@ -226,7 +226,7 @@ const spells = {
   odan_kurae_tsuyi: {
     name: "odan_kurae_tsuyi",
     level: 3,
-    displayName: "Oadan Kurae Tsuyi",
+    displayName: "Odan Kurae Tsuyi",
     damage: 64,
     special: "",
     condition: "cutting",
@@ -284,7 +284,7 @@ const spells = {
       "The monk exposes a fair fraction of his soul, binding it with the monster's. Their pain is briefly one and the same",
   },
   odan_shime_gisoku: {
-    name: "odan_shime_gisku",
+    name: "odan_shime_gisoku",
     level: 3,
     displayName: "Odan Shime Gisoku",
     damage: 0,
@@ -373,7 +373,8 @@ const missions = [
     monster: monsters.monster_prototype,
     title: "Save my children!",
     description: "They're possessed by a spooky ghost!",
-    image: akaManto,
+    type: 'kill',
+    image: akaManto,    
   },
   {
     monster: monsters.aka_manto,
@@ -381,14 +382,17 @@ const missions = [
     description:
       "A strange being is offering toilet paper in the bathroom stalls",
     image: akaManto,
+    type: 'seal',
   },
   {
     monster: monsters.aka_manto,
     title: "The library must be saved",
     description:
-      "The library is being haunted by a demon",
+      "The library is being haunted by a demon! Kill the demon while taking care of not destroying the library",
     image: akaManto,
-    type: 'protect_library',
+    displayObjective: 'Library',
+    type: 'protect',
+    conditions: ['fire', 'water'],
     objectiveHP: 1000,
   },
   {
@@ -397,7 +401,9 @@ const missions = [
     description:
       "My living is being haunted by a demon",
     image: akaManto,
-    type: 'protect_house',
+    displayObjective: 'House',
+    type: 'protect',
+    conditions: ['fire', 'water'],
     objectiveHP: 1000,
   },
   {
@@ -405,7 +411,9 @@ const missions = [
     title: "This person is possessed, don't kill them",
     description: "I want... you",
     image: akaManto,
-    type: 'protect_people',
+    displayObjective: 'People',
+    type: 'protect',
+    conditions: ['fire', 'water'],
     objectiveHP: 1000,
   },
 ];
