@@ -339,7 +339,7 @@ const monsters = {
   monster_prototype: {
     name: "monster_prototype",
     speed: 0.026,
-    hp: 400,
+    hp: 40,
     attackchance: 0.15,
     msperkeystroke: 750,
     spells: [{ spell: spells.roku, chances: 1 }],
@@ -374,7 +374,8 @@ const missions = [
     title: "Save my children!",
     description: "They're possessed by a spooky ghost!",
     type: 'kill',
-    image: akaManto,    
+    image: akaManto,
+    rewards: {spells: [spells.odan_roku]}
   },
   {
     monster: monsters.aka_manto,

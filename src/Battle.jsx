@@ -8,7 +8,9 @@ import {Howl, Howler} from 'howler';
 
 export default function Battle({ monk, mission, onMissionEnd }) {
   const state = useBattleState({ monk, mission, onMissionEnd });
-  let missionObj = mission.type ? `${mission.displayObjective}: ${Math.round(state.objectiveHP / 10)}%` : '';
+  let missionObj = '';
+  if(mission.type === 'protect')
+    missionObj = mission.type ? `${mission.displayObjective}: ${Math.round(state.objectiveHP / 10)}%` : '';
 
   return (
     <div className="battle">

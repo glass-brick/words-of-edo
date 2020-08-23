@@ -180,8 +180,12 @@ export default function useBattleState({ monk, mission, onMissionEnd }) {
 
   useEffect(() => {
     if (monsterHp <= 0 || hp <= 0) {
+      // HACK so it's not called again
+      setMonsterHP(1);
+      setHP(1);
       let missionObjectivePassed;
       let monkDead;
+      let rewards = mission.rewards;
       if(monsterHp > 0) {
         let missionObjectivePassed = true;
         switch (mission.type) {
@@ -197,6 +201,7 @@ export default function useBattleState({ monk, mission, onMissionEnd }) {
       onMissionEnd({
         missionObjectivePassed,
         monkDead,
+        rewards,
       });
       }
 });
