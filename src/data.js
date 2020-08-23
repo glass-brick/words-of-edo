@@ -1,4 +1,5 @@
 import monsterPrototype from "./assets/monster_prototype.png";
+import akaManto from "./assets/aka_manto_portrait.png";
 
 const spells = {
   roku: {
@@ -139,8 +140,18 @@ const utils = {
   maxStartingDistance: 7,
 };
 
+const missions = [
+  {
+    monster: monsters.monster_prototype,
+    title: "Save my children!",
+    description: "They're possessed by a spooky ghost!",
+    image: akaManto,
+  },
+];
+
 export default {
   monsters,
+  missions,
   spells,
   utils,
   spellList: Object.values(spells),
