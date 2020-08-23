@@ -14,12 +14,12 @@ export default function Battle({ monk, mission, onMissionEnd }) {
   return (
     <div className="battle">
       <header className="top-menu">
-        <div
+        <span
           className="top-menu__button"
           onClick={() => setSpellBookOpen(true)}
         >
           Spells
-        </div>
+        </span>
       </header>
 
       <SpellBook

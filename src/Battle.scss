@@ -11,6 +11,7 @@
     background: $darkblue;
 
     &__button {
+      padding: 4px;
       cursor: pointer;
       color: $yellow;
       &:hover {
