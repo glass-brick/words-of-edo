@@ -17,20 +17,22 @@
   position: absolute;
   &__list {
     padding: 6px 20px 10px;
-    background-color: black;
-    color: white;
+    background-color: $darkpurple;
+    color: $white;
     list-style: none;
     &__item {
       padding-top: 4px;
       &:not(:last-child) {
-        border-bottom: 1px solid white;
+        border-bottom: 1px solid $white;
         padding-bottom: 4px;
       }
     }
   }
+  max-height: 400px;
+  overflow-y: scroll;
   &__submenu {
     position: absolute;
-    background-color: white;
+    background-color: $white;
     padding: 4px;
   }
 }

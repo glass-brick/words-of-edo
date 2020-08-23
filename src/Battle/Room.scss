@@ -7,13 +7,14 @@
 
   position: relative;
   &__speech {
+    color: $darkpurple;
     background-color: $white;
     border-radius: 10px;
     padding: 20px;
     &__said {
     }
     &__leftover {
-      color: gray;
+      color: $darkyellow;
     }
   }
   &__player {
