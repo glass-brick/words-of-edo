@@ -360,6 +360,7 @@ const utils = {
   maxStartingDistance: 7,
   defenseMultiplier: 0.3,
   mirrorMultiplier: 0.6,
+  healAmount: 100,
 };
 
 const missions = [
