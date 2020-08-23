@@ -1,5 +1,13 @@
 import monsterPrototype from "./assets/monster_prototype.png";
 import akaManto from "./assets/aka_manto_portrait.png";
+import akakuchi from "./assets/akakuchi.png";
+import nekomata from "./assets/nekomata.png";
+import nureOnna from "./assets/nureOnna.png";
+import tsuchigumo from "./assets/tsuchigumo.png";
+import ushiOni from "./assets/ushiOni.png";
+import yamaUba from "./assets/yamaUba.png";
+import yumeNoSeirei from "./assets/yumeNoSeirei.png";
+import yurei from "./assets/yurei.png";
 
 const spells = {
   roku: {
@@ -352,7 +360,8 @@ const monsters = {
     attackchance: 0.13,
     msperkeystroke: 250,
     spells: [
-      {spell:spells.odan_nakae, chances :0.7}, {spell:spells.odan_kurae_tsuyi, chances :0.3},
+      { spell: spells.odan_nakae, chances: 0.7 },
+      { spell: spells.odan_kurae_tsuyi, chances: 0.3 },
     ],
     sprite: monsterPrototype,
   },
@@ -363,7 +372,8 @@ const monsters = {
     attackchance: 0.1,
     msperkeystroke: 300,
     spells: [
-      {spell:spells.odan_nakae, chances :0.7}, {spell:spells.odan_nakae_tsuyi, chances :0.3},
+      { spell: spells.odan_nakae, chances: 0.7 },
+      { spell: spells.odan_nakae_tsuyi, chances: 0.3 },
     ],
     sprite: akakuchi,
   },
@@ -374,7 +384,8 @@ const monsters = {
     attackchance: 0.13,
     msperkeystroke: 250,
     spells: [
-      {spell:spells.odan_roku, chances :0.8}, {spell:spells.odan_roku_goten, chances :0.2},
+      { spell: spells.odan_roku, chances: 0.8 },
+      { spell: spells.odan_roku_goten, chances: 0.2 },
     ],
     sprite: nekomata,
   },
@@ -385,7 +396,8 @@ const monsters = {
     attackchance: 0.13,
     msperkeystroke: 375,
     spells: [
-      {spell:spells.kurae, chances :0.9}, {spell:spells.odan_kurae_tsuyi, chances :0.1},
+      { spell: spells.kurae, chances: 0.9 },
+      { spell: spells.odan_kurae_tsuyi, chances: 0.1 },
     ],
     sprite: nureOnna,
   },
@@ -396,7 +408,8 @@ const monsters = {
     attackchance: 0.1,
     msperkeystroke: 200,
     spells: [
-      {spell:spells.odan_shime_tagasu, chances :0.3}, {spell:spells.odan_kurae_tsuyi, chances :0.7},
+      { spell: spells.odan_shime_tagasu, chances: 0.3 },
+      { spell: spells.odan_kurae_tsuyi, chances: 0.7 },
     ],
     sprite: tsuchigumo,
   },
@@ -407,7 +420,8 @@ const monsters = {
     attackchance: 0.14,
     msperkeystroke: 300,
     spells: [
-      {spell:spells.odan_katara, chances :0.55}, {spell:spells.iteru_watama, chances :0.45},
+      { spell: spells.odan_katara, chances: 0.55 },
+      { spell: spells.iteru_watama, chances: 0.45 },
     ],
     sprite: ushiOni,
   },
@@ -418,7 +432,8 @@ const monsters = {
     attackchance: 0.21,
     msperkeystroke: 330,
     spells: [
-      {spell:spells.kurae, chances :0.8}, {spell:spells.tagasu, chances :0.2},
+      { spell: spells.kurae, chances: 0.8 },
+      { spell: spells.tagasu, chances: 0.2 },
     ],
     sprite: yamaUba,
   },
@@ -429,7 +444,9 @@ const monsters = {
     attackchance: 0.1,
     msperkeystroke: 350,
     spells: [
-      {spell:spells.odan_roku, chances :0.32}, {spell:spells.odan_kurae, chances :0.33}, {spell:spells.odan_katara, chances :0.35},
+      { spell: spells.odan_roku, chances: 0.32 },
+      { spell: spells.odan_kurae, chances: 0.33 },
+      { spell: spells.odan_katara, chances: 0.35 },
     ],
     sprite: yumeNoSeirei,
   },
@@ -440,7 +457,8 @@ const monsters = {
     attackchance: 0.12,
     msperkeystroke: 225,
     spells: [
-      {spell:spells.odan_katara_goten, chances :0.4}, {spell:spells.gomoku_iteru_watama, chances :0.6},
+      { spell: spells.odan_katara_goten, chances: 0.4 },
+      { spell: spells.gomoku_iteru_watama, chances: 0.6 },
     ],
     sprite: yurei,
   },
@@ -459,9 +477,9 @@ const missions = [
     monster: monsters.monster_prototype,
     title: "Save my children!",
     description: "They're possessed by a spooky ghost!",
-    type: 'kill',
+    type: "kill",
     image: akaManto,
-    rewards: {spells: [spells.odan_roku]}
+    rewards: { spells: [spells.odan_roku] },
   },
   {
     monster: monsters.aka_manto,
@@ -469,7 +487,7 @@ const missions = [
     description:
       "A strange being is offering toilet paper in the bathroom stalls",
     image: akaManto,
-    type: 'seal',
+    type: "seal",
   },
   {
     monster: monsters.aka_manto,
@@ -477,20 +495,19 @@ const missions = [
     description:
       "The library is being haunted by a demon! Kill the demon while taking care of not destroying the library",
     image: akaManto,
-    displayObjective: 'Library',
-    type: 'protect',
-    conditions: ['fire', 'water'],
+    displayObjective: "Library",
+    type: "protect",
+    conditions: ["fire", "water"],
     objectiveHP: 1000,
   },
   {
     monster: monsters.aka_manto,
     title: "My house!",
-    description:
-      "My living is being haunted by a demon",
+    description: "My living is being haunted by a demon",
     image: akaManto,
-    displayObjective: 'House',
-    type: 'protect',
-    conditions: ['fire', 'water'],
+    displayObjective: "House",
+    type: "protect",
+    conditions: ["fire", "water"],
     objectiveHP: 1000,
   },
   {
@@ -498,9 +515,9 @@ const missions = [
     title: "This person is possessed, don't kill them",
     description: "I want... you",
     image: akaManto,
-    displayObjective: 'People',
-    type: 'protect',
-    conditions: ['fire', 'water'],
+    displayObjective: "People",
+    type: "protect",
+    conditions: ["fire", "water"],
     objectiveHP: 1000,
   },
 ];

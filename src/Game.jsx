@@ -5,7 +5,7 @@ import data from "./data";
 
 function Game() {
   const [monk, setMonk] = useState(data.monk);
-  const [currentMission, setCurrentMission] = useState(data.missions[0]);
+  const [currentMission, setCurrentMission] = useState(null);
   const [transition, setTransition] = useState(false);
 
   useEffect(() => {
@@ -29,21 +29,21 @@ function Game() {
             monk={monk}
             mission={currentMission}
             onMissionEnd={(results) => {
-              if(results.rewards){
-                if(results.rewards.spells){
-                  // here we check if the monk already has these spells 
+              if (results.rewards) {
+                if (results.rewards.spells) {
+                  // here we check if the monk already has these spells
                   let newSpells = [];
-                  results.rewards.spells.forEach(spell => {
+                  results.rewards.spells.forEach((spell) => {
                     let monkHasIt = false;
-                    monk.spells.forEach(monkSpell => {
-                      if( monkSpell.name === spell.name){
+                    monk.spells.forEach((monkSpell) => {
+                      if (monkSpell.name === spell.name) {
                         monkHasIt = true;
-                        return ;
+                        return;
                       }
-                    })
-                    if( !monkHasIt ) newSpells.push(spell);
+                    });
+                    if (!monkHasIt) newSpells.push(spell);
                   });
-                  setMonk({...monk, spells: [...monk.spells, ...newSpells]});
+                  setMonk({ ...monk, spells: [...monk.spells, ...newSpells] });
                 }
               }
               if (!transition) setTransition(true);
