@@ -14,6 +14,7 @@ export default function Intro({ onMissionStart = () => {} }) {
             <div
               className="intro__menu__list__item"
               onClick={() => onMissionStart(mission)}
+              key={mission.title}
             >
               <h2 className="intro__menu__list__item__title">
                 {mission.title}
