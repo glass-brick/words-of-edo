@@ -33,6 +33,7 @@ export default function useBattleState({ mission, onMissionEnd }) {
   const [defenseMirror, setDefenseMirror] = useState(null);
   const [defenseBoosted, setDefenseBoosted] = useState(null);
   const [boost, setBoost] = useState(null);
+  const [objectiveHP, setObjectiveHP] = useState(mission.objectiveHP);
 
   function onCompleteWord(spellUsed) {
     if (spellUsed) {
@@ -99,9 +100,22 @@ export default function useBattleState({ mission, onMissionEnd }) {
       if (spellUsed.condition) {
         switch (spellUsed.condition) {
           case "fire":
-            addToLog("The house seems damaged");
-            // TODO add fire damage to house
-            break;
+            if(mission.type && (mission.type === 'protect_house' || mission.type === 'protect_library')){
+              if(objectiveHP){
+                setObjectiveHP(objectiveHP - damage);
+              }
+              addToLog("The house seems damaged");
+            }
+          break;
+          case "water":
+            if(mission.type && mission.type === 'protect_library'){
+              if(objectiveHP){
+                setObjectiveHP(objectiveHP - damage);
+              }
+              addToLog("The books are being destroyed!");
+            }
+          break;
+
         }
       }
     }
@@ -158,8 +172,16 @@ export default function useBattleState({ mission, onMissionEnd }) {
 
   useEffect(() => {
     if (monsterHp <= 0 || hp <= 0) {
+      let missionObjectivePassed = true;
+      switch(mission.type){
+        case 'protect_library': 
+        case 'protect_house': 
+        case 'protect_people': 
+          missionObjectivePassed = (objectiveHP > 0 ? true : false);
+        break;
+      }
       onMissionEnd({
-        /* complete with winning/losing details */
+        missionObjectivePassed,
       });
     }
   });
@@ -179,5 +201,6 @@ export default function useBattleState({ mission, onMissionEnd }) {
       onKeyStroke();
     },
     enemyWord,
+    objectiveHP,
   };
 }
