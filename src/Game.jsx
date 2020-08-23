@@ -4,21 +4,17 @@ import Intro from "./Intro/Intro";
 
 function Game() {
   const [currentMission, setCurrentMission] = useState(null);
-  const [transition, setTransition] = useState(null);
+  const [transition, setTransition] = useState(false);
 
   useEffect(() => {
-    let id1, id2;
-    if (transition !== null) {
+    let id1;
+    if (transition) {
       id1 = setTimeout(() => {
-        setCurrentMission(transition);
-      }, 500);
-      id2 = setTimeout(() => {
-        setTransition(null);
+        setTransition(false);
       }, 1000);
     }
     return () => {
       clearTimeout(id1);
-      clearTimeout(id2);
     };
   }, [transition]);
 
@@ -27,11 +23,22 @@ function Game() {
       <div className="game-app">
         {transition && <div className="transition" />}
         {currentMission ? (
-          <Battle monster={currentMission.monster} />
+          <Battle
+            monster={currentMission.monster}
+            onMissionEnd={() => {
+              if (!transition) setTransition(true);
+              setTimeout(() => {
+                setCurrentMission(null);
+              }, 500);
+            }}
+          />
         ) : (
           <Intro
             onMissionStart={(mission) => {
-              if (!transition) setTransition(mission);
+              if (!transition) setTransition(true);
+              setTimeout(() => {
+                setCurrentMission(mission);
+              }, 500);
             }}
           />
         )}

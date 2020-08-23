@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback, useRef } from "react";
+import React from "react";
 import "./Battle.scss";
 import data from "./data.js";
 import useBattleState from "./useBattleState";
@@ -14,8 +14,8 @@ function Header(props) {
   );
 }
 
-export default function Battle({ monster = data.monsters.monster_prototype }) {
-  const state = useBattleState({ monster });
+export default function Battle({ monster, onMissionEnd }) {
+  const state = useBattleState({ monster, onMissionEnd });
 
   return (
     <div className="battle">

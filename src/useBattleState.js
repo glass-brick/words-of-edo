@@ -1,4 +1,4 @@
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 import data from "./data.js";
 
 function useLog(maxLines) {
@@ -19,7 +19,7 @@ function useLog(maxLines) {
   return [log, addToLog];
 }
 
-export default function useBattleState({ monster }) {
+export default function useBattleState({ monster, onMissionEnd }) {
   const [hp, setHP] = useState(1000);
   const [monsterHp, setMonsterHP] = useState(monster.hp);
   const [monsterDistance, setMonsterDistance] = useState(
@@ -81,6 +81,14 @@ export default function useBattleState({ monster }) {
       }
     } // if it's attacking, it has its own logic
   }
+
+  useEffect(() => {
+    if (monsterHp <= 0 || hp <= 0) {
+      onMissionEnd({
+        /* complete with winning/losing details */
+      });
+    }
+  });
 
   return {
     hp,
