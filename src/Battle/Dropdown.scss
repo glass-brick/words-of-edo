@@ -29,7 +29,7 @@
     }
   }
   max-height: 250px;
-  overflow-y: scroll;
+  overflow-y: auto;
   &__submenu {
     position: absolute;
     background-color: $white;

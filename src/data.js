@@ -384,10 +384,16 @@ const missions = [
   },
 ];
 
+const monk = {
+  hp: 1000,
+  spells: [spells.roku, spells.mamoku, spells.nakae],
+};
+
 export default {
   monsters,
   missions,
   spells,
   utils,
+  monk,
   spellList: Object.values(spells),
 };

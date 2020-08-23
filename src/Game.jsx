@@ -4,6 +4,7 @@ import Intro from "./Intro/Intro";
 import data from "./data";
 
 function Game() {
+  const [monk, setMonk] = useState(data.monk);
   const [currentMission, setCurrentMission] = useState(null);
   const [transition, setTransition] = useState(false);
 
@@ -25,6 +26,7 @@ function Game() {
         {transition && <div className="transition" />}
         {currentMission ? (
           <Battle
+            monk={monk}
             mission={currentMission}
             onMissionEnd={() => {
               if (!transition) setTransition(true);
