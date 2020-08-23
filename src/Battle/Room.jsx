@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import "./Room.scss";
 import data from "../data.js";
 import priest from "../assets/priest.png";
+import { createPortal } from "react-dom";
 
 export default function Room({
   onComplete = () => {},
@@ -9,7 +10,14 @@ export default function Room({
   onEnemyComplete = () => {},
   onKeyStroke,
   monster,
+  monsterDistance,
 }) {
+  const scale = monsterDistance * -0.1875 + 2.3125;
+  const enemyRef = useRef(null);
+  const enemyPos = enemyRef.current
+    ? enemyRef.current.getBoundingClientRect()
+    : {};
+
   const [input, setInput] = useState("");
 
   useEffect(() => {
@@ -59,21 +67,32 @@ export default function Room({
 
   return (
     <div className="room">
-      <div className="room__player">
-        {input && (
-          <div className="room__speech">
-            <span className="room__speech__said">{input}</span>
-          </div>
-        )}
-        <img alt="Priest" src={priest} />
-      </div>
-      <div className="room__enemy">
-        {enemyWord && (
-          <div className="room__speech">
-            <span className="room__speech__said">{enemyInput}</span>
-            <span className="room__speech__leftover">{leftoverEnemyWord}</span>
-          </div>
-        )}
+      <div
+        className="room__enemy"
+        ref={enemyRef}
+        style={{
+          transform: `translate(${130 * monsterDistance - 910}px, ${
+            -60 * monsterDistance + 420
+          }px) scale(${scale})`,
+        }}
+      >
+        {enemyWord &&
+          createPortal(
+            <div
+              className="room__speech"
+              style={{
+                position: "absolute",
+                left: enemyPos.left - enemyWord.displayName.length * 5 * scale,
+                top: enemyPos.top,
+              }}
+            >
+              <span className="room__speech__said">{enemyInput}</span>
+              <span className="room__speech__leftover">
+                {leftoverEnemyWord}
+              </span>
+            </div>,
+            document.getElementById("portal-root")
+          )}
         <img
           alt={monster.name}
           src={monster.sprite}
@@ -81,6 +100,14 @@ export default function Room({
             height: "300px",
           }}
         />
+      </div>
+      <div className="room__player">
+        {input && (
+          <div className="room__speech">
+            <span className="room__speech__said">{input}</span>
+          </div>
+        )}
+        <img alt="Priest" src={priest} />
       </div>
     </div>
   );
