@@ -1,4 +1,9 @@
-import React, { forwardRef, useState, useImperativeHandle } from "react";
+import React, {
+  forwardRef,
+  useState,
+  useImperativeHandle,
+  useEffect,
+} from "react";
 import "./Attacks.scss";
 
 const attackSpeeds = {
@@ -13,41 +18,75 @@ const attackSpeeds = {
 let Attack = ({ enemyPos }, ref) => {
   const [attackOnPlayer, setAttackOnPlayer] = useState(null);
   const [attackOnEnemy, setAttackOnEnemy] = useState(null);
+  const [activePlayer, setActivePlayer] = useState(false);
+  const [activeEnemy, setActiveEnemy] = useState(false);
+
+  useEffect(() => {
+    let id;
+    if (attackOnPlayer) {
+      id = setTimeout(() => {
+        setAttackOnPlayer(null);
+        setActivePlayer(false);
+      }, attackSpeeds[attackOnPlayer] || 1000);
+    }
+    return () => clearTimeout(id);
+  }, [attackOnPlayer, activePlayer]);
+
+  useEffect(() => {
+    let id;
+    if (attackOnEnemy) {
+      id = setTimeout(() => {
+        setAttackOnEnemy(null);
+        setActiveEnemy(false);
+      }, attackSpeeds[attackOnEnemy] || 1000);
+    }
+    return () => clearTimeout(id);
+  }, [attackOnEnemy, activeEnemy]);
 
   useImperativeHandle(ref, () => ({
     triggerAttack: (spell, playerCasted) => {
       if (playerCasted === "player") {
         setAttackOnPlayer(spell.condition);
-        setTimeout(() => {
-          setAttackOnPlayer(null);
-        }, attackSpeeds[spell.condition] || 1000);
+        if (activePlayer) {
+          setActivePlayer(false);
+          setTimeout(() => setActivePlayer(true), 0);
+        } else {
+          setActivePlayer(true);
+        }
       } else if (playerCasted === "enemy") {
         setAttackOnEnemy(spell.condition);
-        setTimeout(() => {
-          setAttackOnEnemy(null);
-        }, attackSpeeds[spell.condition] || 1000);
+        if (activeEnemy) {
+          setActiveEnemy(false);
+          setTimeout(() => setActiveEnemy(true), 0);
+        } else {
+          setActiveEnemy(true);
+        }
       }
     },
   }));
 
   return (
     <>
-      <div
-        className="attack"
-        id={attackOnPlayer}
-        style={{
-          top: enemyPos.top,
-          left: enemyPos.left,
-        }}
-      />
-      <div
-        className="attack"
-        id={attackOnEnemy}
-        style={{
-          bottom: 40,
-          left: 200,
-        }}
-      />
+      {activePlayer && (
+        <div
+          className="attack"
+          id={attackOnPlayer}
+          style={{
+            top: enemyPos.top,
+            left: enemyPos.left,
+          }}
+        />
+      )}
+      {activeEnemy && (
+        <div
+          className="attack"
+          id={attackOnEnemy}
+          style={{
+            bottom: 40,
+            left: 200,
+          }}
+        />
+      )}
     </>
   );
 };
