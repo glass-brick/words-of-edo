@@ -320,7 +320,7 @@ const monsters = {
     hp: 400,
     attackchance: 0.15,
     msperkeystroke: 750,
-    spells: [spells.roku],
+    spells: [{spell:spells.roku, chances :1}],
     sprite: monsterPrototype,
   },
   aka_manto: {
@@ -332,7 +332,7 @@ const monsters = {
     spells: [{spell:spells.kurae, chances :0.3},
       {spell:spells.odan_kurae, chances :0.5},
       {spell:spells.odan_kurae_tsuyi, chances :0.2}],
-    sprite: aka_manto,
+    sprite: akaManto,
   },
 };
 

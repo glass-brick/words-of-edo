@@ -112,13 +112,9 @@ export default function useBattleState({ mission, onMissionEnd }) {
     let boosted = defenseBoosted ? data.utils.boostMultiplier : 1;
     if (defense && spellUsed.level <= defense) {
       damage *= (data.utils.defenseMultiplier / boosted);
-      console.log({damage})
-      console.log({boosted})
       setDefense(null)
     }
     if (defenseMirror && spellUsed.level <= defenseMirror) {
-      console.log(data.utils.mirrorMultiplier * damage * boosted)
-      console.log({boosted})
       setMonsterHP(Math.round(monsterHp - data.utils.mirrorMultiplier * damage * boosted));
       setDefenseMirror(null)
     }
@@ -136,8 +132,23 @@ export default function useBattleState({ mission, onMissionEnd }) {
       // If we have an enemy word it is attacking
       // tries to attack
       if (Math.random() < monster.attackchance) {
+        // choose attack
+        let finalAttack = null;
+        if(monster.spells.length === 1){
+          finalAttack = monster.spells[0].spell;
+        } else {
+          let randomChoice = Math.random();
+          let advance = 0;
+          monster.spells.forEach(attack => {
+            if(attack.chances + advance < randomChoice){
+              finalAttack = attack.spell;
+            }else{
+              advance += attack.chances;
+            }
+          });
+        }
         // Starts attacking
-        setEnemyWord(monster.spells[0]);
+        setEnemyWord(finalAttack);
       } else {
         // Moves
         setMonsterDistance(monsterDistance - monster.speed);
