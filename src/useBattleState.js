@@ -1,6 +1,8 @@
 /* eslint-disable default-case */
 import { useState, useCallback, useEffect } from "react";
 import data from "./data.js";
+import {Howl, Howler} from 'howler';
+import musicSrc from './assets/tin_tintin.mp3';
 
 function useLog(maxLines) {
   const [log, setLog] = useState(["A demon appears!"]);
@@ -20,6 +22,11 @@ function useLog(maxLines) {
   return [log, addToLog];
 }
 
+const music = new Howl({
+  src: [musicSrc],
+  loop: true,
+});
+
 export default function useBattleState({ monk, mission, onMissionEnd }) {
   const { monster } = mission;
   const [hp, setHP] = useState(monk.hp);
@@ -34,6 +41,11 @@ export default function useBattleState({ monk, mission, onMissionEnd }) {
   const [defenseBoosted, setDefenseBoosted] = useState(null);
   const [boost, setBoost] = useState(null);
   const [objectiveHP, setObjectiveHP] = useState(mission.objectiveHP);
+
+  useEffect(() => {
+    music.volume(1)
+    music.play();
+  }, [])
 
   function onCompleteWord(spellUsed) {
     if (spellUsed) {

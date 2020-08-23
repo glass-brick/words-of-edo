@@ -4,6 +4,7 @@ import data from "./data.js";
 import useBattleState from "./useBattleState";
 import Dropdown from "./Battle/Dropdown";
 import Room from "./Battle/Room";
+import {Howl, Howler} from 'howler';
 
 export default function Battle({ monk, mission, onMissionEnd }) {
   const state = useBattleState({ monk, mission, onMissionEnd });
@@ -12,6 +13,7 @@ export default function Battle({ monk, mission, onMissionEnd }) {
   if( mission.type == 'protect_library' ) missionObjName = 'Library'; 
   if( mission.type == 'protect_people' ) missionObjName = 'People'; 
   let missionObj = mission.type ? `${missionObjName}: ${Math.round(state.objectiveHP / 10)}%` : '';
+
 
   return (
     <div className="battle">
