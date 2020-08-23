@@ -24,7 +24,7 @@ function Game() {
         {transition && <div className="transition" />}
         {currentMission ? (
           <Battle
-            monster={currentMission.monster}
+            mission={currentMission}
             onMissionEnd={() => {
               if (!transition) setTransition(true);
               setTimeout(() => {

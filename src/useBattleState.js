@@ -19,7 +19,8 @@ function useLog(maxLines) {
   return [log, addToLog];
 }
 
-export default function useBattleState({ monster, onMissionEnd }) {
+export default function useBattleState({ mission, onMissionEnd }) {
+  const { monster } = mission;
   const [hp, setHP] = useState(1000);
   const [monsterHp, setMonsterHP] = useState(monster.hp);
   const [monsterDistance, setMonsterDistance] = useState(
@@ -46,18 +47,22 @@ export default function useBattleState({ monster, onMissionEnd }) {
             }
             break;
           case "push":
-            finalDistance = monsterDistance + spellUsed.displayName.length * monster.speed * 1.5;
-            if (finalDistance > data.utils.maxStartingDistance){
+            finalDistance =
+              monsterDistance +
+              spellUsed.displayName.length * monster.speed * 1.5;
+            if (finalDistance > data.utils.maxStartingDistance) {
               finalDistance = data.utils.maxStartingDistance;
-              addToLog('It can\'t go any further');
+              addToLog("It can't go any further");
             }
             setMonsterDistance(finalDistance);
             break;
           case "pull":
-            finalDistance = monsterDistance - spellUsed.displayName.length * monster.speed * 1.5;
-            if (finalDistance < data.utils.minStartingDistance){
+            finalDistance =
+              monsterDistance -
+              spellUsed.displayName.length * monster.speed * 1.5;
+            if (finalDistance < data.utils.minStartingDistance) {
               finalDistance = data.utils.minStartingDistance;
-              addToLog('It can\'t go any closer');
+              addToLog("It can't go any closer");
             }
             setMonsterDistance(finalDistance);
             break;
@@ -77,7 +82,7 @@ export default function useBattleState({ monster, onMissionEnd }) {
 
   function onCompleteEnemyWord(spellUsed) {
     let damage = getPlayerDamageFunction(spellUsed.damage, monsterDistance);
-    if(defense && spellUsed.level <= defense){
+    if (defense && spellUsed.level <= defense) {
       damage *= data.utils.defenseMultiplier;
     }
 
