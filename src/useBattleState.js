@@ -31,33 +31,46 @@ export default function useBattleState({ mission, onMissionEnd }) {
   const [log, addToLog] = useLog(5);
   const [defense, setDefense] = useState(null);
   const [defenseMirror, setDefenseMirror] = useState(null);
+  const [defenseBoosted, setDefenseBoosted] = useState(null);
+  const [boost, setBoost] = useState(null);
 
   function onCompleteWord(spellUsed) {
     if (spellUsed) {
+      setDefenseMirror(null);
+      setDefenseBoosted(null);
+      setDefense(null);
       let damage = spellUsed.damage ? spellUsed.damage : 0;
+      let boosted = false;
+      if(boost && boost >= spellUsed.level) {
+        damage *= data.utils.boostMultiplier;
+        boosted = true;
+        setBoost(null);
+      }
       setMonsterHP(Math.round(monsterHp - damage));
 
       // specials logic
       // Specials refer to extra effects on creatures
       if (spellUsed.special) {
         let finalDistance;
+        let boostValue = boosted ? data.utils.boostMultiplier : 1;
         switch (spellUsed.special) {
           case "defense_response":
             // Defense does nothing against a spell that is not being cast
             if (enemyWord) {
               setDefense(spellUsed.level);
+              if(boosted) setDefenseBoosted(boosted);
             }
             break;
           case "defense_mirror":
             // Defense does nothing against a spell that is not being cast
             if (enemyWord) {
               setDefenseMirror(spellUsed.level);
+              if(boosted) setDefenseBoosted(boosted);
             }
             break;
           case "push":
-            finalDistance =
-              monsterDistance +
-              spellUsed.displayName.length * monster.speed * 1.5;
+            finalDistance = monsterDistance + 
+              spellUsed.displayName.length * monster.speed * 1.5 * boostValue;
             if (finalDistance > data.utils.maxStartingDistance) {
               finalDistance = data.utils.maxStartingDistance;
               addToLog("It can't go any further");
@@ -67,7 +80,7 @@ export default function useBattleState({ mission, onMissionEnd }) {
           case "pull":
             finalDistance =
               monsterDistance -
-              spellUsed.displayName.length * monster.speed * 1.5;
+              spellUsed.displayName.length * monster.speed * 1.5 * boostValue;
             if (finalDistance < data.utils.minStartingDistance) {
               finalDistance = data.utils.minStartingDistance;
               addToLog("It can't go any closer");
@@ -75,7 +88,10 @@ export default function useBattleState({ mission, onMissionEnd }) {
             setMonsterDistance(finalDistance);
             break;
           case 'self_heal':
-            setHP(hp + spellUsed.level * data.utils.healAmount);
+            setHP(Math.round(hp + spellUsed.level * data.utils.healAmount * boostValue));
+            break;
+          case 'boost':
+            setBoost(spellUsed.level);
             break;
         }
       }
@@ -93,12 +109,17 @@ export default function useBattleState({ mission, onMissionEnd }) {
 
   function onCompleteEnemyWord(spellUsed) {
     let damage = getPlayerDamageFunction(spellUsed.damage, monsterDistance);
+    let boosted = defenseBoosted ? data.utils.boostMultiplier : 1;
     if (defense && spellUsed.level <= defense) {
-      damage *= data.utils.defenseMultiplier;
+      damage *= (data.utils.defenseMultiplier / boosted);
+      console.log({damage})
+      console.log({boosted})
       setDefense(null)
     }
     if (defenseMirror && spellUsed.level <= defenseMirror) {
-      setMonsterHP(Math.round(monsterHp - data.utils.mirrorMultiplier * damage));
+      console.log(data.utils.mirrorMultiplier * damage * boosted)
+      console.log({boosted})
+      setMonsterHP(Math.round(monsterHp - data.utils.mirrorMultiplier * damage * boosted));
       setDefenseMirror(null)
     }
 
