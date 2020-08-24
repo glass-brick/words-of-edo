@@ -18,6 +18,12 @@ import yamaUbaPortrait from "./assets/yamaUba_portrait.png";
 import yumeNoSeireiPortrait from "./assets/yumeNoSeirei_portrait.png";
 import yureiPortrait from "./assets/yurei_portrait.png";
 import soryoNoIkiryoPortrait from "./assets/soryoNoIkiryo_portrait.png";
+import missionLibrary from "./assets/missionLibrary.png";
+import missionPossessed from "./assets/missionPossessed.png";
+import missionHouse from "./assets/missionHouse.png";
+import missionWidow from "./assets/missionWidow.png";
+import missionShop from "./assets/missionShop.png";
+import missionBoss from "./assets/missionBoss.png";
 
 const spells = {
   roku: {
@@ -527,6 +533,7 @@ const missionPool = {
     unlockedBy: [],
     monster: monsters.aka_manto,
     image: akaManto,
+    background: missionHouse,
     title: "A monster is roaming my house",
     description:
       "A monster has settled in my living room! Please take care of not burning my house to the ground",
@@ -544,6 +551,7 @@ const missionPool = {
     unlockedBy: [0],
     monster: monsters.tsuchigumo,
     image: tsuchigumoPortrait,
+    background: missionShop,
     title: "Something has vandalized my shop!",
     description:
       "Some sort of monster is making a mess in my shop every day. Please take care of not making too much noise, my customers are nearby!",
@@ -561,6 +569,7 @@ const missionPool = {
     unlockedBy: [0],
     monster: monsters.ushi_oni,
     image: ushiOniPortrait,
+    background: missionWidow,
     title: "Local widow acting strangely",
     description:
       "A widow has been acting strangely, maybe demons are behind this. Please take care of not upseting her, she's been through enough already",
@@ -578,6 +587,7 @@ const missionPool = {
     unlockedBy: [0],
     monster: monsters.nure_onna,
     image: nureOnnaPortrait,
+    background: missionWidow,
     title: "Local widow acting strangely",
     description:
       "A widow has been acting strangely, maybe demons are behind this. Please take care of not upseting her, she's been through enough already",
@@ -595,6 +605,7 @@ const missionPool = {
     unlockedBy: [1, 2, 3],
     monster: monsters.aka_manto,
     image: akaManto,
+    background: missionPossessed,
     title: "Save my child!",
     description:
       "My child has been possessed by a demon! Please take care of not harming the possessed body",
@@ -612,6 +623,7 @@ const missionPool = {
     unlockedBy: [1, 2, 3],
     monster: monsters.nure_onna,
     image: nureOnnaPortrait,
+    background: missionShop,
     title: "Something has vandalized my shop!",
     description:
       "Some sort of monster is making a mess in my shop every day. Please take care of not making too much noise, my customers are nearby!",
@@ -629,6 +641,7 @@ const missionPool = {
     unlockedBy: [1, 2, 3],
     monster: monsters.yurei,
     image: yureiPortrait,
+    background: missionLibrary,
     title: "The library must be saved",
     description:
       "The library is being haunted by a demon! Kill the demon while taking care of not destroying the library",
@@ -646,6 +659,7 @@ const missionPool = {
     unlockedBy: [4, 5, 6],
     monster: monsters.aka_manto,
     image: akaManto,
+    background: missionWidow,
     title: "Local widow acting strangely",
     description:
       "A widow has been acting strangely, maybe demons are behind this. Please take care of not upseting her, she's been through enough already",
@@ -663,6 +677,7 @@ const missionPool = {
     unlockedBy: [4, 5, 6],
     monster: monsters.nekomata,
     image: nekomataPortrait,
+    background: missionHouse,
     title: "A monster is roaming my house",
     description:
       "A monster has settled in my living room! Please take care of not burning my house to the ground",
@@ -680,6 +695,7 @@ const missionPool = {
     unlockedBy: [4, 5, 6],
     monster: monsters.ushi_oni,
     image: ushiOniPortrait,
+    background: missionWidow,
     title: "Local widow acting strangely",
     description:
       "A widow has been acting strangely, maybe demons are behind this. Please take care of not upseting her, she's been through enough already",
@@ -697,6 +713,7 @@ const missionPool = {
     unlockedBy: [7, 8, 9],
     monster: monsters.nure_onna,
     image: nureOnnaPortrait,
+    background: missionPossessed,
     title: "Save my child!",
     description:
       "My child has been possessed by a demon! Please take care of not harming the possessed body",
@@ -714,6 +731,7 @@ const missionPool = {
     unlockedBy: [7, 8, 9],
     monster: monsters.aka_manto,
     image: akaManto,
+    background: missionHouse,
     title: "A monster is roaming my house",
     description:
       "A monster has settled in my living room! Please take care of not burning my house to the ground",
@@ -731,6 +749,7 @@ const missionPool = {
     unlockedBy: [7, 8, 9],
     monster: monsters.aka_manto,
     image: akaManto,
+    background: missionLibrary,
     title: "The library must be saved",
     description:
       "The library is being haunted by a demon! Kill the demon while taking care of not destroying the library",
@@ -748,6 +767,7 @@ const missionPool = {
     unlockedBy: [10, 11, 12],
     monster: monsters.akakuchi,
     image: akakuchiPortrait,
+    background: missionHouse,
     title: "A monster is roaming my house",
     description:
       "A monster has settled in my living room! Please take care of not burning my house to the ground",
@@ -765,6 +785,7 @@ const missionPool = {
     unlockedBy: [10, 11, 12],
     monster: monsters.yume_no_seirei,
     image: yumeNoSeireiPortrait,
+    background: missionLibrary,
     title: "The library must be saved",
     description:
       "The library is being haunted by a demon! Kill the demon while taking care of not destroying the library",
@@ -782,6 +803,7 @@ const missionPool = {
     unlockedBy: [10, 11, 12],
     monster: monsters.nure_onna,
     image: nureOnnaPortrait,
+    background: missionHouse,
     title: "A monster is roaming my house",
     description:
       "A monster has settled in my living room! Please take care of not burning my house to the ground",
@@ -799,6 +821,7 @@ const missionPool = {
     unlockedBy: [13, 14, 15],
     monster: monsters.nekomata,
     image: nekomataPortrait,
+    background: missionShop,
     title: "Something has vandalized my shop!",
     description:
       "Some sort of monster is making a mess in my shop every day. Please take care of not making too much noise, my customers are nearby!",
@@ -816,6 +839,7 @@ const missionPool = {
     unlockedBy: [13, 14, 15],
     monster: monsters.tsuchigumo,
     image: tsuchigumoPortrait,
+    background: missionShop,
     title: "Something has vandalized my shop!",
     description:
       "Some sort of monster is making a mess in my shop every day. Please take care of not making too much noise, my customers are nearby!",
@@ -833,6 +857,7 @@ const missionPool = {
     unlockedBy: [13, 14, 15],
     monster: monsters.yama_uba,
     image: yamaUbaPortrait,
+    background: missionHouse,
     title: "A monster is roaming my house",
     description:
       "A monster has settled in my living room! Please take care of not burning my house to the ground",
@@ -850,6 +875,7 @@ const missionPool = {
     unlockedBy: [16, 17, 18],
     monster: monsters.akakuchi,
     image: akakuchiPortrait,
+    background: missionPossessed,
     title: "Save my child!",
     description:
       "My child has been possessed by a demon! Please take care of not harming the possessed body",
@@ -867,6 +893,7 @@ const missionPool = {
     unlockedBy: [16, 17, 18],
     monster: monsters.yume_no_seirei,
     image: yumeNoSeireiPortrait,
+    background: missionHouse,
     title: "A monster is roaming my house",
     description:
       "A monster has settled in my living room! Please take care of not burning my house to the ground",
@@ -884,6 +911,7 @@ const missionPool = {
     unlockedBy: [16, 17, 18],
     monster: monsters.nure_onna,
     image: nureOnnaPortrait,
+    background: missionLibrary,
     title: "The library must be saved",
     description:
       "The library is being haunted by a demon! Kill the demon while taking care of not destroying the library",
@@ -901,6 +929,7 @@ const missionPool = {
     unlockedBy: [19, 20, 21],
     monster: monsters.aka_manto,
     image: akaManto,
+    background: missionPossessed,
     title: "Save my child!",
     description:
       "My child has been possessed by a demon! Please take care of not harming the possessed body",
@@ -918,6 +947,7 @@ const missionPool = {
     unlockedBy: [19, 20, 21],
     monster: monsters.yurei,
     image: yureiPortrait,
+    background: missionWidow,
     title: "Local widow acting strangely",
     description:
       "A widow has been acting strangely, maybe demons are behind this. Please take care of not upseting her, she's been through enough already",
@@ -935,6 +965,7 @@ const missionPool = {
     unlockedBy: [19, 20, 21],
     monster: monsters.aka_manto,
     image: akaManto,
+    background: missionShop,
     title: "Something has vandalized my shop!",
     description:
       "Some sort of monster is making a mess in my shop every day. Please take care of not making too much noise, my customers are nearby!",
@@ -952,6 +983,7 @@ const missionPool = {
     unlockedBy: [22, 23, 24],
     monster: monsters.tsuchigumo,
     image: tsuchigumoPortrait,
+    background: missionShop,
     title: "Something has vandalized my shop!",
     description:
       "Some sort of monster is making a mess in my shop every day. Please take care of not making too much noise, my customers are nearby!",
@@ -969,6 +1001,7 @@ const missionPool = {
     unlockedBy: [22, 23, 24],
     monster: monsters.yama_uba,
     image: yamaUbaPortrait,
+    background: missionLibrary,
     title: "The library must be saved",
     description:
       "The library is being haunted by a demon! Kill the demon while taking care of not destroying the library",
@@ -986,6 +1019,7 @@ const missionPool = {
     unlockedBy: [22, 23, 24],
     monster: monsters.tsuchigumo,
     image: tsuchigumoPortrait,
+    background: missionShop,
     title: "Something has vandalized my shop!",
     description:
       "Some sort of monster is making a mess in my shop every day. Please take care of not making too much noise, my customers are nearby!",
@@ -1003,6 +1037,7 @@ const missionPool = {
     unlockedBy: [25, 26, 27],
     monster: monsters.ushi_oni,
     image: ushiOniPortrait,
+    background: missionHouse,
     title: "A monster is roaming my house",
     description:
       "A monster has settled in my living room! Please take care of not burning my house to the ground",
@@ -1020,6 +1055,7 @@ const missionPool = {
     unlockedBy: [25, 26, 27],
     monster: monsters.yurei,
     image: yureiPortrait,
+    background: missionShop,
     title: "Something has vandalized my shop!",
     description:
       "Some sort of monster is making a mess in my shop every day. Please take care of not making too much noise, my customers are nearby!",
@@ -1037,6 +1073,7 @@ const missionPool = {
     unlockedBy: [25, 26, 27],
     monster: monsters.yume_no_seirei,
     image: yumeNoSeireiPortrait,
+    background: missionPossessed,
     title: "Save my child!",
     description:
       "My child has been possessed by a demon! Please take care of not harming the possessed body",
@@ -1054,6 +1091,7 @@ const missionPool = {
     unlockedBy: [28, 29, 30],
     monster: monsters.soryo_no_ikiryo,
     image: soryoNoIkiryoPortrait,
+    background: missionBoss,
     title: "The monster within",
     description:
       "After battling the evil spirits for so long, the monk soul has been filled with hatred. A fragment of it has left the monk's body, trying to assert its own ego. The only solution is to take care of yourself",
