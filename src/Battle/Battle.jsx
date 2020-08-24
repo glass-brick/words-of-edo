@@ -51,11 +51,13 @@ export default function Battle({ monk, mission, onMissionEnd }) {
       <div className="bottom-menu">
         <div className="bottom-menu__square bottom-menu__hp">
           <div className="bottom-menu__text">
-            HP: {state.hp}/{monk.hp}
+            HP: {Math.max(state.hp, 0)}/{monk.hp}
           </div>
         </div>
         <div className="bottom-menu__square bottom-menu__objective-data">
-          <div className="bottom-menu__text">Enemy HP: {state.monsterHp}</div>
+          <div className="bottom-menu__text">
+            Enemy HP: {Math.max(state.monsterHp, 0)}
+          </div>
         </div>
         <div className="bottom-menu__square bottom-menu__objective">
           <div className="bottom-menu__text">{missionObj}</div>
