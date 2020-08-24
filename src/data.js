@@ -514,7 +514,7 @@ const missionPool = {
     description: "A monster has settled in my living room! Please take care of not burning my house to the ground",
     displayObjective: "House",
     conditions: ["fire"],
-    objectiveHP: 800,
+    objectiveHP: 500,
     type: "protect",
     rewards: { 
         spells: [spells.odan_roku],
@@ -546,7 +546,7 @@ const missionPool = {
     description: "A widow has been acting strangely, maybe demons are behind this. Please take care of not upseting her, she's been through enough already",
     displayObjective: "Widow",
     conditions: ["psi", "cutting", "fire"],
-    objectiveHP: 600,
+    objectiveHP: 475,
     type: "protect",
     rewards: { 
         spells: [spells.watama],
@@ -562,7 +562,7 @@ const missionPool = {
     description: "A widow has been acting strangely, maybe demons are behind this. Please take care of not upseting her, she's been through enough already",
     displayObjective: "Widow",
     conditions: ["psi", "cutting", "fire"],
-    objectiveHP: 600,
+    objectiveHP: 475,
     type: "protect",
     rewards: { 
         spells: [spells.katara],
@@ -610,7 +610,7 @@ const missionPool = {
     description: "The library is being haunted by a demon! Kill the demon while taking care of not destroying the library",
     displayObjective: "Books",
     conditions: ["fire", "water"],
-    objectiveHP: 650,
+    objectiveHP: 500,
     type: "protect",
     rewards: { 
         spells: [spells.tagasu],
@@ -626,7 +626,7 @@ const missionPool = {
     description: "A widow has been acting strangely, maybe demons are behind this. Please take care of not upseting her, she's been through enough already",
     displayObjective: "Widow",
     conditions: ["psi", "cutting", "fire"],
-    objectiveHP: 750,
+    objectiveHP: 475,
     type: "protect",
     rewards: { 
         spells: [spells.kurae],
@@ -642,7 +642,7 @@ const missionPool = {
     description: "A monster has settled in my living room! Please take care of not burning my house to the ground",
     displayObjective: "House",
     conditions: ["fire"],
-    objectiveHP: 800,
+    objectiveHP: 500,
     type: "protect",
     rewards: { 
         spells: [spells.himaki],
@@ -658,7 +658,7 @@ const missionPool = {
     description: "A widow has been acting strangely, maybe demons are behind this. Please take care of not upseting her, she's been through enough already",
     displayObjective: "Widow",
     conditions: ["psi", "cutting", "fire"],
-    objectiveHP: 750,
+    objectiveHP: 475,
     type: "protect",
     rewards: { 
         spells: [spells.chisayu],
@@ -690,7 +690,7 @@ const missionPool = {
     description: "A monster has settled in my living room! Please take care of not burning my house to the ground",
     displayObjective: "House",
     conditions: ["fire"],
-    objectiveHP: 800,
+    objectiveHP: 500,
     type: "protect",
     rewards: { 
         spells: [spells.odan_katara],
@@ -706,7 +706,7 @@ const missionPool = {
     description: "The library is being haunted by a demon! Kill the demon while taking care of not destroying the library",
     displayObjective: "Books",
     conditions: ["fire", "water"],
-    objectiveHP: 650,
+    objectiveHP: 500,
     type: "protect",
     rewards: { 
         spells: [spells.iteru_watama],
@@ -722,7 +722,7 @@ const missionPool = {
     description: "A monster has settled in my living room! Please take care of not burning my house to the ground",
     displayObjective: "House",
     conditions: ["fire"],
-    objectiveHP: 800,
+    objectiveHP: 500,
     type: "protect",
     rewards: { 
         spells: [spells.robae_himaki],
@@ -738,7 +738,7 @@ const missionPool = {
     description: "The library is being haunted by a demon! Kill the demon while taking care of not destroying the library",
     displayObjective: "Books",
     conditions: ["fire", "water"],
-    objectiveHP: 650,
+    objectiveHP: 500,
     type: "protect",
     rewards: { 
         spells: [spells.odan_chisayu],
@@ -754,7 +754,7 @@ const missionPool = {
     description: "A monster has settled in my living room! Please take care of not burning my house to the ground",
     displayObjective: "House",
     conditions: ["fire"],
-    objectiveHP: 800,
+    objectiveHP: 500,
     type: "protect",
     rewards: { 
         spells: [spells.odan_kurae],
@@ -802,7 +802,7 @@ const missionPool = {
     description: "A monster has settled in my living room! Please take care of not burning my house to the ground",
     displayObjective: "House",
     conditions: ["fire"],
-    objectiveHP: 800,
+    objectiveHP: 500,
     type: "protect",
     rewards: { 
         spells: [spells.torane_osumaki],
@@ -834,7 +834,7 @@ const missionPool = {
     description: "A monster has settled in my living room! Please take care of not burning my house to the ground",
     displayObjective: "House",
     conditions: ["fire"],
-    objectiveHP: 800,
+    objectiveHP: 500,
     type: "protect",
     rewards: { 
         spells: [spells.odan_roku_goten],
@@ -850,7 +850,7 @@ const missionPool = {
     description: "The library is being haunted by a demon! Kill the demon while taking care of not destroying the library",
     displayObjective: "Books",
     conditions: ["fire", "water"],
-    objectiveHP: 650,
+    objectiveHP: 500,
     type: "protect",
     rewards: { 
         spells: [spells.itoi_nio_sasu_yosu_itsuo_muso_natsuo_hasu],
@@ -882,7 +882,7 @@ const missionPool = {
     description: "A widow has been acting strangely, maybe demons are behind this. Please take care of not upseting her, she's been through enough already",
     displayObjective: "Widow",
     conditions: ["psi", "cutting", "fire"],
-    objectiveHP: 750,
+    objectiveHP: 475,
     type: "protect",
     rewards: { 
         spells: [spells.torane_osumaki_tsuyi],
@@ -930,7 +930,7 @@ const missionPool = {
     description: "The library is being haunted by a demon! Kill the demon while taking care of not destroying the library",
     displayObjective: "Books",
     conditions: ["fire", "water"],
-    objectiveHP: 650,
+    objectiveHP: 500,
     type: "protect",
     rewards: { 
         spells: [spells.odan_kurae_tsuyi],
@@ -962,7 +962,7 @@ const missionPool = {
     description: "A monster has settled in my living room! Please take care of not burning my house to the ground",
     displayObjective: "House",
     conditions: ["fire"],
-    objectiveHP: 800,
+    objectiveHP: 500,
     type: "protect",
     rewards: { 
         spells: [spells.odan_nakae_tsuyi],
