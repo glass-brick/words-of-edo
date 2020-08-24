@@ -41,6 +41,9 @@
       user-select: none;
       grid-area: spell;
       cursor: pointer;
+      &:hover {
+        background: $yellow;
+      }
     }
     &__hp {
       grid-area: hp;
