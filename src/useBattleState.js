@@ -13,7 +13,7 @@ function useLog(maxLines) {
   const addToLog = useCallback(
     (newItem) =>
       setLog((log) => {
-        if (log.length > maxLines) {
+        if (log.length >= maxLines) {
           return [...log.slice(1), newItem];
         } else {
           return [...log, newItem];
