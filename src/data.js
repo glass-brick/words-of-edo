@@ -521,8 +521,8 @@ const monsters = {
 const utils = {
   minStartingDistance: 4,
   maxStartingDistance: 7,
-  defenseMultiplier: 0.3,
-  mirrorMultiplier: 0.6,
+  defenseMultipliers: { 1: 0.7, 2: 0.4, 3: 0.2 },
+  mirrorMultipliers: { 1: 0.2, 2: 0.4, 3: 0.7 },
   healAmount: 100,
   boostMultiplier: 1.3,
 };

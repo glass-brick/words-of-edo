@@ -76,8 +76,10 @@ export default function BattleWrapper({ onMissionEnd, ...props }) {
               ? "You also passed the objective!"
               : "But you didn't manage to accomplish the objective..."}
           </div>
-          {rewards.map((line) => (
-            <div className="battle__subtitle">{line}</div>
+          {rewards.map((line, i) => (
+            <div key={i} className="battle__subtitle">
+              {line}
+            </div>
           ))}
           <button
             className="button"
