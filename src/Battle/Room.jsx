@@ -4,6 +4,10 @@ import data from "../data.js";
 import priest from "../assets/priest.png";
 import { createPortal } from "react-dom";
 import Attack from "./Attacks";
+import flop from "../assets/attack_sounds/flop.mp3";
+import { Howl } from "howler";
+
+const flopSound = new Howl({ src: flop, volume: 0.2 });
 
 export default function Room({
   onComplete = () => {},
@@ -40,6 +44,8 @@ export default function Room({
         // matchedSpell can be null
         if (matchedSpell) {
           attackRef.current.triggerAttack(matchedSpell, "player");
+        } else {
+          flopSound.play();
         }
         onComplete(matchedSpell);
         setInput("");
