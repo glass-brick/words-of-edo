@@ -7,19 +7,6 @@
   flex-direction: column;
   position: relative;
 
-  .top-menu {
-    background: $darkblue;
-
-    &__button {
-      padding: 4px;
-      cursor: pointer;
-      color: $yellow;
-      &:hover {
-        color: $darkyellow;
-      }
-    }
-  }
-
   .bottom-menu {
     position: absolute;
     bottom: 1em;
@@ -34,8 +21,9 @@
     font-weight: 600;
 
     grid-template-columns: 200px 300px;
-    grid-template-rows: 60px 60px 120px;
+    grid-template-rows: 30px 60px 60px 120px;
     grid-template-areas:
+      "spell spell"
       "hp objective-data"
       "hp objective"
       "log log";
@@ -46,6 +34,14 @@
       border-right: 1px solid $white;
     }
 
+    &__button {
+    }
+
+    &__spell {
+      user-select: none;
+      grid-area: spell;
+      cursor: pointer;
+    }
     &__hp {
       grid-area: hp;
     }

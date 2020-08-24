@@ -49,6 +49,19 @@ $white: #ffecd6;
   width: 1080px;
 }
 
+.mute-button {
+  border: 1px $darkblue solid;
+  background: $orange;
+  color: $blue;
+  border: none;
+  position: absolute;
+  font-size: 20px;
+  border-radius: 4px;
+  top: 12px;
+  left: 12px;
+  padding: 4px 8px;
+}
+
 .transition {
   background: $darkblue;
   opacity: 0;
