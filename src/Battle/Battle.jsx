@@ -41,9 +41,9 @@ export default function Battle({ monk, mission, onMissionEnd }) {
         onComplete={state.onCompleteWord}
         onEnemyComplete={state.onCompleteEnemyWord}
         onKeyStroke={state.onKeyStroke}
-        monster={mission.monster}
         monsterDistance={state.monsterDistance}
         monk={monk}
+        mission={mission}
       />
 
       <div className="bottom-menu">

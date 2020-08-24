@@ -10,10 +10,11 @@ export default function Room({
   enemySpell,
   onEnemyComplete = () => {},
   onKeyStroke,
-  monster,
   monsterDistance,
   monk,
+  mission,
 }) {
+  const { monster, background } = mission;
   const scale = monsterDistance * -0.1875 + 2.3125;
   const enemyRef = useRef(null);
   const enemyPos = enemyRef.current
@@ -73,7 +74,7 @@ export default function Room({
   }, [enemySpell, monster, leftoverEnemyWord, onEnemyComplete]);
 
   return (
-    <div className="room">
+    <div className="room" style={{ backgroundImage: `url(${background})` }}>
       <Attack enemyPos={enemyPos} ref={attackRef} />
       <div
         className="room__enemy"
