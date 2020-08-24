@@ -3,7 +3,8 @@ import { createPortal } from "react-dom";
 import cx from "classnames";
 import "./Dropdown.scss";
 
-export default function Dropdown({ title, options = [] }) {
+export default function Dropdown({ title, options = [], onSelect }) {
+  console.log(options)
   const [open, setOpen] = useState(false);
   const [subMenu, setSubMenu] = useState(null);
   const disabled = options.length === 0;
@@ -46,13 +47,15 @@ export default function Dropdown({ title, options = [] }) {
                     id={option.name}
                     className="dropdown-portal__list__item"
                     onMouseOver={() => setSubMenu(option.name)}
+                    onMouseLeave={() => setSubMenu(null)}
+                    onClick={() => {onSelect(option); setOpen(false)}}
                   >
                     {option.displayName}
                   </li>
                 ))}
               </ul>
             </div>
-            {subMenuItem && (
+            {subMenuItem && subMenuData && (
               <div
                 className="dropdown-portal__submenu"
                 style={{
@@ -61,7 +64,7 @@ export default function Dropdown({ title, options = [] }) {
                   left: subMenuBoundingRect.right + window.scrollX + 21,
                 }}
               >
-                {subMenuData.description}
+                {subMenuData.spell.description}
               </div>
             )}
           </>,

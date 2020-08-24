@@ -47,6 +47,8 @@ export default function useBattleState({ monk, mission, onMissionEnd }) {
   const [defenseBoosted, setDefenseBoosted] = useState(null);
   const [boost, setBoost] = useState(null);
   const [objectiveHP, setObjectiveHP] = useState(mission.objectiveHP);
+  const [monkItems, setMonkItems] = useState(monk.items);
+  const [usedItems, setUsedItems] = useState([]);
 
   useEffect(() => {
     music.volume(1);
@@ -60,75 +62,81 @@ export default function useBattleState({ monk, mission, onMissionEnd }) {
       setDefenseMirror(null);
       setDefenseBoosted(null);
       setDefense(null);
-      let damage = spellUsed.damage ? spellUsed.damage : 0;
       let boosted = false;
       if (boost && boost >= spellUsed.level) {
-        damage *= data.utils.boostMultiplier;
         boosted = true;
         setBoost(null);
       }
-      setMonsterHP(Math.round(monsterHp - damage));
+      attackOnOpponent(spellUsed, boosted);
+    }
+  }
 
-      // specials logic
-      // Specials refer to extra effects on creatures
-      if (spellUsed.special) {
-        let finalDistance;
-        let boostValue = boosted ? data.utils.boostMultiplier : 1;
-        switch (spellUsed.special) {
-          case "defense_response":
-            // Defense does nothing against a spell that is not being cast
-            if (enemyWord) {
-              setDefense(spellUsed.level);
-              if (boosted) setDefenseBoosted(boosted);
-            }
-            break;
-          case "defense_mirror":
-            // Defense does nothing against a spell that is not being cast
-            if (enemyWord) {
-              setDefenseMirror(spellUsed.level);
-              if (boosted) setDefenseBoosted(boosted);
-            }
-            break;
-          case "push":
-            finalDistance =
-              monsterDistance +
-              spellUsed.displayName.length * monster.speed * 1.5 * boostValue;
-            if (finalDistance > data.utils.maxStartingDistance) {
-              finalDistance = data.utils.maxStartingDistance;
-              addToLog("It can't go any further");
-            }
-            setMonsterDistance(finalDistance);
-            break;
-          case "pull":
-            finalDistance =
-              monsterDistance -
-              spellUsed.displayName.length * monster.speed * 1.5 * boostValue;
-            if (finalDistance < data.utils.minStartingDistance) {
-              finalDistance = data.utils.minStartingDistance;
-              addToLog("It can't go any closer");
-            }
-            setMonsterDistance(finalDistance);
-            break;
-          case "self_heal":
-            setHP(
-              Math.round(
-                hp + spellUsed.level * data.utils.healAmount * boostValue
-              )
-            );
-            break;
-          case "boost":
-            setBoost(spellUsed.level);
-            break;
-        }
-      }
+  function attackOnOpponent(spellUsed, boosted) {
+    let damage = spellUsed.damage ? spellUsed.damage : 0;
+    let boostValue = boosted ? data.utils.boostMultiplier : 1;
 
-      if (spellUsed.condition) {
-        if(mission.type === 'protect' && mission.conditions && mission.conditions.includes(spellUsed.condition)) {
-          if (objectiveHP) {
-            setObjectiveHP(objectiveHP - damage);
+    damage *= boostValue;
+
+    setMonsterHP(Math.round(monsterHp - damage));
+
+    // specials logic
+    // Specials refer to extra effects on creatures
+    if (spellUsed.special) {
+      let finalDistance;
+      switch (spellUsed.special) {
+        case "defense_response":
+          // Defense does nothing against a spell that is not being cast
+          if (enemyWord) {
+            setDefense(spellUsed.level);
+            if (boosted) setDefenseBoosted(boosted);
           }
-          addToLog(`The ${mission.type} seems damaged`);
+          break;
+        case "defense_mirror":
+          // Defense does nothing against a spell that is not being cast
+          if (enemyWord) {
+            setDefenseMirror(spellUsed.level);
+            if (boosted) setDefenseBoosted(boosted);
+          }
+          break;
+        case "push":
+          finalDistance =
+            monsterDistance +
+            spellUsed.displayName.length * monster.speed * 1.5 * boostValue;
+          if (finalDistance > data.utils.maxStartingDistance) {
+            finalDistance = data.utils.maxStartingDistance;
+            addToLog("It can't go any further");
+          }
+          setMonsterDistance(finalDistance);
+          break;
+        case "pull":
+          finalDistance =
+            monsterDistance -
+            spellUsed.displayName.length * monster.speed * 1.5 * boostValue;
+          if (finalDistance < data.utils.minStartingDistance) {
+            finalDistance = data.utils.minStartingDistance;
+            addToLog("It can't go any closer");
+          }
+          setMonsterDistance(finalDistance);
+          break;
+        case "self_heal":
+          setHP(
+            Math.round(
+              hp + spellUsed.level * data.utils.healAmount * boostValue
+            )
+          );
+          break;
+        case "boost":
+          setBoost(spellUsed.level);
+          break;
+      }
+    }
+
+    if (spellUsed.condition) {
+      if(mission.type === 'protect' && mission.conditions && mission.conditions.includes(spellUsed.condition)) {
+        if (objectiveHP) {
+          setObjectiveHP(objectiveHP - damage);
         }
+        addToLog(`The ${mission.type} seems damaged`);
       }
     }
   }
@@ -184,6 +192,15 @@ export default function useBattleState({ monk, mission, onMissionEnd }) {
     } // if it's attacking, it has its own logic
   }
 
+  function onItemUse(itemUsed) {
+    if(itemUsed) {
+      attackOnOpponent(itemUsed.spell, false)
+      // here we check if the monk already has these spells 
+      setUsedItems([...usedItems, itemUsed]); // New array with old and new items used
+      setMonkItems(monkItems.filter(item => ( item.name !== itemUsed.name )));
+    }
+  }
+
   useEffect(() => {
     if (monsterHp <= 0 || hp <= 0) {
       // HACK so it's not called again
@@ -208,9 +225,10 @@ export default function useBattleState({ monk, mission, onMissionEnd }) {
         missionObjectivePassed,
         monkDead,
         rewards,
+        usedItems,
       });
-      }
-});
+    }
+  });
 
   return {
     hp,
@@ -226,7 +244,11 @@ export default function useBattleState({ monk, mission, onMissionEnd }) {
     onKeyStroke: () => {
       onKeyStroke();
     },
+    onItemUse: (itemUsed) => {
+      onItemUse(itemUsed);
+    },
     enemyWord,
     objectiveHP,
+    monkItems,
   };
 }

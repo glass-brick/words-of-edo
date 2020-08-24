@@ -46,6 +46,25 @@ function Game() {
                   setMonk({...monk, spells: [...monk.spells, ...newSpells]});
                 }
               }
+              if(results.usedItems){
+                let oldItems = monk.items;
+                let newItems = [];
+                let used;
+                let objectUsed;
+                oldItems.forEach(monkItem => {
+                  used = false;
+                  objectUsed = null;
+                  results.usedItems.forEach(function(item, i) {
+                    if(monkItem.name === item.name){
+                      used = true;
+                      results.usedItems.splice(i,1);
+                      return;
+                    }
+                  });
+                  if(!used) newItems.push(monkItem);
+                });
+                setMonk({...monk, items: newItems});
+              }
               if (!transition) setTransition(true);
               setTimeout(() => {
                 setCurrentMission(null);

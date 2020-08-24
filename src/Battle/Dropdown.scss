@@ -21,6 +21,7 @@
     color: $white;
     list-style: none;
     &__item {
+      cursor: pointer;
       padding-top: 4px;
       &:not(:last-child) {
         border-bottom: 1px solid $white;

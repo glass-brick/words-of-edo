@@ -3,6 +3,7 @@ import "./Battle.scss";
 import useBattleState from "./useBattleState";
 import Room from "./Battle/Room";
 import SpellBook from "./Battle/SpellBook";
+import Dropdown from "./Battle/Dropdown";
 
 export default function Battle({ monk, mission, onMissionEnd }) {
   const state = useBattleState({ monk, mission, onMissionEnd });
@@ -20,6 +21,7 @@ export default function Battle({ monk, mission, onMissionEnd }) {
         >
           Spells
         </span>
+        <Dropdown title="Items" options={state.monkItems} onSelect={(item) => state.onItemUse(item)} />
       </header>
 
       <SpellBook

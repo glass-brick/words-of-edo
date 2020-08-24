@@ -419,9 +419,18 @@ const missions = [
   },
 ];
 
+const items = {
+  watama_kimono: {
+    name: 'watama_kimono',
+    displayName: 'Watama kimono',
+    spell: spells.iteru_watama,
+  }
+}
+
 const monk = {
   hp: 1000,
   spells: [spells.roku, spells.mamoku, spells.nakae],
+  items: [items.watama_kimono],
 };
 
 export default {
