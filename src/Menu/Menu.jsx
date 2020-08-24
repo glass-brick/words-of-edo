@@ -3,14 +3,14 @@ import edo from "../assets/edo.png";
 import "./Menu.scss";
 import data from "../data";
 
-export default function Menu({ onMissionStart = () => {} }) {
+export default function Menu({ onMissionStart = () => {}, missions }) {
   return (
     <div className="main">
       <img src={edo} alt="Edo" />
       <div className="main__menu">
         <h1 className="main__menu__title">Words of Edo</h1>
         <div className="main__menu__list">
-          {data.missions.map((mission) => (
+          {missions.map((mission) => (
             <div
               className="main__menu__list__item"
               onClick={() => onMissionStart(mission)}

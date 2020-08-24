@@ -493,8 +493,9 @@ const utils = {
   healAmount: 100,
 };
 
-const missions = [
-  {
+const missionPool = {
+  0: {
+    name: 0,
     monster: monsters.monster_prototype,
     title: "Save my children!",
     description: "They're possessed by a spooky ghost!",
@@ -505,144 +506,60 @@ const missions = [
       items: [items.odan_kurae_tsuyi_scroll] 
     },
   },
-  {
-    monster: monsters.aka_manto,
-    title: "It's in the bathroom...",
-    description:
-      "A strange being is offering toilet paper in the bathroom stalls",
+  1: {
+    name: 1,
+    monster: monsters.monster_prototype,
+    title: "Save my children... again! 2",
+    description: "They're possessed by a spooky ghost!",
+    type: "kill",
     image: akaManto,
-    type: "seal",
+    rewards: { 
+      spells: [spells.odan_roku],
+      items: [items.odan_kurae_tsuyi_scroll] 
+    },
+    unlockedBy: [0],
   },
-  {
-    monster: monsters.aka_manto,
-    title: "The library must be saved",
-    description:
-      "The library is being haunted by a demon! Kill the demon while taking care of not destroying the library",
+  2: {
+    name: 2,
+    monster: monsters.monster_prototype,
+    title: "Save my children... again! 3",
+    description: "They're possessed by a spooky ghost!",
+    type: "kill",
     image: akaManto,
-    displayObjective: "Library",
-    type: "protect",
-    conditions: ["fire", "water"],
-    objectiveHP: 1000,
+    rewards: { 
+      spells: [spells.odan_roku],
+      items: [items.odan_kurae_tsuyi_scroll] 
+    },
+    unlockedBy: [0],
   },
-  {
-    monster: monsters.aka_manto,
-    title: "My house!",
-    description: "My living is being haunted by a demon",
+  3: {
+    name: 3,
+    monster: monsters.monster_prototype,
+    title: "Save my children... again! 4",
+    description: "They're possessed by a spooky ghost!",
+    type: "kill",
     image: akaManto,
-    displayObjective: "House",
-    type: "protect",
-    conditions: ["fire", "water"],
-    objectiveHP: 1000,
-  },
-  {
-    monster: monsters.aka_manto,
-    title: "This person is possessed, don't kill them",
-    description: "I want... you",
-    image: akaManto,
-    displayObjective: "People",
-    type: "protect",
-    conditions: ["fire", "water"],
-    objectiveHP: 1000,
-  },
-  {
-    monster: monsters.aka_manto,
-    title: "Misión TEST",
-    description: "Monster TEST",
-    image: akaManto,
-    displayObjective: "Books",
-    type: "protect",
-    conditions: ["fire", "water"],
-    objectiveHP: 650,
-  },
-  {
-    monster: monsters.akakuchi,
-    title: "Misión TEST",
-    description: "Monster TEST",
-    image: akakuchiPortrait,
-    displayObjective: "Books",
-    type: "protect",
-    conditions: ["fire", "water"],
-    objectiveHP: 650,
-  },
-  {
-    monster: monsters.nekomata,
-    title: "Misión TEST",
-    description: "Monster TEST",
-    image: nekomataPortrait,
-    displayObjective: "Books",
-    type: "protect",
-    conditions: ["fire", "water"],
-    objectiveHP: 650,
-  },
-  {
-    monster: monsters.nure_onna,
-    title: "Misión TEST",
-    description: "Monster TEST",
-    image: nureOnnaPortrait,
-    displayObjective: "Books",
-    type: "protect",
-    conditions: ["fire", "water"],
-    objectiveHP: 650,
-  },
-  {
-    monster: monsters.tsuchigumo,
-    title: "Misión TEST",
-    description: "Monster TEST",
-    image: tsuchigumoPortrait,
-    displayObjective: "Books",
-    type: "protect",
-    conditions: ["fire", "water"],
-    objectiveHP: 650,
-  },
-  {
-    monster: monsters.ushi_oni,
-    title: "Misión TEST",
-    description: "Monster TEST",
-    image: ushiOniPortrait,
-    displayObjective: "Books",
-    type: "protect",
-    conditions: ["fire", "water"],
-    objectiveHP: 650,
-  },
-  {
-    monster: monsters.yama_uba,
-    title: "Misión TEST",
-    description: "Monster TEST",
-    image: yamaUbaPortrait,
-    displayObjective: "Books",
-    type: "protect",
-    conditions: ["fire", "water"],
-    objectiveHP: 650,
-  },
-  {
-    monster: monsters.yume_no_seirei,
-    title: "Misión TEST",
-    description: "Monster TEST",
-    image: yumeNoSeireiPortrait,
-    displayObjective: "Books",
-    type: "protect",
-    conditions: ["fire", "water"],
-    objectiveHP: 650,
-  },
-  {
-    monster: monsters.yurei,
-    title: "Misión TEST",
-    description: "Monster TEST",
-    image: yureiPortrait,
-    displayObjective: "Books",
-    type: "protect",
-    conditions: ["fire", "water"],
-    objectiveHP: 650,
-  },
+    rewards: { 
+      spells: [spells.odan_roku],
+      items: [items.odan_kurae_tsuyi_scroll] 
+    },
+    unlockedBy: [1,2],
+  }
+}
+
+const missions = [
+  missionPool['0'],
 ];
 
 const monk = {
   hp: 1000,
   spells: [spells.roku, spells.osumaki, spells.mamoku],
   items: [items.watama_kimono],
+  missionBeaten: [],
 };
 
 export default {
+  missionPool,
   monsters,
   missions,
   spells,

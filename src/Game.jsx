@@ -37,6 +37,7 @@ function useTransitionState(initialState) {
 
 function Game() {
   const [monk, setMonk] = useState(data.monk);
+  const [missions, setMissions] = useState(data.missions);
   const [gameScreen, setGameScreen, transition] = useTransitionState({
     // type: localStorage.getItem("introComplete") === "true" ? "menu" : "intro", <- play intro only once
     type: "intro",
@@ -65,6 +66,7 @@ function Game() {
             let newSpells = [];
             let finalItems = [...monk.items];
             let finalSpells = [...monk.spells];
+            let finalMissionsBeaten = [...monk.missionBeaten];
             
             if(results.usedItems){
               let oldItems = monk.items;
@@ -116,7 +118,33 @@ function Game() {
                 finalSpells = [...monk.spells, ...newSpells];
               }
             }
-            setMonk({...monk, spells: [...finalSpells], items: [...finalItems]});
+            // beating the mission may unlock others
+            finalMissionsBeaten = [...monk.missionBeaten, results.mission.name];
+            let missionsNumber = Object.keys(data.missionPool).length;
+            let availableMissions = [];
+            for(let i = 0; i < missionsNumber; i++ ){
+              if( !finalMissionsBeaten.includes(i)){
+                console.log('entra con');
+                console.log(data.missionPool[i]);
+                // Not beaten yet
+                let unlocked = true;
+                if(data.missionPool[i].unlockedBy){
+                  data.missionPool[i].unlockedBy.forEach(function(missionUnlocker){
+                    console.log(missionUnlocker);
+                    console.log(finalMissionsBeaten);
+                    if(!finalMissionsBeaten.includes(missionUnlocker)){
+                      unlocked = false;
+                    }
+                  });
+                  if(unlocked) availableMissions.push(data.missionPool[i]);
+                }
+              }
+            }
+            setMissions([...availableMissions]);
+            setMonk({...monk, 
+              spells: [...finalSpells], 
+              items: [...finalItems], 
+              missionBeaten: [...finalMissionsBeaten]});
             setGameScreen({ type: "menu" });
           }}
         />
@@ -129,6 +157,7 @@ function Game() {
           onMissionStart={(mission) => {
             setGameScreen({ type: "mission", mission });
           }}
+          missions= {missions}
         />
       );
       break;
