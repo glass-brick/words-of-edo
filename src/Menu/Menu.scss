@@ -34,20 +34,19 @@
           "description image";
         cursor: pointer;
         margin-bottom: 4px;
+        place-items: center;
+        text-align: center;
 
         &__title {
           grid-area: title;
-          place-self: center;
           padding: 4 10px;
         }
         &__img {
-          place-self: center;
           grid-area: image;
         }
         &__description {
           grid-area: description;
           margin: 0;
-          place-self: center;
           padding: 4px 10px;
         }
       }
