@@ -162,6 +162,7 @@ function Game() {
             setGameScreen({ type: "mission", mission });
           }}
           missions={missions}
+          monk={monk}
         />
       );
       break;

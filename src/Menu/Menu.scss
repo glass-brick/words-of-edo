@@ -3,7 +3,9 @@
 .main {
   display: flex;
   color: $darkblue;
+  position: relative;
   height: 720px;
+  width: 1080px;
 
   &__menu {
     flex-grow: 1;
@@ -13,6 +15,7 @@
     flex-direction: column;
     align-items: center;
     background: $orange;
+    flex-grow: 1;
 
     &__title {
       margin-bottom: 20px;
@@ -47,6 +50,15 @@
           padding: 4px 10px;
         }
       }
+    }
+    &__button {
+      cursor: pointer;
+      border: none;
+      background: $darkblue;
+      color: $white;
+      font-size: 20px;
+      border-radius: 8px;
+      padding: 8px;
     }
   }
 }

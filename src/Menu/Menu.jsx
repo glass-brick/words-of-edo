@@ -1,11 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
 import edo from "../assets/edo.png";
 import "./Menu.scss";
 import data from "../data";
+import SpellBook from "../Battle/SpellBook";
 
-export default function Menu({ onMissionStart = () => {}, missions }) {
+export default function Menu({ onMissionStart = () => {}, missions, monk }) {
+  const [spellBookOpen, setSpellBookOpen] = useState(false);
+
   return (
     <div className="main">
+      <SpellBook
+        spells={monk.spells}
+        show={spellBookOpen}
+        onClose={() => setSpellBookOpen(false)}
+      />
       <img src={edo} alt="Edo" />
       <div className="main__menu">
         <h1 className="main__menu__title">Words of Edo</h1>
@@ -28,6 +36,12 @@ export default function Menu({ onMissionStart = () => {}, missions }) {
             </div>
           ))}
         </div>
+        <button
+          className="main__menu__button"
+          onClick={() => setSpellBookOpen(true)}
+        >
+          Open SpellBook
+        </button>
       </div>
     </div>
   );
