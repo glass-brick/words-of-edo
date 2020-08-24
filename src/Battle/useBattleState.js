@@ -150,7 +150,11 @@ export default function useBattleState({ monk, mission, onMissionEnd }) {
         if (objectiveHP) {
           setObjectiveHP(objectiveHP - damage);
         }
-        addToLog(`The ${mission.displayObjective.toLowerCase()} seems damaged`);
+        if( mission.displayObjective.toLowerCase() === 'noise' ){
+          addToLog(`The noise is upsetting the customers!`);
+        } else {
+          addToLog(`The ${mission.displayObjective.toLowerCase()} seems damaged`);
+        }
       }
     }
   }
