@@ -8,6 +8,7 @@ import ushiOni from "./assets/ushiOni.png";
 import yamaUba from "./assets/yamaUba.png";
 import yumeNoSeirei from "./assets/yumeNoSeirei.png";
 import yurei from "./assets/yurei.png";
+import soryoNoIkiryo from "./assets/soryoNoIkiryo.png";
 import akakuchiPortrait from "./assets/akakuchi_portrait.png";
 import nekomataPortrait from "./assets/nekomata_portrait.png";
 import nureOnnaPortrait from "./assets/nureOnna_portrait.png";
@@ -16,6 +17,7 @@ import ushiOniPortrait from "./assets/ushiOni_portrait.png";
 import yamaUbaPortrait from "./assets/yamaUba_portrait.png";
 import yumeNoSeireiPortrait from "./assets/yumeNoSeirei_portrait.png";
 import yureiPortrait from "./assets/yurei_portrait.png";
+import soryoNoIkiryoPortrait from "./assets/soryoNoIkiryo_portrait.png";
 
 const spells = {
   roku: {
@@ -492,6 +494,21 @@ const monsters = {
       { spell: spells.gomoku_iteru_watama, chances: 0.6 },
     ],
     sprite: yurei,
+  },
+  soryo_no_ikiryo: {
+    name: "soryo_no_ikiryo",
+    displayName: "Soryo no Ikiryo",
+    speed: 0.035,
+    hp: 2000,
+    attackchance: 0.14,
+    msperkeystroke: 200,
+    spells: [
+      { spell: spells.gomoku_iteru_watama, chances: 0.3 },
+      { spell: spells.odan_roku_goten, chances: 0.2 },
+      { spell: spells.odan_kurae_tsuyi, chances: 0.25 },
+      { spell: spells.odan_katara_goten, chances: 0.25 },
+    ],
+    sprite: soryoNoIkiryo,
   },
 };
 
@@ -1031,20 +1048,25 @@ const missionPool = {
       spells: [spells.odan_chisayu_goten],
     },
   },
+
+  31: {
+    name: 31,
+    unlockedBy: [28, 29, 30],
+    monster: monsters.soryo_no_ikiryo,
+    image: soryoNoIkiryoPortrait,
+    title: "The monster within",
+    description:
+      "After battling the evil spirits for so long, the monk soul has been filled with hatred. A fragment of it has left the monk's body, trying to assert its own ego. The only solution is to take care of yourself",
+    type: "kill",
+    rewards: {},
+  },
 };
 
 const missions = [missionPool["0"]];
 
 const monk = {
   hp: 1000,
-  spells: [
-    spells.roku,
-    spells.osumaki,
-    spells.mamoku,
-    spells.katara,
-    spells.watama,
-    spells.tagasu,
-  ],
+  spells: [spells.roku, spells.osumaki, spells.mamoku],
   items: [items.watama_kimono],
   missionBeaten: [],
 };
