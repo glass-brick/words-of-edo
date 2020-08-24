@@ -1,0 +1,63 @@
+.attack {
+  width: 200px;
+  height: 200px;
+  background-position: left center;
+  position: absolute;
+  z-index: 5;
+
+  &#cutting {
+    background-image: url("../assets/attacks/cutting.png");
+    animation: play13 0.5s steps(13);
+  }
+
+  &#fire {
+    background-image: url("../assets/attacks/fire.png");
+    animation: play16 1s steps(16);
+  }
+
+  &#kinetic {
+    background-image: url("../assets/attacks/kinetic.png");
+    animation: play8 1s steps(8);
+  }
+
+  &#psi {
+    background-image: url("../assets/attacks/psi.png");
+    animation: play16 1.5s steps(16);
+  }
+
+  &#seal {
+    background-image: url("../assets/attacks/seal.png");
+    animation: play24 1.5s steps(24);
+  }
+
+  &#water {
+    background-image: url("../assets/attacks/water.png");
+    animation: play11 1s steps(11);
+  }
+}
+
+@keyframes play8 {
+  100% {
+    background-position: -1600px;
+  }
+}
+@keyframes play11 {
+  100% {
+    background-position: -2200px;
+  }
+}
+@keyframes play13 {
+  100% {
+    background-position: -2600px;
+  }
+}
+@keyframes play16 {
+  100% {
+    background-position: -3200px;
+  }
+}
+@keyframes play24 {
+  100% {
+    background-position: -4800px;
+  }
+}

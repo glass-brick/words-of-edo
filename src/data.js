@@ -1,5 +1,21 @@
 import monsterPrototype from "./assets/monster_prototype.png";
 import akaManto from "./assets/aka_manto_portrait.png";
+import akakuchi from "./assets/akakuchi.png";
+import nekomata from "./assets/nekomata.png";
+import nureOnna from "./assets/nureOnna.png";
+import tsuchigumo from "./assets/tsuchigumo.png";
+import ushiOni from "./assets/ushiOni.png";
+import yamaUba from "./assets/yamaUba.png";
+import yumeNoSeirei from "./assets/yumeNoSeirei.png";
+import yurei from "./assets/yurei.png";
+import akakuchiPortrait from "./assets/akakuchi_portrait.png";
+import nekomataPortrait from "./assets/nekomata_portrait.png";
+import nureOnnaPortrait from "./assets/nureOnna_portrait.png";
+import tsuchigumoPortrait from "./assets/tsuchigumo_portrait.png";
+import ushiOniPortrait from "./assets/ushiOni_portrait.png";
+import yamaUbaPortrait from "./assets/yamaUba_portrait.png";
+import yumeNoSeireiPortrait from "./assets/yumeNoSeirei_portrait.png";
+import yureiPortrait from "./assets/yurei_portrait.png";
 
 const spells = {
   roku: {
@@ -349,14 +365,110 @@ const monsters = {
     name: "aka_manto",
     speed: 0.045,
     hp: 400,
-    attackchance: 0.11,
-    msperkeystroke: 800,
+    attackchance: 0.13,
+    msperkeystroke: 250,
     spells: [
-      { spell: spells.kurae, chances: 0.3 },
-      { spell: spells.odan_kurae, chances: 0.5 },
-      { spell: spells.odan_kurae_tsuyi, chances: 0.2 },
+      { spell: spells.odan_nakae, chances: 0.7 },
+      { spell: spells.odan_kurae_tsuyi, chances: 0.3 },
     ],
     sprite: monsterPrototype,
+  },
+  akakuchi: {
+    name: "akakuchi",
+    speed: 0.055,
+    hp: 650,
+    attackchance: 0.1,
+    msperkeystroke: 300,
+    spells: [
+      { spell: spells.odan_nakae, chances: 0.7 },
+      { spell: spells.odan_nakae_tsuyi, chances: 0.3 },
+    ],
+    sprite: akakuchi,
+  },
+  nekomata: {
+    name: "nekomata",
+    speed: 0.04,
+    hp: 350,
+    attackchance: 0.13,
+    msperkeystroke: 250,
+    spells: [
+      { spell: spells.odan_roku, chances: 0.8 },
+      { spell: spells.odan_roku_goten, chances: 0.2 },
+    ],
+    sprite: nekomata,
+  },
+  nure_onna: {
+    name: "nure_onna",
+    speed: 0.015,
+    hp: 750,
+    attackchance: 0.13,
+    msperkeystroke: 375,
+    spells: [
+      { spell: spells.kurae, chances: 0.9 },
+      { spell: spells.odan_kurae_tsuyi, chances: 0.1 },
+    ],
+    sprite: nureOnna,
+  },
+  tsuchigumo: {
+    name: "tsuchigumo",
+    speed: 0.03,
+    hp: 500,
+    attackchance: 0.1,
+    msperkeystroke: 200,
+    spells: [
+      { spell: spells.odan_shime_tagasu, chances: 0.1 },
+      { spell: spells.odan_kurae_tsuyi, chances: 0.9 },
+    ],
+    sprite: tsuchigumo,
+  },
+  ushi_oni: {
+    name: "ushi_oni",
+    speed: 0.028,
+    hp: 575,
+    attackchance: 0.14,
+    msperkeystroke: 300,
+    spells: [
+      { spell: spells.odan_katara, chances: 0.55 },
+      { spell: spells.iteru_watama, chances: 0.45 },
+    ],
+    sprite: ushiOni,
+  },
+  yama_uba: {
+    name: "yama_uba",
+    speed: 0.07,
+    hp: 325,
+    attackchance: 0.21,
+    msperkeystroke: 330,
+    spells: [
+      { spell: spells.kurae, chances: 0.8 },
+      { spell: spells.tagasu, chances: 0.2 },
+    ],
+    sprite: yamaUba,
+  },
+  yume_no_seirei: {
+    name: "yume_no_seirei",
+    speed: 0.09,
+    hp: 950,
+    attackchance: 0.1,
+    msperkeystroke: 350,
+    spells: [
+      { spell: spells.odan_roku, chances: 0.32 },
+      { spell: spells.odan_kurae, chances: 0.33 },
+      { spell: spells.odan_katara, chances: 0.35 },
+    ],
+    sprite: yumeNoSeirei,
+  },
+  yurei: {
+    name: "yurei",
+    speed: 0.055,
+    hp: 425,
+    attackchance: 0.12,
+    msperkeystroke: 225,
+    spells: [
+      { spell: spells.odan_katara_goten, chances: 0.4 },
+      { spell: spells.gomoku_iteru_watama, chances: 0.6 },
+    ],
+    sprite: yurei,
   },
 };
 
@@ -370,52 +482,94 @@ const utils = {
 
 const missions = [
   {
-    monster: monsters.monster_prototype,
-    title: "Save my children!",
-    description: "They're possessed by a spooky ghost!",
-    type: 'kill',
+    monster: monsters.aka_manto,
+    title: "Misión TEST",
+    description: "Monster TEST",
     image: akaManto,
-    rewards: {spells: [spells.odan_roku]}
+    displayObjective: "Books",
+    type: "protect",
+    conditions: ["fire", "water"],
+    objectiveHP: 650,
   },
   {
-    monster: monsters.aka_manto,
-    title: "It's in the bathroom...",
-    description:
-      "A strange being is offering toilet paper in the bathroom stalls",
-    image: akaManto,
-    type: 'seal',
+    monster: monsters.akakuchi,
+    title: "Misión TEST",
+    description: "Monster TEST",
+    image: akakuchiPortrait,
+    displayObjective: "Books",
+    type: "protect",
+    conditions: ["fire", "water"],
+    objectiveHP: 650,
   },
   {
-    monster: monsters.aka_manto,
-    title: "The library must be saved",
-    description:
-      "The library is being haunted by a demon! Kill the demon while taking care of not destroying the library",
-    image: akaManto,
-    displayObjective: 'Library',
-    type: 'protect',
-    conditions: ['fire', 'water'],
-    objectiveHP: 1000,
+    monster: monsters.nekomata,
+    title: "Misión TEST",
+    description: "Monster TEST",
+    image: nekomataPortrait,
+    displayObjective: "Books",
+    type: "protect",
+    conditions: ["fire", "water"],
+    objectiveHP: 650,
   },
   {
-    monster: monsters.aka_manto,
-    title: "My house!",
-    description:
-      "My living is being haunted by a demon",
-    image: akaManto,
-    displayObjective: 'House',
-    type: 'protect',
-    conditions: ['fire', 'water'],
-    objectiveHP: 1000,
+    monster: monsters.nure_onna,
+    title: "Misión TEST",
+    description: "Monster TEST",
+    image: nureOnnaPortrait,
+    displayObjective: "Books",
+    type: "protect",
+    conditions: ["fire", "water"],
+    objectiveHP: 650,
   },
   {
-    monster: monsters.aka_manto,
-    title: "This person is possessed, don't kill them",
-    description: "I want... you",
-    image: akaManto,
-    displayObjective: 'People',
-    type: 'protect',
-    conditions: ['fire', 'water'],
-    objectiveHP: 1000,
+    monster: monsters.tsuchigumo,
+    title: "Misión TEST",
+    description: "Monster TEST",
+    image: tsuchigumoPortrait,
+    displayObjective: "Books",
+    type: "protect",
+    conditions: ["fire", "water"],
+    objectiveHP: 650,
+  },
+  {
+    monster: monsters.ushi_oni,
+    title: "Misión TEST",
+    description: "Monster TEST",
+    image: ushiOniPortrait,
+    displayObjective: "Books",
+    type: "protect",
+    conditions: ["fire", "water"],
+    objectiveHP: 650,
+  },
+  {
+    monster: monsters.yama_uba,
+    title: "Misión TEST",
+    description: "Monster TEST",
+    image: yamaUbaPortrait,
+    displayObjective: "Books",
+    type: "protect",
+    conditions: ["fire", "water"],
+    objectiveHP: 650,
+  },
+  {
+    monster: monsters.yume_no_seirei,
+    title: "Misión TEST",
+    description: "Monster TEST",
+    image: yumeNoSeireiPortrait,
+    displayObjective: "Books",
+    type: "protect",
+    conditions: ["fire", "water"],
+    objectiveHP: 650,
+  },
+  {
+    monster: monsters.yurei,
+    title: "Misión TEST",
+    description: "Monster TEST",
+    image: yureiPortrait,
+    displayObjective: "Books",
+    type: "protect",
+    conditions: ["fire", "water"],
+    objectiveHP: 650,
   },
 ];
 
@@ -429,7 +583,7 @@ const items = {
 
 const monk = {
   hp: 1000,
-  spells: [spells.roku, spells.mamoku, spells.nakae],
+  spells: [spells.roku, spells.osumaki, spells.mamoku],
   items: [items.watama_kimono],
 };
 

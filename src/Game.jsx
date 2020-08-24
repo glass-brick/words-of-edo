@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import Battle from "./Battle";
-import Intro from "./Intro/Intro";
+import Menu from "./Menu/Menu";
 import data from "./data";
+import Intro from "./Intro/Intro";
 
-function Game() {
-  const [monk, setMonk] = useState(data.monk);
-  const [currentMission, setCurrentMission] = useState(data.missions[0]);
+function useTransitionState(initialState) {
+  const [state, setState] = useState(initialState);
   const [transition, setTransition] = useState(false);
 
   useEffect(() => {
@@ -20,67 +20,105 @@ function Game() {
     };
   }, [transition]);
 
+  const transitionTo = useCallback(
+    (newState) =>
+      new Promise((resolve) => {
+        if (!transition) setTransition(true);
+        setTimeout(() => {
+          setState(newState);
+          resolve();
+        }, 500);
+      }),
+    [transition]
+  );
+
+  return [state, transitionTo, transition];
+}
+
+function Game() {
+  const [monk, setMonk] = useState(data.monk);
+  const [gameScreen, setGameScreen, transition] = useTransitionState({
+    // type: localStorage.getItem("introComplete") === "true" ? "menu" : "intro", <- play intro only once
+    type: "intro",
+  });
+
+  let currentScreen;
+
+  switch (gameScreen.type) {
+    case "intro":
+      currentScreen = (
+        <Intro
+          onIntroEnd={() => {
+            localStorage.setItem("introComplete", "true");
+            setGameScreen({ type: "menu" });
+          }}
+        />
+      );
+      break;
+    case "mission":
+      currentScreen = (
+        <Battle
+          monk={monk}
+          mission={gameScreen.mission}
+          onMissionEnd={(results) => {
+            if(results.rewards){
+              if(results.rewards.spells){
+                // here we check if the monk already has these spells 
+                let newSpells = [];
+                results.rewards.spells.forEach(spell => {
+                  let monkHasIt = false;
+                  monk.spells.forEach(monkSpell => {
+                    if( monkSpell.name === spell.name){
+                      monkHasIt = true;
+                      return ;
+                    }
+                  })
+                  if( !monkHasIt ) newSpells.push(spell);
+                });
+                setMonk({...monk, spells: [...monk.spells, ...newSpells]});
+              }
+            }
+            if(results.usedItems){
+              let oldItems = monk.items;
+              let newItems = [];
+              let used;
+              let objectUsed;
+              oldItems.forEach(monkItem => {
+                used = false;
+                objectUsed = null;
+                results.usedItems.forEach(function(item, i) {
+                  if(monkItem.name === item.name){
+                    used = true;
+                    results.usedItems.splice(i,1);
+                    return;
+                  }
+                });
+                if(!used) newItems.push(monkItem);
+              });
+              setMonk({...monk, items: newItems});
+            }
+          setGameScreen({ type: "menu" });
+          }}
+        />
+      );
+      break;
+    case "menu":
+    default:
+      currentScreen = (
+        <Menu
+          onMissionStart={(mission) => {
+            setGameScreen({ type: "mission", mission });
+          }}
+        />
+      );
+      break;
+  }
+
   return (
     <>
       <div className="game-app">
         {transition && <div className="transition" />}
-        {currentMission ? (
-          <Battle
-            monk={monk}
-            mission={currentMission}
-            onMissionEnd={(results) => {
-              if(results.rewards){
-                if(results.rewards.spells){
-                  // here we check if the monk already has these spells 
-                  let newSpells = [];
-                  results.rewards.spells.forEach(spell => {
-                    let monkHasIt = false;
-                    monk.spells.forEach(monkSpell => {
-                      if( monkSpell.name === spell.name){
-                        monkHasIt = true;
-                        return ;
-                      }
-                    })
-                    if( !monkHasIt ) newSpells.push(spell);
-                  });
-                  setMonk({...monk, spells: [...monk.spells, ...newSpells]});
-                }
-              }
-              if(results.usedItems){
-                let oldItems = monk.items;
-                let newItems = [];
-                let used;
-                let objectUsed;
-                oldItems.forEach(monkItem => {
-                  used = false;
-                  objectUsed = null;
-                  results.usedItems.forEach(function(item, i) {
-                    if(monkItem.name === item.name){
-                      used = true;
-                      results.usedItems.splice(i,1);
-                      return;
-                    }
-                  });
-                  if(!used) newItems.push(monkItem);
-                });
-                setMonk({...monk, items: newItems});
-              }
-              if (!transition) setTransition(true);
-              setTimeout(() => {
-                setCurrentMission(null);
-              }, 500);
-            }}
-          />
-        ) : (
-          <Intro
-            onMissionStart={(mission) => {
-              if (!transition) setTransition(true);
-              setTimeout(() => {
-                setCurrentMission(mission);
-              }, 500);
-            }}
-          />
-        )}
+        {currentScreen}
       </div>
       <div id="portal-root"></div>
     </>
