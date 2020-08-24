@@ -65,7 +65,7 @@ export default function useBattleState({ monk, mission, onMissionEnd }) {
       let boosted = false;
       if (boost && boost >= spellUsed.level) {
         boosted = true;
-        setBoost(null);
+        if(spellUsed.special !== 'boost') setBoost(null);
       }
       attackOnOpponent(spellUsed, boosted);
     }

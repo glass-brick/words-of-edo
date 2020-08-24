@@ -254,7 +254,7 @@ const spells = {
     level: 1,
     displayName: "Tagasu",
     damage: 0,
-    special: "",
+    special: "boost",
     condition: "boost",
     description:
       "The monk sets a small amount of spiritual energy aside to supplement his next spell",
@@ -264,7 +264,7 @@ const spells = {
     level: 2,
     displayName: "Shime Tagasu",
     damage: 0,
-    special: "",
+    special: "boost",
     condition: "boost",
     description:
       "The monk sets a fair amount of spiritual energy aside to supplement his next spell",
@@ -274,7 +274,7 @@ const spells = {
     level: 3,
     displayName: "Odan Shime Tagasu",
     damage: 0,
-    special: "",
+    special: "boost",
     condition: "boost",
     description:
       "The monk sets a huge amount of spiritual energy aside to supplement his next spell",
@@ -501,6 +501,7 @@ const utils = {
   defenseMultiplier: 0.3,
   mirrorMultiplier: 0.6,
   healAmount: 100,
+  boostMultiplier: 1.3,
 };
 
 const missionPool = {
