@@ -10,11 +10,11 @@ export default function Menu({ onMissionStart = () => {}, missions }) {
       <div className="main__menu">
         <h1 className="main__menu__title">Words of Edo</h1>
         <div className="main__menu__list">
-          {missions.map((mission) => (
+          {missions.map((mission, i) => (
             <div
               className="main__menu__list__item"
               onClick={() => onMissionStart(mission)}
-              key={mission.title}
+              key={i}
             >
               <h2 className="main__menu__list__item__title">{mission.title}</h2>
               <p className="main__menu__list__item__description">

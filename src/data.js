@@ -353,20 +353,21 @@ const spells = {
 
 const items = {
   watama_kimono: {
-    name: 'watama_kimono',
-    displayName: 'Watama kimono',
+    name: "watama_kimono",
+    displayName: "Watama kimono",
     spell: spells.iteru_watama,
   },
   odan_kurae_tsuyi_scroll: {
-    name: 'odan_kurae_tsuyi_scroll',
-    displayName: 'Odan kurae tsuyi scroll',
+    name: "odan_kurae_tsuyi_scroll",
+    displayName: "Odan kurae tsuyi scroll",
     spell: spells.odan_kurae_tsuyi,
   },
-}
+};
 
 const monsters = {
   monster_prototype: {
     name: "monster_prototype",
+    displayName: "Monster Prototype",
     speed: 0.026,
     hp: 40,
     attackchance: 0.15,
@@ -376,6 +377,7 @@ const monsters = {
   },
   aka_manto: {
     name: "aka_manto",
+    displayName: "Aka Manto",
     speed: 0.045,
     hp: 400,
     attackchance: 0.13,
@@ -388,6 +390,7 @@ const monsters = {
   },
   akakuchi: {
     name: "akakuchi",
+    displayName: "Akakuchi",
     speed: 0.055,
     hp: 650,
     attackchance: 0.1,
@@ -400,6 +403,7 @@ const monsters = {
   },
   nekomata: {
     name: "nekomata",
+    displayName: "Nekomata",
     speed: 0.04,
     hp: 350,
     attackchance: 0.13,
@@ -412,6 +416,7 @@ const monsters = {
   },
   nure_onna: {
     name: "nure_onna",
+    displayName: "Nure Onna",
     speed: 0.015,
     hp: 750,
     attackchance: 0.13,
@@ -424,6 +429,7 @@ const monsters = {
   },
   tsuchigumo: {
     name: "tsuchigumo",
+    displayName: "Tsuchigumo",
     speed: 0.03,
     hp: 500,
     attackchance: 0.1,
@@ -436,6 +442,7 @@ const monsters = {
   },
   ushi_oni: {
     name: "ushi_oni",
+    displayName: "Ushi Oni",
     speed: 0.028,
     hp: 575,
     attackchance: 0.14,
@@ -448,6 +455,7 @@ const monsters = {
   },
   yama_uba: {
     name: "yama_uba",
+    displayName: "Yama Uba",
     speed: 0.07,
     hp: 325,
     attackchance: 0.21,
@@ -460,6 +468,7 @@ const monsters = {
   },
   yume_no_seirei: {
     name: "yume_no_seirei",
+    displayName: "Yume no Seirei",
     speed: 0.09,
     hp: 950,
     attackchance: 0.1,
@@ -473,6 +482,7 @@ const monsters = {
   },
   yurei: {
     name: "yurei",
+    displayName: "Yurei",
     speed: 0.055,
     hp: 425,
     attackchance: 0.12,
@@ -501,9 +511,9 @@ const missionPool = {
     description: "They're possessed by a spooky ghost!",
     type: "kill",
     image: akaManto,
-    rewards: { 
+    rewards: {
       spells: [spells.odan_roku],
-      items: [items.odan_kurae_tsuyi_scroll] 
+      items: [items.odan_kurae_tsuyi_scroll],
     },
   },
   1: {
