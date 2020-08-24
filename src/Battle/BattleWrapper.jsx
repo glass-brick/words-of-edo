@@ -12,6 +12,22 @@ export default function BattleWrapper({ onMissionEnd, ...props }) {
     setSavedMissionResult(missionResult);
   };
 
+  let rewards = [];
+  if(battleState === 'win'){
+    if(savedMissionResult.missionObjectivePassed && savedMissionResult.mission.rewards.spells) {
+      savedMissionResult.mission.rewards.spells.forEach(spell => {
+        rewards.push(`You can see a vision where ${spell.description.toLowerCase()}`);
+        rewards.push(`You learned ${spell.displayName.toUpperCase()}!`);
+      });
+    }
+    if(savedMissionResult.missionObjectivePassed && savedMissionResult.mission.rewards.items) {
+      savedMissionResult.mission.rewards.items.forEach(item => {
+        rewards.push(`For your services to the people, they gave you a thing called ${item.displayName}!`);
+        rewards.push(`Holding it, can see a vision where ${item.spell.description.toLowerCase()}`);
+      });
+    }
+  }
+
   let element;
   switch (battleState) {
     case "intro":
@@ -37,6 +53,11 @@ export default function BattleWrapper({ onMissionEnd, ...props }) {
               ? "You also passed the objective!"
               : "But you didn't manage to accomplish the objective..."}
           </div>
+          {rewards.map((line) => (
+          <div className="battle__subtitle">
+          {line}
+          </div>
+          ))}
           <button
             className="button"
             onClick={() => onMissionEnd(savedMissionResult)}
