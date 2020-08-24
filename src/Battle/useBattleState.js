@@ -51,6 +51,13 @@ export default function useBattleState({ monk, mission, onMissionEnd }) {
   const [battleRunning, setBattleRunning] = useState(true);
 
   useEffect(() => {
+    if (mission.name === 0) {
+      addToLog("Try writing one of your spells!");
+      addToLog("Roku... Osumaki... Mamoku... ");
+    }
+  }, [addToLog, mission.name]);
+
+  useEffect(() => {
     music.volume(1);
     music.play();
 
@@ -149,10 +156,12 @@ export default function useBattleState({ monk, mission, onMissionEnd }) {
         if (objectiveHP) {
           setObjectiveHP(objectiveHP - damage);
         }
-        if( mission.displayObjective.toLowerCase() === 'noise' ){
+        if (mission.displayObjective.toLowerCase() === "noise") {
           addToLog(`The noise is upsetting the customers!`);
         } else {
-          addToLog(`The ${mission.displayObjective.toLowerCase()} seems damaged`);
+          addToLog(
+            `The ${mission.displayObjective.toLowerCase()} seems damaged`
+          );
         }
       }
     }
