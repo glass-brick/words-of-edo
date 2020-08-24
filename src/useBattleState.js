@@ -220,7 +220,7 @@ export default function useBattleState({ monk, mission, onMissionEnd }) {
       let missionObjectivePassed;
       let monkDead;
       let rewards = mission.rewards;
-      if (monsterHp > 0) {
+      if (monsterHp <= 0) {
         let missionObjectivePassed = true;
         switch (mission.type) {
           case "protect":
@@ -237,9 +237,10 @@ export default function useBattleState({ monk, mission, onMissionEnd }) {
         monkDead,
         rewards,
         usedItems,
+        mission,
       });
     }
-  });
+  },[monsterHp, hp]);
 
   return {
     hp,

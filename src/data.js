@@ -351,6 +351,19 @@ const spells = {
   },
 };
 
+const items = {
+  watama_kimono: {
+    name: 'watama_kimono',
+    displayName: 'Watama kimono',
+    spell: spells.iteru_watama,
+  },
+  odan_kurae_tsuyi_scroll: {
+    name: 'odan_kurae_tsuyi_scroll',
+    displayName: 'Odan kurae tsuyi scroll',
+    spell: spells.odan_kurae_tsuyi,
+  },
+}
+
 const monsters = {
   monster_prototype: {
     name: "monster_prototype",
@@ -482,6 +495,56 @@ const utils = {
 
 const missions = [
   {
+    monster: monsters.monster_prototype,
+    title: "Save my children!",
+    description: "They're possessed by a spooky ghost!",
+    type: "kill",
+    image: akaManto,
+    rewards: { 
+      spells: [spells.odan_roku],
+      items: [items.odan_kurae_tsuyi_scroll] 
+    },
+  },
+  {
+    monster: monsters.aka_manto,
+    title: "It's in the bathroom...",
+    description:
+      "A strange being is offering toilet paper in the bathroom stalls",
+    image: akaManto,
+    type: "seal",
+  },
+  {
+    monster: monsters.aka_manto,
+    title: "The library must be saved",
+    description:
+      "The library is being haunted by a demon! Kill the demon while taking care of not destroying the library",
+    image: akaManto,
+    displayObjective: "Library",
+    type: "protect",
+    conditions: ["fire", "water"],
+    objectiveHP: 1000,
+  },
+  {
+    monster: monsters.aka_manto,
+    title: "My house!",
+    description: "My living is being haunted by a demon",
+    image: akaManto,
+    displayObjective: "House",
+    type: "protect",
+    conditions: ["fire", "water"],
+    objectiveHP: 1000,
+  },
+  {
+    monster: monsters.aka_manto,
+    title: "This person is possessed, don't kill them",
+    description: "I want... you",
+    image: akaManto,
+    displayObjective: "People",
+    type: "protect",
+    conditions: ["fire", "water"],
+    objectiveHP: 1000,
+  },
+  {
     monster: monsters.aka_manto,
     title: "Misión TEST",
     description: "Monster TEST",
@@ -572,14 +635,6 @@ const missions = [
     objectiveHP: 650,
   },
 ];
-
-const items = {
-  watama_kimono: {
-    name: 'watama_kimono',
-    displayName: 'Watama kimono',
-    spell: spells.iteru_watama,
-  }
-}
 
 const monk = {
   hp: 1000,

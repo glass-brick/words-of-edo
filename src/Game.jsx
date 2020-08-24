@@ -61,7 +61,46 @@ function Game() {
           monk={monk}
           mission={gameScreen.mission}
           onMissionEnd={(results) => {
-            if(results.rewards){
+            let newItems = [];
+            let newSpells = [];
+            let finalItems = [...monk.items];
+            let finalSpells = [...monk.spells];
+            
+            if(results.usedItems){
+              let oldItems = monk.items;
+              let usedItems = [];
+              let used;
+              let objectUsed;
+              let indexUsed;
+              results.usedItems.forEach(function(item){
+                usedItems.push(item);
+              });
+              for(let i=0; i< oldItems.length; i++){
+                used = false;
+                objectUsed = null;
+                for(let j=0; j< usedItems.length; j++){
+                  if(usedItems[j].name === oldItems[i].name){
+                    used = true;
+                    indexUsed = j;
+                    break;
+                  }
+                }
+                if(!used){
+                  newItems.push(oldItems[i]);
+                }
+              }
+              if(results.rewards.items) {
+                finalItems = [...newItems, ...results.rewards.items];
+              } else {
+                finalItems = newItems;
+              }
+            } else {
+              if(results.rewards.items) {
+                finalItems = [...monk.items, ...results.rewards.items];
+              }
+            } 
+            if(results.rewards && (results.mission.type !== 'protect' || 
+              (results.mission.type === 'protect' && results.objectiveHP > 0))){
               if(results.rewards.spells){
                 // here we check if the monk already has these spells 
                 let newSpells = [];
@@ -70,34 +109,15 @@ function Game() {
                   monk.spells.forEach(monkSpell => {
                     if( monkSpell.name === spell.name){
                       monkHasIt = true;
-                      return ;
                     }
                   })
                   if( !monkHasIt ) newSpells.push(spell);
                 });
-                setMonk({...monk, spells: [...monk.spells, ...newSpells]});
+                finalSpells = [...monk.spells, ...newSpells];
               }
             }
-            if(results.usedItems){
-              let oldItems = monk.items;
-              let newItems = [];
-              let used;
-              let objectUsed;
-              oldItems.forEach(monkItem => {
-                used = false;
-                objectUsed = null;
-                results.usedItems.forEach(function(item, i) {
-                  if(monkItem.name === item.name){
-                    used = true;
-                    results.usedItems.splice(i,1);
-                    return;
-                  }
-                });
-                if(!used) newItems.push(monkItem);
-              });
-              setMonk({...monk, items: newItems});
-            }
-          setGameScreen({ type: "menu" });
+            setMonk({...monk, spells: [...finalSpells], items: [...finalItems]});
+            setGameScreen({ type: "menu" });
           }}
         />
       );
