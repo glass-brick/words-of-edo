@@ -416,8 +416,8 @@ const monsters = {
     attackchance: 0.1,
     msperkeystroke: 200,
     spells: [
-      { spell: spells.odan_shime_tagasu, chances: 0.3 },
-      { spell: spells.odan_kurae_tsuyi, chances: 0.7 },
+      { spell: spells.odan_shime_tagasu, chances: 0.1 },
+      { spell: spells.odan_kurae_tsuyi, chances: 0.9 },
     ],
     sprite: tsuchigumo,
   },
