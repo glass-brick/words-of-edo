@@ -181,7 +181,7 @@ export default function useBattleState({ monk, mission, onMissionEnd }) {
           let advance = 0;
           for (let i = 0; i < monster.spells.length; i++) {
             const attack = monster.spells[i];
-            if (attack.chances + advance < randomChoice) {
+            if (randomChoice < attack.chances + advance ) {
               finalAttack = attack.spell;
               break;
             } else {
