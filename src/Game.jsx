@@ -3,6 +3,7 @@ import Menu from "./Menu/Menu";
 import data from "./data";
 import Intro from "./Intro/Intro";
 import BattleWrapper from "./Battle/BattleWrapper";
+import { Howler } from "howler";
 
 export function useTransitionState(initialState) {
   const [state, setState] = useState(initialState);
@@ -42,6 +43,17 @@ function Game() {
     type: localStorage.getItem("introComplete") === "true" ? "menu" : "intro", // <- play intro only once
     // type: "intro",
   });
+  const [muted, setMuted] = useState(localStorage.getItem("muted") === "true");
+
+  useEffect(() => {
+    if (muted) {
+      Howler.volume(0);
+      localStorage.setItem("muted", "true");
+    } else {
+      Howler.volume(1);
+      localStorage.setItem("muted", "false");
+    }
+  }, [muted]);
 
   let currentScreen;
 
@@ -174,7 +186,11 @@ function Game() {
         {transition && <div className="transition" />}
         {currentScreen}
       </div>
-      <div id="portal-root"></div>
+      <div id="portal-root">
+        <button className="mute-button" onClick={() => setMuted(!muted)}>
+          {muted ? "Unmute" : "Mute"}
+        </button>
+      </div>
     </>
   );
 }
