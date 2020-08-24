@@ -1,8 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./Intro.scss";
 import data from "../data";
 import arrowLeft from "../assets/arrow_left.png";
 import WordBubble from "../WordBubble";
+import bgMusic from "../assets/melo_pelea3.mp3";
+import { Howl } from "howler";
+
+const bgMusicHowl = new Howl({ src: bgMusic });
 
 const initialWord = "Gambatte";
 
@@ -34,6 +38,12 @@ const introTexts = [
 
 export default function Intro({ onIntroEnd = () => {} }) {
   const [currentTextIndex, setCurrentTextIndex] = useState(0);
+
+  useEffect(() => {
+    bgMusicHowl.play();
+
+    return () => bgMusicHowl.stop();
+  }, []);
 
   const writeEnabled = currentTextIndex === introTexts.length - 1;
 
