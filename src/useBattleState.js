@@ -123,7 +123,11 @@ export default function useBattleState({ monk, mission, onMissionEnd }) {
       }
 
       if (spellUsed.condition) {
-        if(mission.type === 'protect' && mission.conditions && mission.conditions.includes(spellUsed.condition)) {
+        if (
+          mission.type === "protect" &&
+          mission.conditions &&
+          mission.conditions.includes(spellUsed.condition)
+        ) {
           if (objectiveHP) {
             setObjectiveHP(objectiveHP - damage);
           }
@@ -179,7 +183,12 @@ export default function useBattleState({ monk, mission, onMissionEnd }) {
         setEnemyWord(finalAttack);
       } else {
         // Moves
-        setMonsterDistance(monsterDistance - monster.speed);
+        setMonsterDistance(
+          Math.max(
+            monsterDistance - monster.speed,
+            data.utils.minStartingDistance
+          )
+        );
       }
     } // if it's attacking, it has its own logic
   }
@@ -192,7 +201,7 @@ export default function useBattleState({ monk, mission, onMissionEnd }) {
       let missionObjectivePassed;
       let monkDead;
       let rewards = mission.rewards;
-      if(monsterHp > 0) {
+      if (monsterHp > 0) {
         let missionObjectivePassed = true;
         switch (mission.type) {
           case "protect":
@@ -209,8 +218,8 @@ export default function useBattleState({ monk, mission, onMissionEnd }) {
         monkDead,
         rewards,
       });
-      }
-});
+    }
+  });
 
   return {
     hp,
