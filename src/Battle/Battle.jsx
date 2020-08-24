@@ -10,7 +10,9 @@ export default function Battle({ monk, mission, onMissionEnd }) {
   let missionObj = "";
   if (mission.type === "protect")
     missionObj = mission.type
-      ? `${mission.displayObjective}: ${Math.round(state.objectiveHP / 10)}%`
+      ? `${mission.displayObjective}: ${Math.round(
+          (state.objectiveHP / mission.objectiveHP) * 100
+        )}%`
       : "";
   const [spellBookOpen, setSpellBookOpen] = useState(false);
 
