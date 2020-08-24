@@ -546,7 +546,7 @@ const missionPool = {
     description: "A widow has been acting strangely, maybe demons are behind this. Please take care of not upseting her, she's been through enough already",
     displayObjective: "Widow",
     conditions: ["psi", "cutting", "fire"],
-    objectiveHP: 750,
+    objectiveHP: 600,
     type: "protect",
     rewards: { 
         spells: [spells.watama],
@@ -562,7 +562,7 @@ const missionPool = {
     description: "A widow has been acting strangely, maybe demons are behind this. Please take care of not upseting her, she's been through enough already",
     displayObjective: "Widow",
     conditions: ["psi", "cutting", "fire"],
-    objectiveHP: 750,
+    objectiveHP: 600,
     type: "protect",
     rewards: { 
         spells: [spells.katara],
