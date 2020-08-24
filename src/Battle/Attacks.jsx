@@ -13,6 +13,7 @@ import waterSound from "../assets/attack_sounds/water_spell.wav";
 import defenseSound from "../assets/attack_sounds/defense.wav";
 import boostSound from "../assets/attack_sounds/boost1.mp3";
 import mirrorSound from "../assets/attack_sounds/reflect.wav";
+import sealSound from "../assets/attack_sounds/defense_3.wav";
 
 import { Howl } from "howler";
 
@@ -25,8 +26,8 @@ const attackSounds = {
   defense: new Howl({ src: defenseSound, volume: 0.2 }),
   boost: new Howl({ src: boostSound, volume: 0.2 }),
   mirror: new Howl({ src: mirrorSound, volume: 0.2 }),
-  // seal: sealSound,
-  // heal: healSound,
+  seal: new Howl({ src: sealSound, volume: 0.2 }),
+  heal: new Howl({ src: boostSound, volume: 0.2 }),
 };
 
 const attackSpeeds = {
