@@ -1,15 +1,17 @@
 import React, { useState } from "react";
 import "./Battle.scss";
 import useBattleState from "./useBattleState";
-import Room from "./Battle/Room";
-import SpellBook from "./Battle/SpellBook";
-import Dropdown from "./Battle/Dropdown";
+import Room from "./Room";
+import SpellBook from "./SpellBook";
+import Dropdown from "./Dropdown";
 
 export default function Battle({ monk, mission, onMissionEnd }) {
   const state = useBattleState({ monk, mission, onMissionEnd });
-  let missionObj = '';
-  if(mission.type === 'protect')
-    missionObj = mission.type ? `${mission.displayObjective}: ${Math.round(state.objectiveHP / 10)}%` : '';
+  let missionObj = "";
+  if (mission.type === "protect")
+    missionObj = mission.type
+      ? `${mission.displayObjective}: ${Math.round(state.objectiveHP / 10)}%`
+      : "";
   const [spellBookOpen, setSpellBookOpen] = useState(false);
 
   return (
@@ -21,7 +23,11 @@ export default function Battle({ monk, mission, onMissionEnd }) {
         >
           Spells
         </span>
-        <Dropdown title="Items" options={state.monkItems} onSelect={(item) => state.onItemUse(item)} />
+        <Dropdown
+          title="Items"
+          options={state.monkItems}
+          onSelect={(item) => state.onItemUse(item)}
+        />
       </header>
 
       <SpellBook
