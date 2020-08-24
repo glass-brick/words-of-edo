@@ -7,16 +7,6 @@ export default function BattleWrapper({ onMissionEnd, ...props }) {
   const [battleState, setBattleState, transition] = useTransitionState("intro");
   const [savedMissionResult, setSavedMissionResult] = useState(null);
 
-  useEffect(() => {
-    let id;
-    if (battleState === "intro") {
-      id = setTimeout(() => {
-        setBattleState("battle");
-      }, 1000);
-    }
-    return () => clearTimeout(id);
-  }, [battleState, setBattleState]);
-
   const handleMissionEnd = (missionResult) => {
     setBattleState(missionResult.monkDead ? "lose" : "win");
     setSavedMissionResult(missionResult);
@@ -30,6 +20,9 @@ export default function BattleWrapper({ onMissionEnd, ...props }) {
           <div className="battle__title">
             Battle against {props.mission.monster.displayName}
           </div>
+          <button className="button" onClick={() => setBattleState("battle")}>
+            Start the match
+          </button>
         </div>
       );
       break;
