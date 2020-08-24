@@ -13,7 +13,13 @@ const attackSpeeds = {
   psi: 1500,
   seal: 1500,
   water: 1000,
+  defense: 1500,
+  boost: 1000,
+  mirror: 1500,
+  heal: 1000,
 };
+
+const defensiveSpells = ["defense", "boost", "mirror", "heal"];
 
 let Attack = ({ enemyPos }, ref) => {
   const [attackOnPlayer, setAttackOnPlayer] = useState({});
@@ -45,21 +51,29 @@ let Attack = ({ enemyPos }, ref) => {
 
   useImperativeHandle(ref, () => ({
     triggerAttack: (spell, playerCasted) => {
-      if (playerCasted === "player") {
-        setAttackOnPlayer(spell);
-        if (activePlayer) {
-          setActivePlayer(false);
-          setTimeout(() => setActivePlayer(true), 0);
-        } else {
-          setActivePlayer(true);
-        }
-      } else if (playerCasted === "enemy") {
+      if (
+        (playerCasted === "player" &&
+          !defensiveSpells.includes(spell.condition)) ||
+        (playerCasted === "enemy" && defensiveSpells.includes(spell.condition))
+      ) {
         setAttackOnEnemy(spell);
         if (activeEnemy) {
           setActiveEnemy(false);
           setTimeout(() => setActiveEnemy(true), 0);
         } else {
           setActiveEnemy(true);
+        }
+      } else if (
+        (playerCasted === "enemy" &&
+          !defensiveSpells.includes(spell.condition)) ||
+        (playerCasted === "player" && defensiveSpells.includes(spell.condition))
+      ) {
+        setAttackOnPlayer(spell);
+        if (activePlayer) {
+          setActivePlayer(false);
+          setTimeout(() => setActivePlayer(true), 0);
+        } else {
+          setActivePlayer(true);
         }
       }
     },
@@ -73,8 +87,8 @@ let Attack = ({ enemyPos }, ref) => {
           id={attackOnPlayer.condition}
           style={{
             transform: `scale(${attackOnPlayer.level / 3})`,
-            top: enemyPos.top,
-            left: enemyPos.left,
+            bottom: 40,
+            left: 200,
           }}
         />
       )}
@@ -84,8 +98,8 @@ let Attack = ({ enemyPos }, ref) => {
           id={attackOnEnemy.condition}
           style={{
             transform: `scale(${attackOnEnemy.level / 3})`,
-            bottom: 40,
-            left: 200,
+            top: enemyPos.top,
+            left: enemyPos.left,
           }}
         />
       )}
