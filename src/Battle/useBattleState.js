@@ -1,11 +1,11 @@
 /* eslint-disable default-case */
 import { useState, useCallback, useEffect } from "react";
-import data from "./data.js";
+import data from "../data.js";
 
 // Music & Sound
 import { Howl, Howler } from "howler";
-import musicSrc from "./assets/tin_tintin.mp3";
-import musicSrc2 from "./assets/tin_tin_tin_tin_TIN_TIN_TIN_TIN.mp3";
+import musicSrc from "../assets/tin_tintin.mp3";
+import musicSrc2 from "../assets/tin_tin_tin_tin_TIN_TIN_TIN_TIN.mp3";
 
 function useLog(maxLines) {
   const [log, setLog] = useState(["A demon appears!"]);
@@ -49,6 +49,7 @@ export default function useBattleState({ monk, mission, onMissionEnd }) {
   const [objectiveHP, setObjectiveHP] = useState(mission.objectiveHP);
   const [monkItems, setMonkItems] = useState(monk.items);
   const [usedItems, setUsedItems] = useState([]);
+  const [battleRunning, setBattleRunning] = useState(true);
 
   useEffect(() => {
     music.volume(1);
@@ -65,7 +66,7 @@ export default function useBattleState({ monk, mission, onMissionEnd }) {
       let boosted = false;
       if (boost && boost >= spellUsed.level) {
         boosted = true;
-        if(spellUsed.special !== 'boost') setBoost(null);
+        if (spellUsed.special !== "boost") setBoost(null);
       }
       attackOnOpponent(spellUsed, boosted);
     }
@@ -181,7 +182,7 @@ export default function useBattleState({ monk, mission, onMissionEnd }) {
           let advance = 0;
           for (let i = 0; i < monster.spells.length; i++) {
             const attack = monster.spells[i];
-            if (randomChoice < (attack.chances + advance) ) {
+            if (randomChoice < attack.chances + advance) {
               finalAttack = attack.spell;
               break;
             } else {
@@ -213,10 +214,8 @@ export default function useBattleState({ monk, mission, onMissionEnd }) {
   }
 
   useEffect(() => {
-    if (monsterHp <= 0 || hp <= 0) {
-      // HACK so it's not called again
-      setMonsterHP(1);
-      setHP(1);
+    if (battleRunning && (monsterHp <= 0 || hp <= 0)) {
+      setBattleRunning(false);
       let missionObjectivePassed;
       let monkDead;
       let rewards = mission.rewards;
@@ -240,7 +239,15 @@ export default function useBattleState({ monk, mission, onMissionEnd }) {
         mission,
       });
     }
-  }, [monsterHp, hp]);
+  }, [
+    monsterHp,
+    hp,
+    battleRunning,
+    mission,
+    onMissionEnd,
+    usedItems,
+    objectiveHP,
+  ]);
 
   return {
     hp,

@@ -39,8 +39,8 @@ function Game() {
   const [monk, setMonk] = useState(data.monk);
   const [missions, setMissions] = useState(data.missions);
   const [gameScreen, setGameScreen, transition] = useTransitionState({
-    // type: localStorage.getItem("introComplete") === "true" ? "menu" : "intro", <- play intro only once
-    type: "intro",
+    type: localStorage.getItem("introComplete") === "true" ? "menu" : "intro", // <- play intro only once
+    // type: "intro",
   });
 
   let currentScreen;
@@ -67,8 +67,8 @@ function Game() {
             let finalItems = [...monk.items];
             let finalSpells = [...monk.spells];
             let finalMissionsBeaten = [...monk.missionBeaten];
-            
-            if(results.usedItems){
+
+            if (results.usedItems) {
               let oldItems = monk.items;
               let usedItems = [];
               let used;
@@ -104,7 +104,8 @@ function Game() {
             if (
               results.rewards &&
               (results.mission.type !== "protect" ||
-                (results.mission.type === "protect" && results.missionObjectivePassed > 0))
+                (results.mission.type === "protect" &&
+                  results.missionObjectivePassed > 0))
             ) {
               if (results.rewards.spells) {
                 // here we check if the monk already has these spells
@@ -112,7 +113,6 @@ function Game() {
                 results.rewards.spells.forEach((spell) => {
                   let monkHasIt = false;
                   monk.spells.forEach((monkSpell) => {
-
                     if (monkSpell.name === spell.name) {
                       monkHasIt = true;
                     }
@@ -126,25 +126,29 @@ function Game() {
             finalMissionsBeaten = [...monk.missionBeaten, results.mission.name];
             let missionsNumber = Object.keys(data.missionPool).length;
             let availableMissions = [];
-            for(let i = 0; i < missionsNumber; i++ ){
-              if( !finalMissionsBeaten.includes(i)){
+            for (let i = 0; i < missionsNumber; i++) {
+              if (!finalMissionsBeaten.includes(i)) {
                 // Not beaten yet
                 let unlocked = true;
-                if(data.missionPool[i].unlockedBy){
-                  data.missionPool[i].unlockedBy.forEach(function(missionUnlocker){
-                    if(!finalMissionsBeaten.includes(missionUnlocker)){
+                if (data.missionPool[i].unlockedBy) {
+                  data.missionPool[i].unlockedBy.forEach(function (
+                    missionUnlocker
+                  ) {
+                    if (!finalMissionsBeaten.includes(missionUnlocker)) {
                       unlocked = false;
                     }
                   });
-                  if(unlocked) availableMissions.push(data.missionPool[i]);
+                  if (unlocked) availableMissions.push(data.missionPool[i]);
                 }
               }
             }
             setMissions([...availableMissions]);
-            setMonk({...monk, 
-              spells: [...finalSpells], 
-              items: [...finalItems], 
-              missionBeaten: [...finalMissionsBeaten]});
+            setMonk({
+              ...monk,
+              spells: [...finalSpells],
+              items: [...finalItems],
+              missionBeaten: [...finalMissionsBeaten],
+            });
             setGameScreen({ type: "menu" });
           }}
         />
@@ -157,7 +161,7 @@ function Game() {
           onMissionStart={(mission) => {
             setGameScreen({ type: "mission", mission });
           }}
-          missions= {missions}
+          missions={missions}
         />
       );
       break;
