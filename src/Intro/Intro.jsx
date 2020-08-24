@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import "./Intro.scss";
 import data from "../data";
 import arrowLeft from "../assets/arrow_left.png";
-import { createPortal } from "react-dom";
+import WordBubble from "../WordBubble";
 
 const initialWord = "Gambatte";
 
@@ -34,33 +34,8 @@ const introTexts = [
 
 export default function Intro({ onIntroEnd = () => {} }) {
   const [currentTextIndex, setCurrentTextIndex] = useState(0);
-  const [input, setInput] = useState("");
 
-  const leftoverWord = initialWord.substring(input.length);
-
-  useEffect(() => {
-    let handler = () => {};
-    if (currentTextIndex === introTexts.length - 1) {
-      handler = (e) => {
-        if (e.code === "Enter") {
-          if (leftoverWord.length === 0) {
-            onIntroEnd();
-          } else {
-            setInput("");
-          }
-        } else if (
-          e.key &&
-          e.key.toLowerCase() === leftoverWord[0].toLowerCase()
-        ) {
-          setInput((input) => `${input}${leftoverWord[0]}`);
-        }
-      };
-    }
-
-    document.addEventListener("keydown", handler);
-
-    return () => document.removeEventListener("keydown", handler);
-  }, [currentTextIndex, input, leftoverWord, onIntroEnd]);
+  const writeEnabled = currentTextIndex === introTexts.length - 1;
 
   return (
     <div className="intro">
@@ -81,22 +56,13 @@ export default function Intro({ onIntroEnd = () => {} }) {
             />
           )}
         </div>
-        {currentTextIndex === introTexts.length - 1 &&
-          createPortal(
-            <div
-              className="room__speech"
-              style={{
-                position: "absolute",
-                right: 390,
-                top: 120,
-                fontSize: 40,
-              }}
-            >
-              <span className="room__speech__said">{input}</span>
-              <span className="room__speech__leftover">{leftoverWord}</span>
-            </div>,
-            document.getElementById("portal-root")
-          )}
+        {writeEnabled && (
+          <WordBubble
+            wordToWrite={initialWord}
+            onFinish={onIntroEnd}
+            pos={{ right: 390, top: 120 }}
+          />
+        )}
       </div>
     </div>
   );

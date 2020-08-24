@@ -5,6 +5,7 @@ import "./BattleWrapper.scss";
 import gameOverTheme from "../assets/game_over.mp3";
 import winTheme from "../assets/you_win.mp3";
 import { Howl } from "howler";
+import WordBubble from "../WordBubble";
 
 const gameOverMusic = new Howl({ src: gameOverTheme });
 const winMusic = new Howl({ src: winTheme });
@@ -68,9 +69,11 @@ export default function BattleWrapper({ onMissionEnd, ...props }) {
           <div className="battle__title">
             Battle against {props.mission.monster.displayName}
           </div>
-          <button className="button" onClick={() => setBattleState("battle")}>
-            Start the match
-          </button>
+          <WordBubble
+            wordToWrite="Gambatte"
+            onFinish={() => setBattleState("battle")}
+            pos={{ left: 430, top: 300 }}
+          />
         </div>
       );
       break;
