@@ -132,7 +132,11 @@ export default function useBattleState({ monk, mission, onMissionEnd }) {
     }
 
     if (spellUsed.condition) {
-      if(mission.type === 'protect' && mission.conditions && mission.conditions.includes(spellUsed.condition)) {
+      if (
+        mission.type === "protect" &&
+        mission.conditions &&
+        mission.conditions.includes(spellUsed.condition)
+      ) {
         if (objectiveHP) {
           setObjectiveHP(objectiveHP - damage);
         }
@@ -175,13 +179,15 @@ export default function useBattleState({ monk, mission, onMissionEnd }) {
         } else {
           let randomChoice = Math.random();
           let advance = 0;
-          monster.spells.forEach((attack) => {
+          for (let i = 0; i < monster.spells.length; i++) {
+            const attack = monster.spells[i];
             if (attack.chances + advance < randomChoice) {
               finalAttack = attack.spell;
+              break;
             } else {
               advance += attack.chances;
             }
-          });
+          }
         }
         // Starts attacking
         setEnemyWord(finalAttack);
@@ -198,11 +204,11 @@ export default function useBattleState({ monk, mission, onMissionEnd }) {
   }
 
   function onItemUse(itemUsed) {
-    if(itemUsed) {
-      attackOnOpponent(itemUsed.spell, false)
-      // here we check if the monk already has these spells 
+    if (itemUsed) {
+      attackOnOpponent(itemUsed.spell, false);
+      // here we check if the monk already has these spells
       setUsedItems([...usedItems, itemUsed]); // New array with old and new items used
-      setMonkItems(monkItems.filter(item => ( item.name !== itemUsed.name )));
+      setMonkItems(monkItems.filter((item) => item.name !== itemUsed.name));
     }
   }
 

@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import edo from "../assets/edo.png";
 import "./Intro.scss";
 import data from "../data";
 import arrowLeft from "../assets/arrow_left.png";
