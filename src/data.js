@@ -461,8 +461,8 @@ const monsters = {
     attackchance: 0.21,
     msperkeystroke: 330,
     spells: [
-      { spell: spells.kurae, chances: 0.8 },
-      { spell: spells.tagasu, chances: 0.2 },
+      { spell: spells.kurae, chances: 0.7 },
+      { spell: spells.tagasu, chances: 0.3 },
     ],
     sprite: yamaUba,
   },
@@ -470,7 +470,7 @@ const monsters = {
     name: "yume_no_seirei",
     displayName: "Yume no Seirei",
     speed: 0.09,
-    hp: 950,
+    hp: 750,
     attackchance: 0.1,
     msperkeystroke: 350,
     spells: [
