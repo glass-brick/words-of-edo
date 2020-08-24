@@ -104,14 +104,15 @@ function Game() {
             if (
               results.rewards &&
               (results.mission.type !== "protect" ||
-                (results.mission.type === "protect" && results.objectiveHP > 0))
+                (results.mission.type === "protect" && results.missionObjectivePassed > 0))
             ) {
               if (results.rewards.spells) {
                 // here we check if the monk already has these spells
-                let newSpells = [];
+                newSpells = [];
                 results.rewards.spells.forEach((spell) => {
                   let monkHasIt = false;
                   monk.spells.forEach((monkSpell) => {
+
                     if (monkSpell.name === spell.name) {
                       monkHasIt = true;
                     }
@@ -127,14 +128,10 @@ function Game() {
             let availableMissions = [];
             for(let i = 0; i < missionsNumber; i++ ){
               if( !finalMissionsBeaten.includes(i)){
-                console.log('entra con');
-                console.log(data.missionPool[i]);
                 // Not beaten yet
                 let unlocked = true;
                 if(data.missionPool[i].unlockedBy){
                   data.missionPool[i].unlockedBy.forEach(function(missionUnlocker){
-                    console.log(missionUnlocker);
-                    console.log(finalMissionsBeaten);
                     if(!finalMissionsBeaten.includes(missionUnlocker)){
                       unlocked = false;
                     }
