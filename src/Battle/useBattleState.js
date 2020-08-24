@@ -156,13 +156,13 @@ export default function useBattleState({ monk, mission, onMissionEnd }) {
   function onCompleteEnemyWord(spellUsed) {
     let damage = getPlayerDamageFunction(spellUsed.damage, monsterDistance);
     let boosted = defenseBoosted ? data.utils.boostMultiplier : 1;
-    if (defense && spellUsed.level <= defense) {
+    if (defense) {
       damage *= data.utils.defenseMultiplier / boosted;
       setDefense(null);
       addToLog("Your words protected you!");
       addToLog("The protection vanishes");
     }
-    if (defenseMirror && spellUsed.level <= defenseMirror) {
+    if (defenseMirror) {
       setMonsterHP(
         Math.round(monsterHp - data.utils.mirrorMultiplier * damage * boosted)
       );
@@ -209,6 +209,7 @@ export default function useBattleState({ monk, mission, onMissionEnd }) {
         }
         // Starts attacking
         setEnemyWord(finalAttack);
+        addToLog("The monster starts chanting...");
       } else {
         // Moves
         setMonsterDistance(

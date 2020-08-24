@@ -24,10 +24,14 @@
     position: absolute;
     bottom: 1em;
     right: 1em;
-    background-color: $white;
+    background-color: $orange;
     display: grid;
     color: $darkblue;
-    border: 1px solid $white;
+    border-top: 1px solid $white;
+    border-left: 1px solid $white;
+
+    font-size: 20px;
+    font-weight: 600;
 
     grid-template-columns: 200px 300px;
     grid-template-rows: 60px 60px 120px;
@@ -38,7 +42,8 @@
     gap: 1px 1px;
 
     & > * {
-      background-color: $orange;
+      border-bottom: 1px solid $white;
+      border-right: 1px solid $white;
     }
 
     &__hp {
@@ -52,6 +57,21 @@
     }
     &__log {
       grid-area: log;
+      font-size: 16px;
+      font-weight: normal;
+      list-style: none;
+      padding-left: 20px;
+      &__line {
+      }
+    }
+
+    &__square {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    &__text {
     }
   }
 }

@@ -47,16 +47,22 @@ export default function Battle({ monk, mission, onMissionEnd }) {
       />
 
       <div className="bottom-menu">
-        <div className="bottom-menu__hp">
-          HP: {state.hp}/{monk.hp}
+        <div className="bottom-menu__square bottom-menu__hp">
+          <div className="bottom-menu__text">
+            HP: {state.hp}/{monk.hp}
+          </div>
         </div>
-        <div className="bottom-menu__objective-data">
-          Enemy HP: {state.monsterHp}
+        <div className="bottom-menu__square bottom-menu__objective-data">
+          <div className="bottom-menu__text">Enemy HP: {state.monsterHp}</div>
         </div>
-        <div className="bottom-menu__objective">{missionObj}</div>
+        <div className="bottom-menu__square bottom-menu__objective">
+          <div className="bottom-menu__text">{missionObj}</div>
+        </div>
         <ul className="bottom-menu__log">
           {state.log.map((line, i) => (
-            <li key={i}>{line}</li>
+            <li className="bottom-menu__log__line" key={i}>
+              {line}
+            </li>
           ))}
         </ul>
       </div>

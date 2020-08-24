@@ -11,7 +11,7 @@ import kineticSound from "../assets/attack_sounds/push.wav";
 import psiSound from "../assets/attack_sounds/psi.wav";
 import waterSound from "../assets/attack_sounds/water_spell.wav";
 import defenseSound from "../assets/attack_sounds/defense.wav";
-import boostSound from "../assets/attack_sounds/boost.wav";
+import boostSound from "../assets/attack_sounds/boost1.mp3";
 
 import { Howl } from "howler";
 
@@ -55,7 +55,7 @@ let Attack = ({ enemyPos }, ref) => {
       id = setTimeout(() => {
         setAttackOnPlayer({});
         setActivePlayer(false);
-      }, attackSpeeds[attackOnPlayer] || 1000);
+      }, attackSpeeds[attackOnPlayer.condition] || 1000);
     }
     return () => clearTimeout(id);
   }, [attackOnPlayer, activePlayer]);
@@ -66,7 +66,7 @@ let Attack = ({ enemyPos }, ref) => {
       id = setTimeout(() => {
         setAttackOnEnemy({});
         setActiveEnemy(false);
-      }, attackSpeeds[attackOnEnemy] || 1000);
+      }, attackSpeeds[attackOnEnemy.condition] || 1000);
     }
     return () => clearTimeout(id);
   }, [attackOnEnemy, activeEnemy]);
