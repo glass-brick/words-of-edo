@@ -5,6 +5,28 @@ import React, {
   useEffect,
 } from "react";
 import "./Attacks.scss";
+import cuttingSound from "../assets/attack_sounds/cut.wav";
+import fireSound from "../assets/fireball.wav";
+import kineticSound from "../assets/attack_sounds/push.wav";
+import psiSound from "../assets/attack_sounds/psi.wav";
+import waterSound from "../assets/attack_sounds/water_spell.wav";
+import defenseSound from "../assets/attack_sounds/defense.wav";
+import boostSound from "../assets/attack_sounds/boost.wav";
+
+import { Howl } from "howler";
+
+const attackSounds = {
+  cutting: new Howl({ src: cuttingSound, volume: 0.2 }),
+  fire: new Howl({ src: fireSound, volume: 0.2 }),
+  kinetic: new Howl({ src: kineticSound, volume: 0.2 }),
+  psi: new Howl({ src: psiSound, volume: 0.2 }),
+  water: new Howl({ src: waterSound, volume: 0.2 }),
+  defense: new Howl({ src: defenseSound, volume: 0.2 }),
+  boost: new Howl({ src: boostSound, volume: 0.2 }),
+  // seal: sealSound,
+  // mirror: mirrorSound,
+  // heal: healSound,
+};
 
 const attackSpeeds = {
   cutting: 500,
@@ -51,6 +73,10 @@ let Attack = ({ enemyPos }, ref) => {
 
   useImperativeHandle(ref, () => ({
     triggerAttack: (spell, playerCasted) => {
+      const sound = attackSounds[spell.condition];
+      if (sound) {
+        sound.play();
+      }
       if (
         (playerCasted === "player" &&
           !defensiveSpells.includes(spell.condition)) ||

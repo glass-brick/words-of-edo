@@ -88,8 +88,11 @@ export default function useBattleState({ monk, mission, onMissionEnd }) {
         case "defense_response":
           // Defense does nothing against a spell that is not being cast
           if (enemyWord) {
+            addToLog("You feel protected");
             setDefense(spellUsed.level);
             if (boosted) setDefenseBoosted(boosted);
+          } else {
+            addToLog("There is nothing to protect against!");
           }
           break;
         case "defense_mirror":
@@ -103,6 +106,7 @@ export default function useBattleState({ monk, mission, onMissionEnd }) {
           finalDistance =
             monsterDistance +
             spellUsed.displayName.length * monster.speed * 1.5 * boostValue;
+          addToLog("The monster is pushed away!");
           if (finalDistance > data.utils.maxStartingDistance) {
             finalDistance = data.utils.maxStartingDistance;
             addToLog("It can't go any further");
@@ -113,6 +117,7 @@ export default function useBattleState({ monk, mission, onMissionEnd }) {
           finalDistance =
             monsterDistance -
             spellUsed.displayName.length * monster.speed * 1.5 * boostValue;
+          addToLog("The monster is pulled closer!");
           if (finalDistance < data.utils.minStartingDistance) {
             finalDistance = data.utils.minStartingDistance;
             addToLog("It can't go any closer");
@@ -125,8 +130,10 @@ export default function useBattleState({ monk, mission, onMissionEnd }) {
               hp + spellUsed.level * data.utils.healAmount * boostValue
             )
           );
+          addToLog("You feel your wounds closing up...");
           break;
         case "boost":
+          addToLog("You feel stronger than ever!");
           setBoost(spellUsed.level);
           break;
       }
@@ -141,7 +148,7 @@ export default function useBattleState({ monk, mission, onMissionEnd }) {
         if (objectiveHP) {
           setObjectiveHP(objectiveHP - damage);
         }
-        addToLog(`The ${mission.type} seems damaged`);
+        addToLog(`The ${mission.displayObjective.toLowerCase()} seems damaged`);
       }
     }
   }
@@ -152,12 +159,22 @@ export default function useBattleState({ monk, mission, onMissionEnd }) {
     if (defense && spellUsed.level <= defense) {
       damage *= data.utils.defenseMultiplier / boosted;
       setDefense(null);
+      addToLog("Your words protected you!");
+      addToLog("The protection vanishes");
     }
     if (defenseMirror && spellUsed.level <= defenseMirror) {
       setMonsterHP(
         Math.round(monsterHp - data.utils.mirrorMultiplier * damage * boosted)
       );
       setDefenseMirror(null);
+      addToLog("Your words turned the attack back on the monster!");
+      addToLog("The mirror vanishes");
+    }
+
+    if (damage > 0) {
+      addToLog("You feel wounded");
+    } else if (damage === 0) {
+      addToLog("The attack doesn't seem to damage you");
     }
 
     setHP(Math.round(hp - damage));
