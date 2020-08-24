@@ -405,7 +405,7 @@ const monsters = {
     name: "nekomata",
     displayName: "Nekomata",
     speed: 0.04,
-    hp: 350,
+    hp: 450,
     attackchance: 0.13,
     msperkeystroke: 250,
     spells: [
@@ -457,7 +457,7 @@ const monsters = {
     name: "yama_uba",
     displayName: "Yama Uba",
     speed: 0.07,
-    hp: 325,
+    hp: 475,
     attackchance: 0.21,
     msperkeystroke: 330,
     spells: [
