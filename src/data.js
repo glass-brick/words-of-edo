@@ -339,15 +339,15 @@ const spells = {
     description:
       "The monk calls upon a huge amount of friendly spirits, asking them to heal his wounds",
   },
-  itochi_nio_sasu_yosu_itsuio: {
-    name: "itochi_nio_sasu_yosu_itsuio",
+  itoi_nio_sasu_yosu_itsuo_muso_natsuo_hasu: {
+    name: "itoi_nio_sasu_yosu_itsuo_muso_natsuo_hasu",
     level: 3,
-    displayName: "Itochi Nio Sasu Yosu Itsuio",
-    damage: 0,
-    special: "seal_monster",
+    displayName: "Itoi Nio Sasu Yosu Itsuo Muso Natsuo Hasu",
+    damage: 300,
+    special: "",
     condition: "seal",
     description:
-      "The monk fills the seal with spiritual power, preparing it to chain the monster within it",
+      "The monk invokes the power of eight million gods to pull the monster back into the underworld",
   },
 };
 
@@ -853,7 +853,7 @@ const missionPool = {
     objectiveHP: 650,
     type: "protect",
     rewards: { 
-        spells: [spells.itochi_nio_sasu_yosu_itsuio],
+        spells: [spells.itoi_nio_sasu_yosu_itsuo_muso_natsuo_hasu],
     },
     },
     
