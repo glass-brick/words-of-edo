@@ -14,13 +14,13 @@ export default function BattleWrapper({ onMissionEnd, ...props }) {
 
   let rewards = [];
   if(battleState === 'win'){
-    if(savedMissionResult.missionObjectivePassed && savedMissionResult.mission.rewards.spells) {
+    if((savedMissionResult.missionObjectivePassed > 0) && savedMissionResult.mission.rewards.spells) {
       savedMissionResult.mission.rewards.spells.forEach(spell => {
         rewards.push(`You can see a vision where ${spell.description.toLowerCase()}`);
         rewards.push(`You learned ${spell.displayName.toUpperCase()}!`);
       });
     }
-    if(savedMissionResult.missionObjectivePassed && savedMissionResult.mission.rewards.items) {
+    if((savedMissionResult.missionObjectivePassed > 0) && savedMissionResult.mission.rewards.items) {
       savedMissionResult.mission.rewards.items.forEach(item => {
         rewards.push(`For your services to the people, they gave you a thing called ${item.displayName}!`);
         rewards.push(`Holding it, can see a vision where ${item.spell.description.toLowerCase()}`);
@@ -49,7 +49,7 @@ export default function BattleWrapper({ onMissionEnd, ...props }) {
             You defeated {props.mission.monster.displayName}!
           </div>
           <div className="battle__subtitle">
-            {savedMissionResult.missionObjectivePassed
+            {savedMissionResult.missionObjectivePassed > 0
               ? "You also passed the objective!"
               : "But you didn't manage to accomplish the objective..."}
           </div>
