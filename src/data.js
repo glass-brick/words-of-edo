@@ -572,7 +572,7 @@ const missionPool = {
     4: {
     name: 4,
     unlockedBy: [1, 2, 3],
-    monster: monsters.monster_prototype,
+    monster: monsters.aka_manto,
     image: akaManto,
     title: "Save my child!",
     description: "My child has been possessed by a demon! Please take care of not harming the possessed body",
@@ -620,7 +620,7 @@ const missionPool = {
     7: {
     name: 7,
     unlockedBy: [4, 5, 6],
-    monster: monsters.monster_prototype,
+    monster: monsters.aka_manto,
     image: akaManto,
     title: "Local widow acting strangely",
     description: "A widow has been acting strangely, maybe demons are behind this. Please take care of not upseting her, she's been through enough already",
@@ -684,7 +684,7 @@ const missionPool = {
     11: {
     name: 11,
     unlockedBy: [7, 8, 9],
-    monster: monsters.monster_prototype,
+    monster: monsters.aka_manto,
     image: akaManto,
     title: "A monster is roaming my house",
     description: "A monster has settled in my living room! Please take care of not burning my house to the ground",
@@ -700,7 +700,7 @@ const missionPool = {
     12: {
     name: 12,
     unlockedBy: [7, 8, 9],
-    monster: monsters.monster_prototype,
+    monster: monsters.aka_manto,
     image: akaManto,
     title: "The library must be saved",
     description: "The library is being haunted by a demon! Kill the demon while taking care of not destroying the library",
@@ -860,7 +860,7 @@ const missionPool = {
     22: {
     name: 22,
     unlockedBy: [19, 20, 21],
-    monster: monsters.monster_prototype,
+    monster: monsters.aka_manto,
     image: akaManto,
     title: "Save my child!",
     description: "My child has been possessed by a demon! Please take care of not harming the possessed body",
@@ -892,7 +892,7 @@ const missionPool = {
     24: {
     name: 24,
     unlockedBy: [19, 20, 21],
-    monster: monsters.monster_prototype,
+    monster: monsters.aka_manto,
     image: akaManto,
     title: "Something has vandalized my shop!",
     description: "Some sort of monster is making a mess in my shop every day. Please take care of not making too much noise, my customers are nearby!",
