@@ -3,9 +3,11 @@ import Battle from "./Battle";
 import { useTransitionState } from "../Game";
 import "./BattleWrapper.scss";
 import gameOverTheme from "../assets/game_over.mp3";
+import winTheme from "../assets/you_win.mp3";
 import { Howl } from "howler";
 
 const gameOverMusic = new Howl({ src: gameOverTheme });
+const winMusic = new Howl({ src: winTheme });
 
 export default function BattleWrapper({ onMissionEnd, ...props }) {
   const [battleState, setBattleState, transition] = useTransitionState("intro");
@@ -21,6 +23,13 @@ export default function BattleWrapper({ onMissionEnd, ...props }) {
       gameOverMusic.play();
     }
     return () => gameOverMusic.stop();
+  }, [battleState]);
+
+  useEffect(() => {
+    if (battleState === "win") {
+      winMusic.play();
+    }
+    return () => winMusic.stop();
   }, [battleState]);
 
   let rewards = [];
