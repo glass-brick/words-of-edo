@@ -34,6 +34,26 @@
     background-image: url("../assets/attacks/water.png");
     animation: play11 1s steps(11);
   }
+
+  &#defense {
+    background-image: url("../assets/attacks/defense.png");
+    animation: play16 1.5s steps(16);
+  }
+
+  &#boost {
+    background-image: url("../assets/attacks/boost.png");
+    animation: play8 1s steps(8);
+  }
+
+  &#mirror {
+    background-image: url("../assets/attacks/mirror.png");
+    animation: play16 1.5s steps(16);
+  }
+
+  &#heal {
+    background-image: url("../assets/attacks/heal.png");
+    animation: play8 1s steps(8);
+  }
 }
 
 @keyframes play8 {

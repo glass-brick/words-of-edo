@@ -3,6 +3,7 @@
 .main {
   display: flex;
   color: $darkblue;
+  height: 720px;
 
   &__menu {
     flex-grow: 1;
@@ -17,6 +18,7 @@
       margin-bottom: 20px;
     }
     &__list {
+      overflow-y: auto;
       &__item {
         border: 2px solid $darkpurple;
         background: $yellow;
