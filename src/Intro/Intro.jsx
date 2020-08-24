@@ -6,9 +6,9 @@ import arrowLeft from "../assets/arrow_left.png";
 
 const introTexts = [
   "I don't yet know the words of Edo",
-  "The only words I know here are Kanae, Roku and Mamoku",
+  "The only words I know here are Roku, Osumaki and Mamoku",
   "With Roku I can burn them",
-  "With Kanae I can hit them",
+  "With Osumaki I can push them away",
   "With Mamoku I can protect myself from them at the last minute",
   "The demons can use them too",
   "Their spells get stronger the closer they get",
