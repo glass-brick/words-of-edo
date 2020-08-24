@@ -5,10 +5,12 @@ import data from "../data";
 import SpellBook from "../Battle/SpellBook";
 import { Howl } from "howler";
 import mainMenuTheme from "../assets/main_menu.mp3";
+import WordBubble from "../WordBubble";
 
 const mainMenuMusic = new Howl({ src: mainMenuTheme, loop: true });
 
 export default function Menu({ onMissionStart = () => {}, missions, monk }) {
+  const [resetGame, setResetGame] = useState(false);
   const [spellBookOpen, setSpellBookOpen] = useState(false);
 
   useEffect(() => {
@@ -24,6 +26,22 @@ export default function Menu({ onMissionStart = () => {}, missions, monk }) {
         show={spellBookOpen}
         onClose={() => setSpellBookOpen(false)}
       />
+      {resetGame && (
+        <WordBubble
+          wordToWrite="I want to reset everything"
+          onFinish={() => {
+            localStorage.clear();
+            window.location.reload(false);
+          }}
+          pos={{
+            top: 300,
+            left: 300,
+          }}
+          onEscape={() => {
+            setResetGame(false);
+          }}
+        />
+      )}
       <img src={edo} alt="Edo" />
       <div className="main__menu">
         <h1 className="main__menu__title">Words of Edo</h1>
@@ -46,12 +64,19 @@ export default function Menu({ onMissionStart = () => {}, missions, monk }) {
             </div>
           ))}
         </div>
-        <button
+        <div
           className="main__menu__button"
           onClick={() => setSpellBookOpen(true)}
         >
           Open SpellBook
-        </button>
+        </div>
+
+        <div
+          className="main__menu__button"
+          onClick={() => setResetGame(!resetGame)}
+        >
+          Reset game
+        </div>
       </div>
     </div>
   );

@@ -4,6 +4,7 @@ import data from "./data";
 import Intro from "./Intro/Intro";
 import BattleWrapper from "./Battle/BattleWrapper";
 import { Howler } from "howler";
+import WordBubble from "./WordBubble";
 
 export function useTransitionState(initialState) {
   const [state, setState] = useState(initialState);
@@ -103,6 +104,10 @@ function Game() {
           monk={monk}
           mission={gameScreen.mission}
           onMissionEnd={(results) => {
+            setGameScreen({ type: "menu" });
+            if (results.monkDead) {
+              return;
+            }
             let newItems = [];
             let newSpells = [];
             let finalItems = [...monk.items];
@@ -190,7 +195,6 @@ function Game() {
               items: [...finalItems],
               missionBeaten: [...finalMissionsBeaten],
             });
-            setGameScreen({ type: "menu" });
           }}
         />
       );
