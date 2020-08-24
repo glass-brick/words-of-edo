@@ -52,8 +52,8 @@ export default function useBattleState({ monk, mission, onMissionEnd }) {
 
   useEffect(() => {
     if (mission.name === 0) {
+      addToLog("Press [1] at any time to open the spellbook");
       addToLog("Try writing one of your spells!");
-      addToLog("Roku... Osumaki... Mamoku... ");
     }
   }, [addToLog, mission.name]);
 

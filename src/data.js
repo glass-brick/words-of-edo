@@ -1100,7 +1100,7 @@ const missionPool = {
   },
 };
 
-const missions = [missionPool["0"]];
+const startingMissions = [0];
 
 const monk = {
   hp: 1000,
@@ -1112,7 +1112,7 @@ const monk = {
 export default {
   missionPool,
   monsters,
-  missions,
+  startingMissions,
   spells,
   utils,
   monk,

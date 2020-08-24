@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./Battle.scss";
 import useBattleState from "./useBattleState";
 import Room from "./Room";
@@ -15,6 +15,18 @@ export default function Battle({ monk, mission, onMissionEnd }) {
         )}%`
       : "";
   const [spellBookOpen, setSpellBookOpen] = useState(false);
+
+  useEffect(() => {
+    const handler = (e) => {
+      if (e.code === "Digit1" || e.code === "Escape") {
+        setSpellBookOpen(!spellBookOpen);
+      }
+    };
+
+    document.addEventListener("keydown", handler);
+
+    return () => document.removeEventListener("keydown", handler);
+  }, [spellBookOpen]);
 
   return (
     <div className="battle">
@@ -39,7 +51,7 @@ export default function Battle({ monk, mission, onMissionEnd }) {
           className="bottom-menu__square bottom-menu__spell"
           onClick={() => setSpellBookOpen(true)}
         >
-          <div className="bottom-menu__button">Open spellbook</div>
+          <div className="bottom-menu__button">Open spellbook ( 1 )</div>
         </div>
         <div className="bottom-menu__square bottom-menu__hp">
           <div className="bottom-menu__text">

@@ -36,14 +36,44 @@ export function useTransitionState(initialState) {
   return [state, transitionTo, transition];
 }
 
+const useLocalStorageObjectState = (key, initialState = {}) => {
+  const valueString = window.localStorage.getItem(key);
+  const valueArray = valueString ? JSON.parse(valueString) : initialState;
+  const [valueState, setValueState] = useState(valueArray);
+
+  useEffect(() => {
+    if (valueState.length === 0) window.localStorage.removeItem(key);
+    else window.localStorage.setItem(key, JSON.stringify(valueState));
+  }, [key, valueState]);
+
+  return [valueState, setValueState];
+};
+
+const useLocalStorageArrayState = (key, initialState) => {
+  const valueString = window.localStorage.getItem(key);
+  const valueArray = valueString ? valueString.split(";") : initialState;
+  const [valueState, setValueState] = useState(valueArray);
+
+  useEffect(() => {
+    if (valueState.length === 0) window.localStorage.removeItem(key);
+    else window.localStorage.setItem(key, valueState.join(";"));
+  }, [key, valueState]);
+
+  return [valueState, setValueState];
+};
+
 function Game() {
-  const [monk, setMonk] = useState(data.monk);
-  const [missions, setMissions] = useState(data.missions);
+  const [monk, setMonk] = useLocalStorageObjectState("monk", data.monk);
+  const [
+    availableMissionIds,
+    setAvailableMissionIds,
+  ] = useLocalStorageArrayState("missions", [0]);
   const [gameScreen, setGameScreen, transition] = useTransitionState({
     type: localStorage.getItem("introComplete") === "true" ? "menu" : "intro", // <- play intro only once
     // type: "intro",
   });
   const [muted, setMuted] = useState(localStorage.getItem("muted") === "true");
+  const missions = availableMissionIds.map((id) => data.missionPool[id]);
 
   useEffect(() => {
     if (muted) {
@@ -137,7 +167,7 @@ function Game() {
             // beating the mission may unlock others
             finalMissionsBeaten = [...monk.missionBeaten, results.mission.name];
             let missionsNumber = Object.keys(data.missionPool).length;
-            let availableMissions = [];
+            let newAvailableMissionIds = [];
             for (let i = 0; i < missionsNumber; i++) {
               if (!finalMissionsBeaten.includes(i)) {
                 // Not beaten yet
@@ -150,11 +180,11 @@ function Game() {
                       unlocked = false;
                     }
                   });
-                  if (unlocked) availableMissions.push(data.missionPool[i]);
+                  if (unlocked) newAvailableMissionIds.push(i);
                 }
               }
             }
-            setMissions([...availableMissions]);
+            setAvailableMissionIds([...newAvailableMissionIds]);
             setMonk({
               ...monk,
               spells: [...finalSpells],
