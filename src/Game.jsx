@@ -69,8 +69,7 @@ function Game() {
     setAvailableMissionIds,
   ] = useLocalStorageArrayState("missions", [0]);
   const [gameScreen, setGameScreen, transition] = useTransitionState({
-    type: localStorage.getItem("introComplete") === "true" ? "menu" : "intro", // <- play intro only once
-    // type: "intro",
+    type: "intro",
   });
   const [muted, setMuted] = useState(localStorage.getItem("muted") === "true");
   const missions = availableMissionIds.map((id) => data.missionPool[id]);
