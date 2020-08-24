@@ -2,6 +2,10 @@ import React, { useEffect, useState } from "react";
 import Battle from "./Battle";
 import { useTransitionState } from "../Game";
 import "./BattleWrapper.scss";
+import gameOverTheme from "../assets/game_over.mp3";
+import { Howl } from "howler";
+
+const gameOverMusic = new Howl({ src: gameOverTheme });
 
 export default function BattleWrapper({ onMissionEnd, ...props }) {
   const [battleState, setBattleState, transition] = useTransitionState("intro");
@@ -11,6 +15,13 @@ export default function BattleWrapper({ onMissionEnd, ...props }) {
     setBattleState(missionResult.monkDead ? "lose" : "win");
     setSavedMissionResult(missionResult);
   };
+
+  useEffect(() => {
+    if (battleState === "lose") {
+      gameOverMusic.play();
+    }
+    return () => gameOverMusic.stop();
+  }, [battleState]);
 
   let rewards = [];
   if (battleState === "win") {

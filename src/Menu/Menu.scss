@@ -22,6 +22,7 @@
     }
     &__list {
       overflow-y: auto;
+      flex-grow: 1;
       &__item {
         border: 2px solid $darkpurple;
         background: $yellow;

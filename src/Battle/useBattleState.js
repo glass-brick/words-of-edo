@@ -69,6 +69,8 @@ export default function useBattleState({ monk, mission, onMissionEnd }) {
         if (spellUsed.special !== "boost") setBoost(null);
       }
       attackOnOpponent(spellUsed, boosted);
+    } else {
+      addToLog("That isn't a word of power!");
     }
   }
 
