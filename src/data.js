@@ -524,7 +524,7 @@ const utils = {
   defenseMultipliers: { 1: 0.7, 2: 0.4, 3: 0.2 },
   mirrorMultipliers: { 1: 0.2, 2: 0.4, 3: 0.7 },
   healAmount: 100,
-  boostMultiplier: 1.3,
+  boostMultipliers: { 1: 1.3, 2: 1.6, 3: 2 },
 };
 
 const missionPool = {

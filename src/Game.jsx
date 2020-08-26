@@ -9,7 +9,7 @@ import { useLocalStorageObjectState, useTransitionState } from "./hooks";
 function Game() {
   const [monk, setMonk] = useLocalStorageObjectState("monk", data.monk);
   const [gameScreen, setGameScreen, transition] = useTransitionState({
-    type: "menu",
+    type: process.env.NODE_ENV === "production" ? "intro" : "menu",
   });
   const [muted, setMuted] = useState(localStorage.getItem("muted") === "true");
   const missions = Object.values(data.missionPool).filter((mission) => {
@@ -52,66 +52,17 @@ function Game() {
             if (results.monkDead) {
               return;
             }
-            let newItems = [];
-            let newSpells = [];
-            let finalItems = [...monk.items];
-            let finalSpells = [...monk.spells];
-
-            if (results.usedItems) {
-              let oldItems = monk.items;
-              let usedItems = [];
-              let used;
-              results.usedItems.forEach(function (item) {
-                usedItems.push(item);
-              });
-              for (let i = 0; i < oldItems.length; i++) {
-                used = false;
-                for (let j = 0; j < usedItems.length; j++) {
-                  if (usedItems[j].name === oldItems[i].name) {
-                    used = true;
-                    break;
-                  }
-                }
-                if (!used) {
-                  newItems.push(oldItems[i]);
-                }
-              }
-              if (results.rewards?.items) {
-                finalItems = [...newItems, ...results.rewards.items];
-              } else {
-                finalItems = newItems;
-              }
-            } else {
-              if (results.rewards?.items) {
-                finalItems = [...monk.items, ...results.rewards.items];
-              }
-            }
-            if (
-              results.rewards &&
-              (results.mission.type !== "protect" ||
-                (results.mission.type === "protect" &&
-                  results.missionObjectivePassed > 0))
-            ) {
-              if (results.rewards.spells) {
-                // here we check if the monk already has these spells
-                newSpells = [];
-                results.rewards.spells.forEach((spell) => {
-                  let monkHasIt = false;
-                  monk.spells.forEach((monkSpell) => {
-                    if (monkSpell.name === spell.name) {
-                      monkHasIt = true;
-                    }
-                  });
-                  if (!monkHasIt) newSpells.push(spell);
-                });
-                finalSpells = [...monk.spells, ...newSpells];
-              }
-            }
+            const spells = [
+              ...monk.spells,
+              ...(results.rewards?.spells.filter(
+                (spell) =>
+                  !monk.spells.find((_spell) => spell.name === _spell.name)
+              ) || []),
+            ];
             setMonk({
               ...monk,
-              spells: [...finalSpells],
-              items: [...finalItems],
               missionBeaten: [...monk.missionBeaten, results.mission.name],
+              spells,
             });
           }}
         />

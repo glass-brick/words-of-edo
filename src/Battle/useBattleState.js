@@ -33,10 +33,16 @@ const music = new Howl({
   loop: true,
 });
 
+function useHP(initialHP) {
+  const [hp, setHP] = useState(initialHP);
+
+  return [hp, (hp) => setHP(Math.round(hp))];
+}
+
 export default function useBattleState({ monk, mission, onMissionEnd }) {
   const { monster } = mission;
-  const [hp, setHP] = useState(monk.hp);
-  const [monsterHp, setMonsterHP] = useState(monster.hp);
+  const [hp, setHP] = useHP(monk.hp);
+  const [monsterHp, setMonsterHP] = useHP(monster.hp);
   const [monsterDistance, setMonsterDistance] = useState(
     data.utils.maxStartingDistance
   );
@@ -83,11 +89,11 @@ export default function useBattleState({ monk, mission, onMissionEnd }) {
 
   function attackOnOpponent(spellUsed, boosted) {
     let damage = spellUsed.damage ? spellUsed.damage : 0;
-    let boostValue = boosted ? data.utils.boostMultiplier : 1;
+    let boostValue = boosted ? data.utils.boostMultipliers[boosted] : 1;
 
     damage *= boostValue;
 
-    setMonsterHP(Math.round(monsterHp - damage));
+    setMonsterHP(monsterHp - damage);
 
     // specials logic
     // Specials refer to extra effects on creatures
@@ -134,11 +140,7 @@ export default function useBattleState({ monk, mission, onMissionEnd }) {
           setMonsterDistance(finalDistance);
           break;
         case "self_heal":
-          setHP(
-            Math.round(
-              hp + spellUsed.level * data.utils.healAmount * boostValue
-            )
-          );
+          setHP(hp + spellUsed.level * data.utils.healAmount * boostValue);
           addToLog("You feel your wounds closing up...");
           break;
         case "boost":
@@ -170,7 +172,9 @@ export default function useBattleState({ monk, mission, onMissionEnd }) {
 
   function onCompleteEnemyWord(spellUsed) {
     let damage = getPlayerDamageFunction(spellUsed.damage, monsterDistance);
-    let boosted = defenseBoosted ? data.utils.boostMultiplier : 1;
+    let boosted = defenseBoosted
+      ? data.utils.boostMultipliers[defenseBoosted]
+      : 1;
     if (defense) {
       damage *= data.utils.defenseMultipliers[defense] / boosted;
       setDefense(null);
@@ -179,10 +183,8 @@ export default function useBattleState({ monk, mission, onMissionEnd }) {
     }
     if (defenseMirror) {
       setMonsterHP(
-        Math.round(
-          monsterHp -
-            data.utils.mirrorMultipliers[defenseMirror] * damage * boosted
-        )
+        monsterHp -
+          data.utils.mirrorMultipliers[defenseMirror] * damage * boosted
       );
       setDefenseMirror(null);
       addToLog("Your words turned the attack back on the monster!");
@@ -195,7 +197,7 @@ export default function useBattleState({ monk, mission, onMissionEnd }) {
       addToLog("The attack doesn't seem to damage you");
     }
 
-    setHP(Math.round(hp - damage));
+    setHP(hp - damage);
     setEnemyWord(null);
   }
 
@@ -209,24 +211,15 @@ export default function useBattleState({ monk, mission, onMissionEnd }) {
       // tries to attack
       if (Math.random() < monster.attackchance) {
         // choose attack
-        let finalAttack = null;
-        if (monster.spells.length === 1) {
-          finalAttack = monster.spells[0].spell;
-        } else {
-          let randomChoice = Math.random();
-          let advance = 0;
-          for (let i = 0; i < monster.spells.length; i++) {
-            const attack = monster.spells[i];
-            if (randomChoice < attack.chances + advance) {
-              finalAttack = attack.spell;
-              break;
-            } else {
-              advance += attack.chances;
-            }
-          }
-        }
+        const randomChoice = Math.random();
+        let advance = 0;
+        const attack = monster.spells.find((attack, i) => {
+          advance += attack.chances;
+          return randomChoice < advance;
+        })?.spell;
+
         // Starts attacking
-        setEnemyWord(finalAttack);
+        setEnemyWord(attack);
         addToLog("The monster starts chanting...");
       } else {
         // Moves
@@ -290,18 +283,10 @@ export default function useBattleState({ monk, mission, onMissionEnd }) {
     monsterHp,
     monsterDistance,
     log,
-    onCompleteWord: (spellUsed) => {
-      onCompleteWord(spellUsed);
-    },
-    onCompleteEnemyWord: (spellUsed) => {
-      onCompleteEnemyWord(spellUsed);
-    },
-    onKeyStroke: () => {
-      onKeyStroke();
-    },
-    onItemUse: (itemUsed) => {
-      onItemUse(itemUsed);
-    },
+    onCompleteWord,
+    onCompleteEnemyWord,
+    onKeyStroke,
+    onItemUse,
     enemyWord,
     objectiveHP,
     monkItems,

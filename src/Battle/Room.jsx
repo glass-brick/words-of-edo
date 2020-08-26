@@ -31,7 +31,11 @@ export default function Room({
     const handler = (e) => {
       if (e.code.startsWith("Key") || e.code === "Space") {
         onKeyStroke();
-        setInput((input) => `${input}${e.key}`);
+        const nextKey =
+          input.length === 0 || input[input.length - 1] === " "
+            ? e.key.toUpperCase()
+            : e.key.toLowerCase();
+        setInput((input) => `${input}${nextKey}`);
       }
       if (e.code === "Backspace") {
         setInput((input) => input.slice(0, -1));
