@@ -21,14 +21,13 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
-      - name: NPM install and deploy
+      - name: Install dependencies and build
         run: |
           npm ci
           npm run build
-      - name: deploy
+      - name: Deploy
         env:
           ACCESS_TOKEN: ${{ secrets.TOKEN }}
         run: |
-          git config user.email "julianabsatz@gmail.com"
-          git config user.name "CI"
+          git remote add origin https://jabsatz:{ACCESS_TOKEN}@github.com/jabsatz/extra-credits-gamejam-2020.git
           npm run deploy
