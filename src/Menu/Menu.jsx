@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import edo from "../assets/edo.png";
 import "./Menu.scss";
-import data from "../data";
 import SpellBook from "../Battle/SpellBook";
 import { Howl } from "howler";
 import mainMenuTheme from "../assets/main_menu.mp3";

@@ -3,7 +3,7 @@ import { useState, useCallback, useEffect } from "react";
 import data from "../data.js";
 
 // Music & Sound
-import { Howl, Howler } from "howler";
+import { Howl } from "howler";
 import musicSrc2 from "../assets/tin_tin_tin_tin_TIN_TIN_TIN_TIN.mp3";
 
 function useLog(maxLines) {

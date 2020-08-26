@@ -1,6 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
 import "./Room.scss";
-import data from "../data.js";
 import priest from "../assets/priest.png";
 import { createPortal } from "react-dom";
 import Attack from "./Attacks";

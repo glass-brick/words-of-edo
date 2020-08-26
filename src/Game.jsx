@@ -4,7 +4,6 @@ import data from "./data";
 import Intro from "./Intro/Intro";
 import BattleWrapper from "./Battle/BattleWrapper";
 import { Howler } from "howler";
-import WordBubble from "./WordBubble";
 
 export function useTransitionState(initialState) {
   const [state, setState] = useState(initialState);
@@ -118,18 +117,14 @@ function Game() {
               let oldItems = monk.items;
               let usedItems = [];
               let used;
-              let objectUsed;
-              let indexUsed;
               results.usedItems.forEach(function (item) {
                 usedItems.push(item);
               });
               for (let i = 0; i < oldItems.length; i++) {
                 used = false;
-                objectUsed = null;
                 for (let j = 0; j < usedItems.length; j++) {
                   if (usedItems[j].name === oldItems[i].name) {
                     used = true;
-                    indexUsed = j;
                     break;
                   }
                 }

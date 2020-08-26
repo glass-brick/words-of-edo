@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import "./Intro.scss";
-import data from "../data";
 import arrowLeft from "../assets/arrow_left.png";
 import WordBubble from "../WordBubble";
 import bgMusic from "../assets/melo_pelea3.mp3";

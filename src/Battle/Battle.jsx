@@ -3,7 +3,6 @@ import "./Battle.scss";
 import useBattleState from "./useBattleState";
 import Room from "./Room";
 import SpellBook from "./SpellBook";
-import Dropdown from "./Dropdown";
 
 export default function Battle({ monk, mission, onMissionEnd }) {
   const state = useBattleState({ monk, mission, onMissionEnd });
