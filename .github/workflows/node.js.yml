@@ -20,7 +20,7 @@ jobs:
       - name: Install dependencies and build
         run: |
           npm ci
-          npm run build
+          CI=false npm run build
       - name: Deploy to GitHub Pages
         if: success()
         uses: crazy-max/ghaction-github-pages@v2
