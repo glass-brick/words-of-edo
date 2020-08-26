@@ -21,8 +21,14 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
-      - name: NPM install, build and deploy
+      - name: NPM install and deploy
         run: |
           npm ci
           npm run build
+      - name: deploy
+        env:
+          ACCESS_TOKEN: ${{ secrets.TOKEN }}
+        run: |
+          git config user.email "julianabsatz@gmail.com"
+          git config user.name "CI"
           npm run deploy
