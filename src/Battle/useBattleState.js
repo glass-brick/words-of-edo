@@ -7,11 +7,12 @@ import { Howl } from "howler";
 import musicSrc2 from "../assets/tin_tin_tin_tin_TIN_TIN_TIN_TIN.mp3";
 
 function useLog(maxLines) {
-  const [log, setLog] = useState(["A demon appears!"]);
+  const [log, setLog] = useState([{ pos: 0, text: "A demon appears!" }]);
 
   const addToLog = useCallback(
-    (newItem) =>
+    (newText) =>
       setLog((log) => {
+        const newItem = { pos: log[log.length - 1].pos + 1, text: newText };
         if (log.length >= maxLines) {
           return [...log.slice(1), newItem];
         } else {
@@ -52,7 +53,7 @@ export default function useBattleState({ monk, mission, onMissionEnd }) {
 
   useEffect(() => {
     if (mission.name === 0) {
-      addToLog("Press [1] at any time to open the spellbook");
+      addToLog("Press (1) at any time to open the spellbook");
       addToLog("Try writing one of your spells!");
     }
   }, [addToLog, mission.name]);

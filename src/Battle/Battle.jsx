@@ -3,6 +3,7 @@ import "./Battle.scss";
 import useBattleState from "./useBattleState";
 import Room from "./Room";
 import SpellBook from "./SpellBook";
+import TextCrawl from "../TextCrawl";
 
 export default function Battle({ monk, mission, onMissionEnd }) {
   const state = useBattleState({ monk, mission, onMissionEnd });
@@ -66,9 +67,9 @@ export default function Battle({ monk, mission, onMissionEnd }) {
           <div className="bottom-menu__text">{missionObj}</div>
         </div>
         <ul className="bottom-menu__log">
-          {state.log.map((line, i) => (
-            <li className="bottom-menu__log__line" key={i}>
-              {line}
+          {state.log.map((line) => (
+            <li className="bottom-menu__log__line" key={line.pos}>
+              <TextCrawl disableSkip>{line.text}</TextCrawl>
             </li>
           ))}
         </ul>

@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import Battle from "./Battle";
-import { useTransitionState } from "../Game";
 import "./BattleWrapper.scss";
 import gameOverTheme from "../assets/game_over.mp3";
 import winTheme from "../assets/you_win.mp3";
 import { Howl } from "howler";
 import WordBubble from "../WordBubble";
+import { useTransitionState } from "../hooks";
 
 const gameOverMusic = new Howl({ src: gameOverTheme });
 const winMusic = new Howl({ src: winTheme });

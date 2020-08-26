@@ -1,78 +1,22 @@
 import React, { useState, useEffect, useCallback } from "react";
 import Menu from "./Menu/Menu";
 import data from "./data";
-import Intro from "./Intro/Intro";
+import Tutorial from "./Tutorial/Tutorial";
 import BattleWrapper from "./Battle/BattleWrapper";
 import { Howler } from "howler";
-
-export function useTransitionState(initialState) {
-  const [state, setState] = useState(initialState);
-  const [transition, setTransition] = useState(false);
-
-  useEffect(() => {
-    let id1;
-    if (transition) {
-      id1 = setTimeout(() => {
-        setTransition(false);
-      }, 1000);
-    }
-    return () => {
-      clearTimeout(id1);
-    };
-  }, [transition]);
-
-  const transitionTo = useCallback(
-    (newState) =>
-      new Promise((resolve) => {
-        if (!transition) setTransition(true);
-        setTimeout(() => {
-          setState(newState);
-          resolve();
-        }, 500);
-      }),
-    [transition]
-  );
-
-  return [state, transitionTo, transition];
-}
-
-const useLocalStorageObjectState = (key, initialState = {}) => {
-  const valueString = window.localStorage.getItem(key);
-  const valueArray = valueString ? JSON.parse(valueString) : initialState;
-  const [valueState, setValueState] = useState(valueArray);
-
-  useEffect(() => {
-    if (valueState.length === 0) window.localStorage.removeItem(key);
-    else window.localStorage.setItem(key, JSON.stringify(valueState));
-  }, [key, valueState]);
-
-  return [valueState, setValueState];
-};
-
-const useLocalStorageArrayState = (key, initialState) => {
-  const valueString = window.localStorage.getItem(key);
-  const valueArray = valueString ? valueString.split(";") : initialState;
-  const [valueState, setValueState] = useState(valueArray);
-
-  useEffect(() => {
-    if (valueState.length === 0) window.localStorage.removeItem(key);
-    else window.localStorage.setItem(key, valueState.join(";"));
-  }, [key, valueState]);
-
-  return [valueState, setValueState];
-};
+import { useLocalStorageObjectState, useTransitionState } from "./hooks";
 
 function Game() {
   const [monk, setMonk] = useLocalStorageObjectState("monk", data.monk);
-  const [
-    availableMissionIds,
-    setAvailableMissionIds,
-  ] = useLocalStorageArrayState("missions", [0]);
   const [gameScreen, setGameScreen, transition] = useTransitionState({
-    type: "intro",
+    type: "menu",
   });
   const [muted, setMuted] = useState(localStorage.getItem("muted") === "true");
-  const missions = availableMissionIds.map((id) => data.missionPool[id]);
+  const missions = Object.values(data.missionPool).filter((mission) => {
+    if (monk.missionBeaten.includes(mission.name)) return false;
+    const unlockers = mission.unlockedBy;
+    return unlockers.every((unlocker) => monk.missionBeaten.includes(unlocker));
+  });
 
   useEffect(() => {
     if (muted) {
@@ -89,8 +33,8 @@ function Game() {
   switch (gameScreen.type) {
     case "intro":
       currentScreen = (
-        <Intro
-          onIntroEnd={() => {
+        <Tutorial
+          onTutorialEnd={() => {
             localStorage.setItem("introComplete", "true");
             setGameScreen({ type: "menu" });
           }}
@@ -104,6 +48,7 @@ function Game() {
           mission={gameScreen.mission}
           onMissionEnd={(results) => {
             setGameScreen({ type: "menu" });
+            // If monk is dead, return to screen as if nothing happened
             if (results.monkDead) {
               return;
             }
@@ -111,7 +56,6 @@ function Game() {
             let newSpells = [];
             let finalItems = [...monk.items];
             let finalSpells = [...monk.spells];
-            let finalMissionsBeaten = [...monk.missionBeaten];
 
             if (results.usedItems) {
               let oldItems = monk.items;
@@ -163,32 +107,11 @@ function Game() {
                 finalSpells = [...monk.spells, ...newSpells];
               }
             }
-            // beating the mission may unlock others
-            finalMissionsBeaten = [...monk.missionBeaten, results.mission.name];
-            let missionsNumber = Object.keys(data.missionPool).length;
-            let newAvailableMissionIds = [];
-            for (let i = 0; i < missionsNumber; i++) {
-              if (!finalMissionsBeaten.includes(i)) {
-                // Not beaten yet
-                let unlocked = true;
-                if (data.missionPool[i].unlockedBy) {
-                  data.missionPool[i].unlockedBy.forEach(function (
-                    missionUnlocker
-                  ) {
-                    if (!finalMissionsBeaten.includes(missionUnlocker)) {
-                      unlocked = false;
-                    }
-                  });
-                  if (unlocked) newAvailableMissionIds.push(i);
-                }
-              }
-            }
-            setAvailableMissionIds([...newAvailableMissionIds]);
             setMonk({
               ...monk,
               spells: [...finalSpells],
               items: [...finalItems],
-              missionBeaten: [...finalMissionsBeaten],
+              missionBeaten: [...monk.missionBeaten, results.mission.name],
             });
           }}
         />

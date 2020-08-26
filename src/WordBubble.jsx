@@ -1,34 +1,34 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { createPortal } from "react-dom";
+import { useGlobalKeypress } from "./hooks";
 
 export function useWriteWord({ wordToWrite, onFinish, onEscape }) {
   const [input, setInput] = useState("");
 
   const leftoverWord = wordToWrite.substring(input.length);
 
-  useEffect(() => {
-    const handler = (e) => {
-      if (e.code === "Enter") {
-        if (leftoverWord.length === 0) {
-          onFinish();
-        } else {
-          setInput("");
+  useGlobalKeypress(
+    useCallback(
+      (e) => {
+        if (e.code === "Enter") {
+          if (leftoverWord.length === 0) {
+            onFinish();
+          } else {
+            setInput("");
+          }
+        } else if (
+          e.key &&
+          e.key.toLowerCase() === leftoverWord[0].toLowerCase()
+        ) {
+          setInput((input) => `${input}${leftoverWord[0]}`);
         }
-      } else if (
-        e.key &&
-        e.key.toLowerCase() === leftoverWord[0].toLowerCase()
-      ) {
-        setInput((input) => `${input}${leftoverWord[0]}`);
-      }
-      if (onEscape && e.code === "Escape") {
-        onEscape();
-      }
-    };
-
-    document.addEventListener("keydown", handler);
-
-    return () => document.removeEventListener("keydown", handler);
-  }, [input, leftoverWord, onFinish, onEscape]);
+        if (onEscape && e.code === "Escape") {
+          onEscape();
+        }
+      },
+      [leftoverWord, onEscape, onFinish]
+    )
+  );
 
   return [input, leftoverWord];
 }

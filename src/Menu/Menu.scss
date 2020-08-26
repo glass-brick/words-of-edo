@@ -1,4 +1,4 @@
-@import "../index.scss";
+@import "../globals.scss";
 
 .main {
   display: flex;
@@ -17,14 +17,31 @@
     background: $orange;
     flex-grow: 1;
 
+    &__cursor {
+      position: absolute;
+      animation: bobbing 2s ease-in-out infinite;
+
+      @keyframes bobbing {
+        from {
+          transform: translateX(0);
+        }
+        50% {
+          transform: translateX(20px);
+        }
+        to {
+          transform: translateX(0);
+        }
+      }
+    }
     &__title {
       margin-bottom: 20px;
     }
     &__list {
-      overflow-y: auto;
       flex-grow: 1;
       &__item {
-        border: 2px solid $darkpurple;
+        overflow: hidden;
+        border: 4px solid $darkpurple;
+        border-radius: 8px;
         background: $yellow;
         display: grid;
         grid-template-columns: auto auto;

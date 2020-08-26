@@ -1,9 +1,11 @@
-import React, { useState, useEffect } from "react";
-import "./Intro.scss";
+import React, { useState, useEffect, useCallback } from "react";
+import "./Tutorial.scss";
 import arrowLeft from "../assets/arrow_left.png";
 import WordBubble from "../WordBubble";
 import bgMusic from "../assets/melo_pelea3.mp3";
 import { Howl } from "howler";
+import TextCrawl from "../TextCrawl";
+import { useGlobalKeypress } from "../hooks";
 
 const bgMusicHowl = new Howl({ src: bgMusic });
 
@@ -35,8 +37,9 @@ const introTexts = [
   </>,
 ];
 
-export default function Intro({ onIntroEnd = () => {} }) {
+export default function Tutorial({ onTutorialEnd = () => {} }) {
   const [currentTextIndex, setCurrentTextIndex] = useState(0);
+  const [arrowEnabled, setArrowEnabled] = useState(false);
 
   useEffect(() => {
     bgMusicHowl.play();
@@ -44,16 +47,38 @@ export default function Intro({ onIntroEnd = () => {} }) {
     return () => bgMusicHowl.stop();
   }, []);
 
+  useGlobalKeypress(
+    useCallback(() => {
+      if (currentTextIndex < introTexts.length - 1) {
+        if (arrowEnabled) {
+          setCurrentTextIndex(currentTextIndex + 1);
+        }
+        setArrowEnabled(!arrowEnabled);
+      }
+    }, [arrowEnabled, currentTextIndex])
+  );
+
   const writeEnabled = currentTextIndex === introTexts.length - 1;
 
   return (
     <div className="intro">
       <div className="intro__text-box">
-        <p className="intro__text-box__text">{introTexts[currentTextIndex]}</p>
+        <p className="intro__text-box__text">
+          {currentTextIndex < introTexts.length - 1 ? (
+            <TextCrawl onFinish={() => setArrowEnabled(true)}>
+              {introTexts[currentTextIndex]}
+            </TextCrawl>
+          ) : (
+            introTexts[currentTextIndex]
+          )}
+        </p>
         <div className="intro__text-box__arrow">
-          {currentTextIndex < introTexts.length - 1 && (
+          {arrowEnabled && (
             <img
-              onClick={() => setCurrentTextIndex(currentTextIndex + 1)}
+              onClick={() => {
+                setArrowEnabled(false);
+                setCurrentTextIndex(currentTextIndex + 1);
+              }}
               src={arrowLeft}
               alt="Right"
               style={{
@@ -68,7 +93,7 @@ export default function Intro({ onIntroEnd = () => {} }) {
         {writeEnabled && (
           <WordBubble
             wordToWrite={initialWord}
-            onFinish={onIntroEnd}
+            onFinish={onTutorialEnd}
             pos={{ right: 390, top: 120 }}
           />
         )}

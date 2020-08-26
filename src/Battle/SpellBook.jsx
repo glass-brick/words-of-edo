@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import arrowLeft from "../assets/arrow_left.png";
 import cx from "classnames";
 import "./SpellBook.scss";
+import { useGlobalKeypress } from "../hooks";
 
 function Spell({ spell }) {
   return (
@@ -36,19 +37,11 @@ export default function SpellBook({ spells, show, onClose }) {
 
   const ref = useRef(null);
 
-  useEffect(() => {
-    const handler = (e) => {
-      if (!ref.current.contains(e.target) && show) {
-        onClose();
-      }
-    };
-    document.addEventListener("click", handler);
-    document.addEventListener("keydown", handler);
-    return () => {
-      document.removeEventListener("click", handler);
-      document.removeEventListener("keydown", handler);
-    };
-  }, [onClose, show]);
+  useGlobalKeypress((e) => {
+    if (e.code === "Escape") onClose();
+    if (e.code === "ArrowLeft" && canGoLeft) setCurrentPage(currentPage - 1);
+    if (e.code === "ArrowRight" && canGoRight) setCurrentPage(currentPage + 1);
+  });
   return (
     <div
       className={cx("spellbook", {
@@ -62,7 +55,6 @@ export default function SpellBook({ spells, show, onClose }) {
         ))}
         <div className="spellbook__face__bottom">
           <img
-            onClick={() => setCurrentPage(currentPage - 1)}
             src={arrowLeft}
             alt="Left"
             style={{
@@ -91,7 +83,6 @@ export default function SpellBook({ spells, show, onClose }) {
             {currentPage * 2 + 2} of {faces}
           </span>
           <img
-            onClick={() => setCurrentPage(currentPage + 1)}
             src={arrowLeft}
             alt="Right"
             style={{
