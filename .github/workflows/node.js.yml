@@ -25,9 +25,11 @@ jobs:
         run: |
           npm ci
           npm run build
-      - name: Deploy
+      - name: Deploy to GitHub Pages
+        if: success()
+        uses: crazy-max/ghaction-github-pages@v2
+        with:
+          target_branch: gh-pages
+          build_dir: build
         env:
-          ACCESS_TOKEN: ${{ secrets.TOKEN }}
-        run: |
-          git remote add origin https://jabsatz:{ACCESS_TOKEN}@github.com/jabsatz/extra-credits-gamejam-2020.git
-          npm run deploy
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
