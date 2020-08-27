@@ -20,7 +20,7 @@ export function useWriteWord({ wordToWrite, onFinish, onEscape }) {
           setInput((input) => input.substring(0, input.length - 1));
         } else if (
           e.key?.length === 1 &&
-          e.key.toLowerCase() === leftoverWord[0].toLowerCase()
+          e.key.toLowerCase() === leftoverWord[0]?.toLowerCase()
         ) {
           setInput((input) => `${input}${leftoverWord[0]}`);
         }
