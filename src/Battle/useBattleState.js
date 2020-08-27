@@ -69,6 +69,12 @@ export default function useBattleState({ monk, mission, onMissionEnd }) {
     defenseBoosted: null,
     boosted: null,
   });
+  const [enemyBuffs, setEnemyBuffs] = useBuffState({
+    defense: null,
+    defenseMirror: null,
+    defenseBoosted: null,
+    boosted: null,
+  });
   const [monkItems, setMonkItems] = useState(monk.items);
   const [usedItems, setUsedItems] = useState([]);
   const [battleRunning, setBattleRunning] = useState(true);
