@@ -1,10 +1,11 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef, useCallback } from "react";
 import "./Room.scss";
-import priest from "../assets/priest.png";
+import priest from "../assets/sprites/priest.png";
 import { createPortal } from "react-dom";
 import Attack from "./Attacks";
 import flop from "../assets/attack_sounds/flop.mp3";
 import { Howl } from "howler";
+import { useGlobalKeypress } from "../hooks";
 
 const flopSound = new Howl({ src: flop, volume: 0.2 });
 
@@ -30,38 +31,37 @@ export default function Room({
 
   const [input, setInput] = useState("");
 
-  useEffect(() => {
-    const handler = (e) => {
-      if (e.code.startsWith("Key") || e.code === "Space") {
-        onKeyStroke();
-        const nextKey =
-          input.length === 0 || input[input.length - 1] === " "
-            ? e.key.toUpperCase()
-            : e.key.toLowerCase();
-        setInput((input) => `${input}${nextKey}`);
-      }
-      if (e.code === "Backspace") {
-        setInput((input) => input.slice(0, -1));
-      }
-      if (e.code === "Enter") {
-        const matchedSpell = monk.spells.find(
-          (spell) => spell.displayName.toLowerCase() === input.toLowerCase()
-        );
-        // matchedSpell can be null
-        if (matchedSpell) {
-          attackRef.current.triggerAttack(matchedSpell, "player");
-        } else {
-          flopSound.play();
+  useGlobalKeypress(
+    useCallback(
+      (e) => {
+        if (e.code.startsWith("Key") || e.code === "Space") {
+          onKeyStroke();
+          const nextKey =
+            input.length === 0 || input[input.length - 1] === " "
+              ? e.key.toUpperCase()
+              : e.key.toLowerCase();
+          setInput((input) => `${input}${nextKey}`);
         }
-        onCompleteWord(matchedSpell);
-        setInput("");
-      }
-    };
-
-    document.addEventListener("keydown", handler);
-
-    return () => document.removeEventListener("keydown", handler);
-  }, [input, monk.spells, onCompleteWord, onKeyStroke]);
+        if (e.code === "Backspace") {
+          setInput((input) => input.slice(0, -1));
+        }
+        if (e.code === "Enter") {
+          const matchedSpell = monk.spells.find(
+            (spell) => spell.displayName.toLowerCase() === input.toLowerCase()
+          );
+          // matchedSpell can be null
+          if (matchedSpell) {
+            attackRef.current.triggerAttack(matchedSpell, "player");
+          } else {
+            flopSound.play();
+          }
+          onCompleteWord(matchedSpell);
+          setInput("");
+        }
+      },
+      [input, monk.spells, onCompleteWord, onKeyStroke]
+    )
+  );
 
   const [enemyInput, setEnemyInput] = useState("");
 

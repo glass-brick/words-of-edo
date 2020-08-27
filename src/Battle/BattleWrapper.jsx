@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import Battle from "./Battle";
 import "./BattleWrapper.scss";
-import gameOverTheme from "../assets/game_over.mp3";
-import winTheme from "../assets/you_win.mp3";
+import gameOverTheme from "../assets/music/game_over.mp3";
+import winTheme from "../assets/music/you_win.mp3";
 import { Howl } from "howler";
 import WordBubble from "../WordBubble";
 import { useTransitionState } from "../hooks";

@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import arrowLeft from "../assets/arrow_left.png";
+import arrowLeft from "../assets/icons/arrow_left.png";
 import cx from "classnames";
 import "./SpellBook.scss";
 import { useGlobalKeypress, useTransitionState } from "../hooks";

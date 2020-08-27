@@ -32,9 +32,14 @@ export function usePrevious(value) {
 
 export function useGlobalKeypress(onPress) {
   useEffect(() => {
-    document.addEventListener("keydown", onPress);
+    const handler = (e) => {
+      e.preventDefault();
+      onPress(e);
+    };
 
-    return () => document.removeEventListener("keydown", onPress);
+    document.addEventListener("keydown", handler);
+
+    return () => document.removeEventListener("keydown", handler);
   }, [onPress]);
 }
 

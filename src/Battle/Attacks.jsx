@@ -6,7 +6,7 @@ import React, {
 } from "react";
 import "./Attacks.scss";
 import cuttingSound from "../assets/attack_sounds/cut.wav";
-import fireSound from "../assets/fireball.wav";
+import fireSound from "../assets/attack_sounds/fireball.wav";
 import kineticSound from "../assets/attack_sounds/push.wav";
 import psiSound from "../assets/attack_sounds/psi.wav";
 import waterSound from "../assets/attack_sounds/water_spell.wav";

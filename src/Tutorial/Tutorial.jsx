@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useCallback } from "react";
 import "./Tutorial.scss";
-import arrowLeft from "../assets/arrow_left.png";
+import arrowLeft from "../assets/icons/arrow_left.png";
 import WordBubble from "../WordBubble";
-import bgMusic from "../assets/melo_pelea3.mp3";
+import bgMusic from "../assets/music/intro.mp3";
 import { Howl } from "howler";
 import TextCrawl from "../TextCrawl";
 import { useGlobalKeypress } from "../hooks";

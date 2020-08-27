@@ -1,29 +1,29 @@
-import monsterPrototype from "./assets/monster_prototype.png";
-import akaManto from "./assets/aka_manto_portrait.png";
-import akakuchi from "./assets/akakuchi.png";
-import nekomata from "./assets/nekomata.png";
-import nureOnna from "./assets/nureOnna.png";
-import tsuchigumo from "./assets/tsuchigumo.png";
-import ushiOni from "./assets/ushiOni.png";
-import yamaUba from "./assets/yamaUba.png";
-import yumeNoSeirei from "./assets/yumeNoSeirei.png";
-import yurei from "./assets/yurei.png";
-import soryoNoIkiryo from "./assets/soryoNoIkiryo.png";
-import akakuchiPortrait from "./assets/akakuchi_portrait.png";
-import nekomataPortrait from "./assets/nekomata_portrait.png";
-import nureOnnaPortrait from "./assets/nureOnna_portrait.png";
-import tsuchigumoPortrait from "./assets/tsuchigumo_portrait.png";
-import ushiOniPortrait from "./assets/ushiOni_portrait.png";
-import yamaUbaPortrait from "./assets/yamaUba_portrait.png";
-import yumeNoSeireiPortrait from "./assets/yumeNoSeirei_portrait.png";
-import yureiPortrait from "./assets/yurei_portrait.png";
-import soryoNoIkiryoPortrait from "./assets/soryoNoIkiryo_portrait.png";
-import missionLibrary from "./assets/missionLibrary.png";
-import missionPossessed from "./assets/missionPossessed.png";
-import missionHouse from "./assets/missionHouse.png";
-import missionWidow from "./assets/missionWidow.png";
-import missionShop from "./assets/missionShop.png";
-import missionBoss from "./assets/missionBoss.png";
+import akaManto from "./assets/sprites/aka_manto.png";
+import akakuchi from "./assets/sprites/akakuchi.png";
+import nekomata from "./assets/sprites/nekomata.png";
+import nureOnna from "./assets/sprites/nureOnna.png";
+import tsuchigumo from "./assets/sprites/tsuchigumo.png";
+import ushiOni from "./assets/sprites/ushiOni.png";
+import yamaUba from "./assets/sprites/yamaUba.png";
+import yumeNoSeirei from "./assets/sprites/yumeNoSeirei.png";
+import yurei from "./assets/sprites/yurei.png";
+import soryoNoIkiryo from "./assets/sprites/soryoNoIkiryo.png";
+import akaMantoPortrait from "./assets/portraits/aka_manto_portrait.png";
+import akakuchiPortrait from "./assets/portraits/akakuchi_portrait.png";
+import nekomataPortrait from "./assets/portraits/nekomata_portrait.png";
+import nureOnnaPortrait from "./assets/portraits/nureOnna_portrait.png";
+import tsuchigumoPortrait from "./assets/portraits/tsuchigumo_portrait.png";
+import ushiOniPortrait from "./assets/portraits/ushiOni_portrait.png";
+import yamaUbaPortrait from "./assets/portraits/yamaUba_portrait.png";
+import yumeNoSeireiPortrait from "./assets/portraits/yumeNoSeirei_portrait.png";
+import yureiPortrait from "./assets/portraits/yurei_portrait.png";
+import soryoNoIkiryoPortrait from "./assets/portraits/soryoNoIkiryo_portrait.png";
+import missionLibrary from "./assets/backgrounds/missionLibrary.png";
+import missionPossessed from "./assets/backgrounds/missionPossessed.png";
+import missionHouse from "./assets/backgrounds/missionHouse.png";
+import missionWidow from "./assets/backgrounds/missionWidow.png";
+import missionShop from "./assets/backgrounds/missionShop.png";
+import missionBoss from "./assets/backgrounds/missionBoss.png";
 
 const spells = {
   roku: {
@@ -381,7 +381,7 @@ const monsters = {
     attackchance: 0.15,
     msperkeystroke: 750,
     spells: [{ spell: spells.roku, chances: 1 }],
-    sprite: monsterPrototype,
+    sprite: akaManto,
   },
   aka_manto: {
     name: "aka_manto",
@@ -394,7 +394,7 @@ const monsters = {
       { spell: spells.odan_nakae, chances: 0.7 },
       { spell: spells.odan_kurae_tsuyi, chances: 0.3 },
     ],
-    sprite: monsterPrototype,
+    sprite: akaManto,
   },
   akakuchi: {
     name: "akakuchi",
@@ -532,7 +532,7 @@ const missionPool = {
     name: 0,
     unlockedBy: [],
     monster: monsters.aka_manto,
-    image: akaManto,
+    image: akaMantoPortrait,
     background: missionHouse,
     title: "A monster is roaming my house",
     description:
@@ -604,7 +604,7 @@ const missionPool = {
     name: 4,
     unlockedBy: [1, 2, 3],
     monster: monsters.aka_manto,
-    image: akaManto,
+    image: akaMantoPortrait,
     background: missionPossessed,
     title: "Save my child!",
     description:
@@ -658,7 +658,7 @@ const missionPool = {
     name: 7,
     unlockedBy: [4, 5, 6],
     monster: monsters.aka_manto,
-    image: akaManto,
+    image: akaMantoPortrait,
     background: missionWidow,
     title: "Local widow acting strangely",
     description:
@@ -730,7 +730,7 @@ const missionPool = {
     name: 11,
     unlockedBy: [7, 8, 9],
     monster: monsters.aka_manto,
-    image: akaManto,
+    image: akaMantoPortrait,
     background: missionHouse,
     title: "A monster is roaming my house",
     description:
@@ -748,7 +748,7 @@ const missionPool = {
     name: 12,
     unlockedBy: [7, 8, 9],
     monster: monsters.aka_manto,
-    image: akaManto,
+    image: akaMantoPortrait,
     background: missionLibrary,
     title: "The library must be saved",
     description:
@@ -928,7 +928,7 @@ const missionPool = {
     name: 22,
     unlockedBy: [19, 20, 21],
     monster: monsters.aka_manto,
-    image: akaManto,
+    image: akaMantoPortrait,
     background: missionPossessed,
     title: "Save my child!",
     description:
@@ -964,7 +964,7 @@ const missionPool = {
     name: 24,
     unlockedBy: [19, 20, 21],
     monster: monsters.aka_manto,
-    image: akaManto,
+    image: akaMantoPortrait,
     background: missionShop,
     title: "Something has vandalized my shop!",
     description:

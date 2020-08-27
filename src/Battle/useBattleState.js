@@ -4,7 +4,7 @@ import data from "../data.js";
 
 // Music & Sound
 import { Howl } from "howler";
-import musicSrc2 from "../assets/tin_tin_tin_tin_TIN_TIN_TIN_TIN.mp3";
+import musicSrc from "../assets/music/battle1.mp3";
 
 function useLog(maxLines) {
   const [log, setLog] = useState([{ pos: 0, text: "A demon appears!" }]);
@@ -25,7 +25,7 @@ function useLog(maxLines) {
   return [log, addToLog];
 }
 
-const possibleMusic = [musicSrc2];
+const possibleMusic = [musicSrc];
 
 let musicChoice = Math.floor(Math.random() * possibleMusic.length);
 const music = new Howl({
