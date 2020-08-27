@@ -24,6 +24,7 @@ const attackSounds = {
   psi: new Howl({ src: psiSound, volume: 0.2 }),
   water: new Howl({ src: waterSound, volume: 0.2 }),
   defense: new Howl({ src: defenseSound, volume: 0.2 }),
+  defense_success: new Howl({ src: defenseSound, volume: 0.2 }),
   boost: new Howl({ src: boostSound, volume: 0.2 }),
   mirror: new Howl({ src: mirrorSound, volume: 0.2 }),
   seal: new Howl({ src: sealSound, volume: 0.2 }),
@@ -38,6 +39,7 @@ const attackSpeeds = {
   seal: 1500,
   water: 1000,
   defense: 1500,
+  defense_success: 1500,
   boost: 1000,
   mirror: 1500,
   heal: 1000,
@@ -45,63 +47,59 @@ const attackSpeeds = {
 
 const defensiveSpells = ["defense", "boost", "mirror", "heal"];
 
-let Attack = ({ enemyPos }, ref) => {
-  const [attackOnPlayer, setAttackOnPlayer] = useState({});
-  const [attackOnEnemy, setAttackOnEnemy] = useState({});
-  const [activePlayer, setActivePlayer] = useState(false);
-  const [activeEnemy, setActiveEnemy] = useState(false);
+function useSpellOnPlace() {
+  const [spellCast, setSpellCast] = useState({});
+  const [spellIsActive, setSpellIsActive] = useState(false);
 
   useEffect(() => {
     let id;
-    if (attackOnPlayer) {
+    if (spellCast) {
       id = setTimeout(() => {
-        setAttackOnPlayer({});
-        setActivePlayer(false);
-      }, attackSpeeds[attackOnPlayer.condition] || 1000);
+        setSpellCast({});
+        setSpellIsActive(false);
+      }, attackSpeeds[spellCast.condition] || 1000);
     }
     return () => clearTimeout(id);
-  }, [attackOnPlayer, activePlayer]);
+  }, [spellCast, spellIsActive]);
 
-  useEffect(() => {
-    let id;
-    if (attackOnEnemy) {
-      id = setTimeout(() => {
-        setAttackOnEnemy({});
-        setActiveEnemy(false);
-      }, attackSpeeds[attackOnEnemy.condition] || 1000);
+  const triggerSpell = (spell) => {
+    const sound = attackSounds[spell.condition];
+    if (sound) {
+      sound.play();
     }
-    return () => clearTimeout(id);
-  }, [attackOnEnemy, activeEnemy]);
+    setSpellCast(spell);
+    if (spellIsActive) {
+      setSpellIsActive(false);
+      setTimeout(() => setSpellIsActive(true), 0);
+    } else {
+      setSpellIsActive(true);
+    }
+  };
+
+  return [spellIsActive && spellCast, triggerSpell];
+}
+
+let Attack = ({ enemyPos, defense }, ref) => {
+  const [spellOnPlayer, triggerSpellOnPlayer] = useSpellOnPlace();
+  const [spellOnEnemy, triggerSpellOnEnemy] = useSpellOnPlace();
+  const [auxPlayerSpell, triggerAuxPlayerSpell] = useSpellOnPlace();
 
   useImperativeHandle(ref, () => ({
-    triggerAttack: (spell, playerCasted) => {
-      const sound = attackSounds[spell.condition];
-      if (sound) {
-        sound.play();
-      }
+    triggerAttack: (spell, entityCasted) => {
       if (
-        (playerCasted === "player" &&
+        (entityCasted === "player" &&
           !defensiveSpells.includes(spell.condition)) ||
-        (playerCasted === "enemy" && defensiveSpells.includes(spell.condition))
+        (entityCasted === "enemy" && defensiveSpells.includes(spell.condition))
       ) {
-        setAttackOnEnemy(spell);
-        if (activeEnemy) {
-          setActiveEnemy(false);
-          setTimeout(() => setActiveEnemy(true), 0);
-        } else {
-          setActiveEnemy(true);
-        }
+        triggerSpellOnEnemy(spell);
       } else if (
-        (playerCasted === "enemy" &&
+        (entityCasted === "enemy" &&
           !defensiveSpells.includes(spell.condition)) ||
-        (playerCasted === "player" && defensiveSpells.includes(spell.condition))
+        (entityCasted === "player" && defensiveSpells.includes(spell.condition))
       ) {
-        setAttackOnPlayer(spell);
-        if (activePlayer) {
-          setActivePlayer(false);
-          setTimeout(() => setActivePlayer(true), 0);
-        } else {
-          setActivePlayer(true);
+        triggerSpellOnPlayer(spell);
+        if (entityCasted === "enemy" && defense) {
+          triggerAuxPlayerSpell({ condition: "defense_success", level: 3 });
         }
       }
     },
@@ -109,23 +107,34 @@ let Attack = ({ enemyPos }, ref) => {
 
   return (
     <>
-      {activePlayer && (
+      {auxPlayerSpell && (
         <div
           className="attack"
-          id={attackOnPlayer.condition}
+          id={auxPlayerSpell.condition}
           style={{
-            transform: `scale(${attackOnPlayer.level / 3})`,
+            transform: `scale(${auxPlayerSpell.level / 3})`,
             bottom: 40,
             left: 200,
           }}
         />
       )}
-      {activeEnemy && (
+      {spellOnPlayer && (
         <div
           className="attack"
-          id={attackOnEnemy.condition}
+          id={spellOnPlayer.condition}
           style={{
-            transform: `scale(${attackOnEnemy.level / 3})`,
+            transform: `scale(${spellOnPlayer.level / 3})`,
+            bottom: 40,
+            left: 200,
+          }}
+        />
+      )}
+      {spellOnEnemy && (
+        <div
+          className="attack"
+          id={spellOnEnemy.condition}
+          style={{
+            transform: `scale(${spellOnEnemy.level / 3})`,
             top: enemyPos.top,
             left: enemyPos.left,
           }}

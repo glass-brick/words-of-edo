@@ -36,15 +36,7 @@ export default function Battle({ monk, mission, onMissionEnd }) {
         onClose={() => setSpellBookOpen(false)}
       />
 
-      <Room
-        enemySpell={state.enemyWord}
-        onComplete={state.onCompleteWord}
-        onEnemyComplete={state.onCompleteEnemyWord}
-        onKeyStroke={state.onKeyStroke}
-        monsterDistance={state.monsterDistance}
-        monk={monk}
-        mission={mission}
-      />
+      <Room battleState={state} monk={monk} mission={mission} />
 
       <div className="bottom-menu">
         <div

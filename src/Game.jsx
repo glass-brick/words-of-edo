@@ -8,15 +8,19 @@ import { useLocalStorageObjectState, useTransitionState } from "./hooks";
 
 function Game() {
   const [monk, setMonk] = useLocalStorageObjectState("monk", data.monk);
-  const [gameScreen, setGameScreen, transition] = useTransitionState({
-    type: process.env.NODE_ENV === "production" ? "intro" : "menu",
-  });
   const [muted, setMuted] = useState(localStorage.getItem("muted") === "true");
   const missions = Object.values(data.missionPool).filter((mission) => {
     if (monk.missionBeaten.includes(mission.name)) return false;
     const unlockers = mission.unlockedBy;
     return unlockers.every((unlocker) => monk.missionBeaten.includes(unlocker));
   });
+  const [gameScreen, setGameScreen, transition] = useTransitionState(
+    process.env.NODE_ENV === "production"
+      ? { type: "intro" }
+      : {
+          type: "menu",
+        }
+  );
 
   useEffect(() => {
     if (muted) {
@@ -89,9 +93,9 @@ function Game() {
         {currentScreen}
       </div>
       <div id="portal-root">
-        <button className="mute-button" onClick={() => setMuted(!muted)}>
+        <div className="mute-button" onClick={() => setMuted(!muted)}>
           {muted ? "Unmute" : "Mute"}
-        </button>
+        </div>
       </div>
     </>
   );

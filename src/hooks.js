@@ -94,3 +94,13 @@ export function useTransitionState(initialState) {
 
   return [state, transitionTo, transition];
 }
+
+export function useIsMounted() {
+  const [isMounted, setIsMounted] = useState(false);
+  useEffect(() => {
+    setIsMounted(true);
+    return () => setIsMounted(false);
+  }, []);
+
+  return isMounted;
+}

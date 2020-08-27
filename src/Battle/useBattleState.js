@@ -46,7 +46,7 @@ export default function useBattleState({ monk, mission, onMissionEnd }) {
   const [monsterDistance, setMonsterDistance] = useState(
     data.utils.maxStartingDistance
   );
-  const [enemyWord, setEnemyWord] = useState(null);
+  const [enemySpell, setEnemySpell] = useState(null);
   const [log, addToLog] = useLog(5);
   const [defense, setDefense] = useState(null);
   const [defenseMirror, setDefenseMirror] = useState(null);
@@ -102,7 +102,7 @@ export default function useBattleState({ monk, mission, onMissionEnd }) {
       switch (spellUsed.special) {
         case "defense_response":
           // Defense does nothing against a spell that is not being cast
-          if (enemyWord) {
+          if (enemySpell) {
             addToLog("You feel protected");
             setDefense(spellUsed.level);
             if (boosted) setDefenseBoosted(boosted);
@@ -112,7 +112,7 @@ export default function useBattleState({ monk, mission, onMissionEnd }) {
           break;
         case "defense_mirror":
           // Defense does nothing against a spell that is not being cast
-          if (enemyWord) {
+          if (enemySpell) {
             setDefenseMirror(spellUsed.level);
             if (boosted) setDefenseBoosted(boosted);
           }
@@ -198,7 +198,7 @@ export default function useBattleState({ monk, mission, onMissionEnd }) {
     }
 
     setHP(hp - damage);
-    setEnemyWord(null);
+    setEnemySpell(null);
   }
 
   function getPlayerDamageFunction(baseDamage, distance) {
@@ -206,7 +206,7 @@ export default function useBattleState({ monk, mission, onMissionEnd }) {
   }
 
   function onKeyStroke() {
-    if (!enemyWord) {
+    if (!enemySpell) {
       // If we have an enemy word it is attacking
       // tries to attack
       if (Math.random() < monster.attackchance) {
@@ -219,7 +219,7 @@ export default function useBattleState({ monk, mission, onMissionEnd }) {
         })?.spell;
 
         // Starts attacking
-        setEnemyWord(attack);
+        setEnemySpell(attack);
         addToLog("The monster starts chanting...");
       } else {
         // Moves
@@ -287,8 +287,9 @@ export default function useBattleState({ monk, mission, onMissionEnd }) {
     onCompleteEnemyWord,
     onKeyStroke,
     onItemUse,
-    enemyWord,
+    enemySpell,
     objectiveHP,
     monkItems,
+    defense,
   };
 }

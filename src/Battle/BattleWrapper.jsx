@@ -6,6 +6,7 @@ import winTheme from "../assets/you_win.mp3";
 import { Howl } from "howler";
 import WordBubble from "../WordBubble";
 import { useTransitionState } from "../hooks";
+import Cursor from "../Cursor";
 
 const gameOverMusic = new Howl({ src: gameOverTheme });
 const winMusic = new Howl({ src: winTheme });
@@ -33,34 +34,6 @@ export default function BattleWrapper({ onMissionEnd, ...props }) {
     return () => winMusic.stop();
   }, [battleState]);
 
-  let rewards = [];
-  if (battleState === "win") {
-    if (
-      savedMissionResult.missionObjectivePassed > 0 &&
-      savedMissionResult.mission.rewards.spells
-    ) {
-      savedMissionResult.mission.rewards.spells.forEach((spell) => {
-        rewards.push(
-          `You can see a vision where ${spell.description.toLowerCase()}`
-        );
-        rewards.push(`You learned ${spell.displayName.toUpperCase()}!`);
-      });
-    }
-    if (
-      savedMissionResult.missionObjectivePassed > 0 &&
-      savedMissionResult.mission.rewards.items
-    ) {
-      savedMissionResult.mission.rewards.items.forEach((item) => {
-        rewards.push(
-          `For your services to the people, they gave you a thing called ${item.displayName}!`
-        );
-        rewards.push(
-          `Holding it, can see a vision where ${item.spell.description.toLowerCase()}`
-        );
-      });
-    }
-  }
-
   let element;
   switch (battleState) {
     case "intro":
@@ -80,6 +53,11 @@ export default function BattleWrapper({ onMissionEnd, ...props }) {
     case "win":
       element = (
         <div className="battle--win-screen">
+          <Cursor
+            enterHandlers={{
+              returnToMenu: () => onMissionEnd(savedMissionResult),
+            }}
+          />
           <div className="battle__title">
             You defeated {props.mission.monster.displayName}!
           </div>
@@ -88,39 +66,41 @@ export default function BattleWrapper({ onMissionEnd, ...props }) {
               ? "You also passed the objective!"
               : "But you didn't manage to accomplish the objective..."}
           </div>
-          {rewards.map((line, i) => (
-            <div key={i} className="battle__subtitle">
-              {line}
-            </div>
+          {savedMissionResult.mission.rewards.spells.map((spell, i) => (
+            <React.Fragment key={i}>
+              <div className="battle__subtitle">
+                You can see a vision where {spell.description.toLowerCase()}
+              </div>
+              <div className="battle__subtitle">
+                You learned {spell.displayName.toUpperCase()}!
+              </div>
+            </React.Fragment>
           ))}
-          <button
-            className="button"
-            onClick={() => onMissionEnd(savedMissionResult)}
-          >
+          <div data-cursor-id="returnToMenu" className="button">
             Continue
-          </button>
+          </div>
         </div>
       );
       break;
     case "lose":
       element = (
         <div className="battle--lose-screen">
-          <div className="battle__title">You lost!</div>
-          <button
-            className="button"
-            onClick={async () => {
-              await setBattleState("intro");
-              setSavedMissionResult(null);
+          <Cursor
+            enterHandlers={{
+              tryAgain: async () => {
+                await setBattleState("intro");
+                setSavedMissionResult(null);
+              },
+              returnToMenu: () => onMissionEnd(savedMissionResult),
             }}
-          >
+          />
+          <div className="battle__title">You lost!</div>
+          <div data-cursor-id="tryAgain" className="button">
             Try again
-          </button>
-          <button
-            className="button"
-            onClick={() => onMissionEnd(savedMissionResult)}
-          >
+          </div>
+          <div data-cursor-id="returnToMenu" className="button">
             Return to mission select
-          </button>
+          </div>
         </div>
       );
       break;

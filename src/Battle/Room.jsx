@@ -9,11 +9,14 @@ import { Howl } from "howler";
 const flopSound = new Howl({ src: flop, volume: 0.2 });
 
 export default function Room({
-  onComplete = () => {},
-  enemySpell,
-  onEnemyComplete = () => {},
-  onKeyStroke,
-  monsterDistance,
+  battleState: {
+    onCompleteWord = () => {},
+    enemySpell,
+    onCompleteEnemyWord = () => {},
+    onKeyStroke,
+    monsterDistance,
+    defense,
+  },
   monk,
   mission,
 }) {
@@ -50,7 +53,7 @@ export default function Room({
         } else {
           flopSound.play();
         }
-        onComplete(matchedSpell);
+        onCompleteWord(matchedSpell);
         setInput("");
       }
     };
@@ -58,7 +61,7 @@ export default function Room({
     document.addEventListener("keydown", handler);
 
     return () => document.removeEventListener("keydown", handler);
-  }, [input, monk.spells, onComplete, onKeyStroke]);
+  }, [input, monk.spells, onCompleteWord, onKeyStroke]);
 
   const [enemyInput, setEnemyInput] = useState("");
 
@@ -73,18 +76,18 @@ export default function Room({
         if (leftoverEnemyWord.length === 1) {
           attackRef.current.triggerAttack(enemySpell, "enemy");
           setEnemyInput("");
-          onEnemyComplete(enemySpell);
+          onCompleteEnemyWord(enemySpell);
         }
       }, monster.msperkeystroke);
     }
     return () => {
       if (id) clearTimeout(id);
     };
-  }, [enemySpell, monster, leftoverEnemyWord, onEnemyComplete]);
+  }, [enemySpell, monster, leftoverEnemyWord, onCompleteEnemyWord]);
 
   return (
     <div className="room" style={{ backgroundImage: `url(${background})` }}>
-      <Attack enemyPos={enemyPos} ref={attackRef} />
+      <Attack enemyPos={enemyPos} defense={defense} ref={attackRef} />
       <div
         className="room__enemy"
         ref={enemyRef}

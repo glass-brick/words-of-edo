@@ -40,6 +40,11 @@
     animation: play16 1.5s steps(16);
   }
 
+  &#defense_success {
+    background-image: url("../assets/attacks/defense.png");
+    animation: play5 0.5s steps(5) forwards;
+  }
+
   &#boost {
     background-image: url("../assets/attacks/boost.png");
     animation: play8 1s steps(8);
@@ -56,6 +61,11 @@
   }
 }
 
+@keyframes play5 {
+  100% {
+    background-position: -1000px;
+  }
+}
 @keyframes play8 {
   100% {
     background-position: -1600px;

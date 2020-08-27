@@ -1,0 +1,16 @@
+.cursor {
+  position: absolute;
+  animation: bobbing 2s ease-in-out infinite;
+
+  @keyframes bobbing {
+    from {
+      transform: translateX(0);
+    }
+    50% {
+      transform: translateX(20px);
+    }
+    to {
+      transform: translateX(0);
+    }
+  }
+}
