@@ -21,7 +21,7 @@ const attackSounds = {
   cutting: new Howl({ src: cuttingSound, volume: 0.2 }),
   fire: new Howl({ src: fireSound, volume: 0.2 }),
   kinetic: new Howl({ src: kineticSound, volume: 0.2 }),
-  psi: new Howl({ src: psiSound, volume: 0.2 }),
+  mind: new Howl({ src: psiSound, volume: 0.2 }),
   water: new Howl({ src: waterSound, volume: 0.2 }),
   defense: new Howl({ src: defenseSound, volume: 0.2 }),
   defense_success: new Howl({ src: defenseSound, volume: 0.2 }),
