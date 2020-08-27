@@ -115,7 +115,7 @@ const spells = {
     displayName: "Watama",
     damage: 13,
     special: "",
-    condition: "psi",
+    condition: "mind",
     description: "A spirit of headache infiltrates the monster's thoughts",
   },
   iteru_watama: {
@@ -124,7 +124,7 @@ const spells = {
     displayName: "Iteru Watama",
     damage: 33,
     special: "",
-    condition: "psi",
+    condition: "mind",
     description: "An evil spirit of migraine infiltrates the monster's mind",
   },
   gomoku_iteru_watama: {
@@ -133,7 +133,7 @@ const spells = {
     displayName: "Gomoku Iteru Watama",
     damage: 59,
     special: "",
-    condition: "psi",
+    condition: "mind",
     description:
       "A sealed demon infiltrates the monster's mind, causing excruciating pain",
   },
@@ -574,7 +574,7 @@ const missionPool = {
     description:
       "A widow has been acting strangely, maybe demons are behind this. Please take care of not upseting her, she's been through enough already",
     displayObjective: "Widow",
-    conditions: ["psi", "cutting", "fire"],
+    conditions: ["mind", "cutting", "fire"],
     objectiveHP: 475,
     type: "protect",
     rewards: {
@@ -592,7 +592,7 @@ const missionPool = {
     description:
       "A widow has been acting strangely, maybe demons are behind this. Please take care of not upseting her, she's been through enough already",
     displayObjective: "Widow",
-    conditions: ["psi", "cutting", "fire"],
+    conditions: ["mind", "cutting", "fire"],
     objectiveHP: 475,
     type: "protect",
     rewards: {
@@ -664,7 +664,7 @@ const missionPool = {
     description:
       "A widow has been acting strangely, maybe demons are behind this. Please take care of not upseting her, she's been through enough already",
     displayObjective: "Widow",
-    conditions: ["psi", "cutting", "fire"],
+    conditions: ["mind", "cutting", "fire"],
     objectiveHP: 475,
     type: "protect",
     rewards: {
@@ -700,7 +700,7 @@ const missionPool = {
     description:
       "A widow has been acting strangely, maybe demons are behind this. Please take care of not upseting her, she's been through enough already",
     displayObjective: "Widow",
-    conditions: ["psi", "cutting", "fire"],
+    conditions: ["mind", "cutting", "fire"],
     objectiveHP: 475,
     type: "protect",
     rewards: {
@@ -952,7 +952,7 @@ const missionPool = {
     description:
       "A widow has been acting strangely, maybe demons are behind this. Please take care of not upseting her, she's been through enough already",
     displayObjective: "Widow",
-    conditions: ["psi", "cutting", "fire"],
+    conditions: ["mind", "cutting", "fire"],
     objectiveHP: 475,
     type: "protect",
     rewards: {
