@@ -75,9 +75,31 @@ export default function useBattleState({ monk, mission, onMissionEnd }) {
     defenseBoosted: null,
     boosted: null,
   });
-  const [monkItems, setMonkItems] = useState(monk.items);
-  const [usedItems, setUsedItems] = useState([]);
   const [battleRunning, setBattleRunning] = useState(true);
+
+  const state = {
+    hp,
+    monsterHp,
+    objectiveHP,
+    monsterDistance,
+    enemySpell,
+    log,
+    playerBuffs,
+    enemyBuffs,
+    battleRunning,
+  };
+
+  const stateSetters = {
+    setHP,
+    setMonsterHP,
+    setObjectiveHP,
+    setMonsterDistance,
+    setEnemySpell,
+    addToLog,
+    setPlayerBuffs,
+    setEnemyBuffs,
+    setBattleRunning,
+  };
 
   useEffect(() => {
     if (mission.name === 0) {
@@ -93,24 +115,7 @@ export default function useBattleState({ monk, mission, onMissionEnd }) {
     return () => music.stop();
   }, []);
 
-  function onCompleteWord(spellUsed) {
-    if (spellUsed) {
-      setPlayerBuffs({
-        defense: null,
-        defenseMirror: null,
-        defenseBoosted: null,
-      });
-      let boosted = false;
-      if (playerBuffs.boost && playerBuffs.boost >= spellUsed.level) {
-        boosted = true;
-        if (spellUsed.special !== "boost") setPlayerBuffs({ boosted: null });
-      }
-      attackOnOpponent(spellUsed, boosted);
-    } else {
-      addToLog("That isn't a word of power!");
-    }
-  }
-
+  // Helper functions
   function attackOnOpponent(spellUsed, boosted) {
     let damage = spellUsed.damage ? spellUsed.damage : 0;
     let boostValue = boosted ? data.utils.boostMultipliers[boosted] : 1;
@@ -194,6 +199,34 @@ export default function useBattleState({ monk, mission, onMissionEnd }) {
     }
   }
 
+  function moveMonster(distance = monsterDistance - monster.speed) {
+    setMonsterDistance(Math.max(distance, data.utils.minStartingDistance));
+  }
+
+  const helpers = {
+    attackOnOpponent,
+    moveMonster,
+  };
+
+  // Events
+  function onCompleteWord(spellUsed) {
+    if (spellUsed) {
+      setPlayerBuffs({
+        defense: null,
+        defenseMirror: null,
+        defenseBoosted: null,
+      });
+      let boosted = false;
+      if (playerBuffs.boost && playerBuffs.boost >= spellUsed.level) {
+        boosted = true;
+        if (spellUsed.special !== "boost") setPlayerBuffs({ boosted: null });
+      }
+      attackOnOpponent(spellUsed, boosted);
+    } else {
+      addToLog("That isn't a word of power!");
+    }
+  }
+
   function onCompleteEnemyWord(spellUsed) {
     let damage = getPlayerDamageFunction(spellUsed.damage, monsterDistance);
     let boosted = playerBuffs.defenseBoosted
@@ -228,7 +261,12 @@ export default function useBattleState({ monk, mission, onMissionEnd }) {
   }
 
   function onKeyStroke() {
-    if (!enemySpell) {
+    if (
+      monster.hasToThink &&
+      monster.hasToThink(state, stateSetters, helpers)
+    ) {
+      monster.think(state, stateSetters, helpers);
+    } else if (!enemySpell) {
       // If we have an enemy word it is attacking
       // tries to attack
       if (Math.random() < monster.attackchance) {
@@ -244,25 +282,19 @@ export default function useBattleState({ monk, mission, onMissionEnd }) {
         setEnemySpell(attack);
         addToLog("The monster starts chanting...");
       } else {
-        // Moves
-        setMonsterDistance(
-          Math.max(
-            monsterDistance - monster.speed,
-            data.utils.minStartingDistance
-          )
-        );
+        moveMonster();
       }
     } // if it's attacking, it has its own logic
   }
 
-  function onItemUse(itemUsed) {
-    if (itemUsed) {
-      attackOnOpponent(itemUsed.spell, false);
-      // here we check if the monk already has these spells
-      setUsedItems([...usedItems, itemUsed]); // New array with old and new items used
-      setMonkItems(monkItems.filter((item) => item.name !== itemUsed.name));
-    }
-  }
+  // function onItemUse(itemUsed) {
+  //   if (itemUsed) {
+  //     attackOnOpponent(itemUsed.spell, false);
+  //     // here we check if the monk already has these spells
+  //     setUsedItems([...usedItems, itemUsed]); // New array with old and new items used
+  //     setMonkItems(monkItems.filter((item) => item.name !== itemUsed.name));
+  //   }
+  // }
 
   useEffect(() => {
     if (battleRunning && (monsterHp <= 0 || hp <= 0)) {
@@ -286,7 +318,7 @@ export default function useBattleState({ monk, mission, onMissionEnd }) {
         missionObjectivePassed,
         monkDead,
         rewards,
-        usedItems,
+        // usedItems,
         mission,
       });
     }
@@ -296,22 +328,16 @@ export default function useBattleState({ monk, mission, onMissionEnd }) {
     battleRunning,
     mission,
     onMissionEnd,
-    usedItems,
+    // usedItems,
     objectiveHP,
   ]);
 
   return {
-    hp,
-    monsterHp,
-    monsterDistance,
-    log,
+    ...state,
     onCompleteWord,
     onCompleteEnemyWord,
     onKeyStroke,
-    onItemUse,
-    enemySpell,
-    objectiveHP,
-    monkItems,
-    playerBuffs,
+    // onItemUse,
+    // monkItems,
   };
 }

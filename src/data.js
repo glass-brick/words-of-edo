@@ -373,15 +373,30 @@ const items = {
 };
 
 const monsters = {
-  monster_prototype: {
-    name: "monster_prototype",
-    displayName: "Monster Prototype",
-    speed: 0.026,
-    hp: 40,
-    attackchance: 0.15,
-    msperkeystroke: 750,
-    spells: [{ spell: spells.roku, chances: 1 }],
+  aka_manto_v1: {
+    name: "aka_manto_v1",
+    displayName: "Aka Manto",
+    speed: 0.045,
+    hp: 400,
+    attackchance: 0.13,
+    msperkeystroke: 250,
+    spells: [
+      { spell: spells.odan_nakae, chances: 0.7 },
+      { spell: spells.odan_kurae_tsuyi, chances: 0.3 },
+    ],
     sprite: akaManto,
+    hasToThink: (state, setters, helpers) => {
+      return state.monsterHp <= 100;
+    },
+    think: (state, setters, helpers) => {
+      if (!state.enemyWord) {
+        setters.setEnemySpell(spells.odan_kurae_tsuyi);
+        if (!state.enemyBuffs.angry) {
+          setters.setEnemyBuffs({ angry: true });
+          setters.addToLog("Aka Manto becomes angry, he won't stop chanting!");
+        }
+      }
+    },
   },
   aka_manto: {
     name: "aka_manto",
@@ -531,7 +546,7 @@ const missionPool = {
   0: {
     name: 0,
     unlockedBy: [],
-    monster: monsters.aka_manto,
+    monster: monsters.aka_manto_v1,
     image: akaMantoPortrait,
     background: missionHouse,
     title: "A monster is roaming my house",
