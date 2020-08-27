@@ -64,7 +64,7 @@ export const useLocalStorageArrayState = (key, initialState) => {
   return [valueState, setValueState];
 };
 
-export function useTransitionState(initialState) {
+export function useTransitionState(initialState, delay = 1000) {
   const [state, setState] = useState(initialState);
   const [transition, setTransition] = useState(false);
 
@@ -73,12 +73,12 @@ export function useTransitionState(initialState) {
     if (transition) {
       id1 = setTimeout(() => {
         setTransition(false);
-      }, 1000);
+      }, delay);
     }
     return () => {
       clearTimeout(id1);
     };
-  }, [transition]);
+  }, [transition, delay]);
 
   const transitionTo = useCallback(
     (newState) =>

@@ -21,11 +21,30 @@
     width: 50%;
     height: 100%;
     background: $yellow;
-    border-right: 1px solid $darkyellow;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: stretch;
+    position: relative;
+    &:first-child {
+      border-right: 4px solid $darkyellow;
+    }
+    &::before {
+      content: "";
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: $yellow;
+      opacity: 0;
+      transition: opacity 0.5s ease-in-out;
+      z-index: 6;
+    }
+    &--flipping {
+      &::before {
+        opacity: 1;
+      }
+    }
+
     &__bottom {
       flex-grow: 1;
       display: grid;
@@ -38,12 +57,43 @@
   }
 
   &__spell {
+    display: grid;
+    border-bottom: 4px solid $orange;
+    grid-template-columns: auto 200px;
+    grid-template-rows: 1fr 20px 1fr;
+    grid-template-areas:
+      "title image"
+      "data image"
+      "description image";
     height: 30%;
+    text-align: center;
     &__title {
+      grid-area: title;
+      font-size: 30px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
     &__data {
+      grid-area: data;
     }
     &__description {
+      grid-area: description;
+    }
+    &__image {
+      grid-area: image;
+      position: static !important;
+      &.spellbook__spell__image--level {
+        &-1 {
+          transform: scale(0.5);
+        }
+        &-2 {
+          transform: scale(0.75);
+        }
+        &-3 {
+          transform: scale(1);
+        }
+      }
     }
   }
 }

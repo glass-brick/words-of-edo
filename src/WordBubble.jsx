@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useCallback } from "react";
 import { createPortal } from "react-dom";
 import { useGlobalKeypress, useIsMounted } from "./hooks";
 
@@ -10,7 +10,6 @@ export function useWriteWord({ wordToWrite, onFinish, onEscape }) {
   useGlobalKeypress(
     useCallback(
       (e) => {
-        console.log(e);
         if (e.code === "Enter") {
           if (leftoverWord.length === 0) {
             onFinish();
