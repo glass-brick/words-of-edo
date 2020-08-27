@@ -5,6 +5,7 @@ import Tutorial from "./Tutorial/Tutorial";
 import BattleWrapper from "./Battle/BattleWrapper";
 import { Howler } from "howler";
 import { useLocalStorageObjectState, useTransitionState } from "./hooks";
+import "./Game.scss";
 
 function Game() {
   const [monk, setMonk] = useLocalStorageObjectState("monk", data.monk);
