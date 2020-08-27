@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from "react";
 import * as ReactIs from "react-is";
-import { useGlobalKeypress, useInterval, usePrevious } from "./hooks";
+import { useGlobalKeypress, useInterval, usePrevious } from "../hooks";
 
 function getTextLength(text) {
   if (typeof text === "undefined") return 0;

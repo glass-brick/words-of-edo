@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useCallback } from "react";
 import "./Tutorial.scss";
 import arrowLeft from "../assets/icons/arrow_left.png";
-import WordBubble from "../WordBubble";
+import WordBubble from "../Common/WordBubble";
 import bgMusic from "../assets/music/intro.mp3";
 import { Howl } from "howler";
-import TextCrawl from "../TextCrawl";
+import TextCrawl from "../Common/TextCrawl";
 import { useGlobalKeypress } from "../hooks";
 
 const bgMusicHowl = new Howl({ src: bgMusic });

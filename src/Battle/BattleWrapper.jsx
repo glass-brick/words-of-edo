@@ -4,9 +4,9 @@ import "./BattleWrapper.scss";
 import gameOverTheme from "../assets/music/game_over.mp3";
 import winTheme from "../assets/music/you_win.mp3";
 import { Howl } from "howler";
-import WordBubble from "../WordBubble";
+import WordBubble from "../Common/WordBubble";
 import { useTransitionState } from "../hooks";
-import Cursor from "../Cursor";
+import Cursor from "../Common/Cursor";
 
 const gameOverMusic = new Howl({ src: gameOverTheme });
 const winMusic = new Howl({ src: winTheme });

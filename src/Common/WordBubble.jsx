@@ -1,6 +1,6 @@
 import React, { useState, useCallback } from "react";
 import { createPortal } from "react-dom";
-import { useGlobalKeypress, useIsMounted } from "./hooks";
+import { useGlobalKeypress, useIsMounted } from "../hooks";
 
 export function useWriteWord({ wordToWrite, onFinish, onEscape }) {
   const [input, setInput] = useState("");

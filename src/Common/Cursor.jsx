@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import cursor from "./assets/icons/cursor.png";
+import cursor from "../assets/icons/cursor.png";
 import "./Cursor.scss";
-import { useGlobalKeypress } from "./hooks";
+import { useGlobalKeypress } from "../hooks";
 
 const cursorSize = {
   width: 48,

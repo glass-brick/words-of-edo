@@ -4,8 +4,8 @@ import "./Menu.scss";
 import SpellBook from "../Battle/SpellBook";
 import { Howl } from "howler";
 import mainMenuTheme from "../assets/music/main_menu.mp3";
-import WordBubble from "../WordBubble";
-import Cursor from "../Cursor";
+import WordBubble from "../Common/WordBubble";
+import Cursor from "../Common/Cursor";
 
 const mainMenuMusic = new Howl({ src: mainMenuTheme, loop: true });
 

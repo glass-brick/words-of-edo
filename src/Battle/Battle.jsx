@@ -3,7 +3,7 @@ import "./Battle.scss";
 import useBattleState from "./useBattleState";
 import Room from "./Room";
 import SpellBook from "./SpellBook";
-import TextCrawl from "../TextCrawl";
+import TextCrawl from "../Common/TextCrawl";
 
 export default function Battle({ monk, mission, onMissionEnd }) {
   const state = useBattleState({ monk, mission, onMissionEnd });
