@@ -1,9 +1,4 @@
-import React, {
-  useState,
-  useEffect,
-  useCallback,
-  useLayoutEffect,
-} from "react";
+import React, { useState, useEffect } from "react";
 import cursor from "./assets/cursor.png";
 import "./Cursor.scss";
 import { useGlobalKeypress } from "./hooks";
@@ -54,7 +49,7 @@ function useCursorState(enterHandlers, disabled) {
         );
       } else if (["ArrowRight", "ArrowDown"].includes(e.code)) {
         setSelectedItemIndex((selectedItemIndex + 1) % orderedItems.length);
-      } else if (e.code === "Enter") {
+      } else if (["Enter", "Space"].includes(e.code)) {
         const handler = enterHandlers[selectedItem];
         if (handler) handler();
       }
