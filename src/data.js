@@ -1104,7 +1104,19 @@ const startingMissions = [0];
 
 const monk = {
   hp: 1000,
-  spells: [spells.roku, spells.osumaki, spells.mamoku],
+  spells: [
+    spells.roku,
+    spells.osumaki,
+    spells.mamoku,
+    // IMPORTANT: don't commit these, test only
+    // spells.kurae,
+    // spells.watama,
+    // spells.itoi_nio_sasu_yosu_itsuo_muso_natsuo_hasu,
+    // spells.katara,
+    // spells.tagasu,
+    // spells.gisoku,
+    // spells.chisayu,
+  ],
   items: [items.watama_kimono],
   missionBeaten: [],
 };

@@ -4,7 +4,6 @@ import cx from "classnames";
 import "./Dropdown.scss";
 
 export default function Dropdown({ title, options = [], onSelect }) {
-  console.log(options)
   const [open, setOpen] = useState(false);
   const [subMenu, setSubMenu] = useState(null);
   const disabled = options.length === 0;
@@ -48,7 +47,10 @@ export default function Dropdown({ title, options = [], onSelect }) {
                     className="dropdown-portal__list__item"
                     onMouseOver={() => setSubMenu(option.name)}
                     onMouseLeave={() => setSubMenu(null)}
-                    onClick={() => {onSelect(option); setOpen(false)}}
+                    onClick={() => {
+                      onSelect(option);
+                      setOpen(false);
+                    }}
                   >
                     {option.displayName}
                   </li>

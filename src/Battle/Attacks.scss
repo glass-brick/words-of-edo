@@ -8,36 +8,57 @@
   &#cutting {
     background-image: url("../assets/attacks/cutting.png");
     animation: play13 0.5s steps(13);
+    &.attack--no-animation {
+      background-position: -2600px;
+    }
   }
 
   &#fire {
     background-image: url("../assets/attacks/fire.png");
     animation: play16 1s steps(16);
+    &.attack--no-animation {
+      background-position: -600px;
+    }
   }
 
   &#kinetic {
     background-image: url("../assets/attacks/kinetic.png");
     animation: play8 1s steps(8);
+    &.attack--no-animation {
+      background-position: -1400px;
+    }
   }
 
   &#psi {
     background-image: url("../assets/attacks/psi.png");
     animation: play16 1.5s steps(16);
+    &.attack--no-animation {
+      background-position: -200px;
+    }
   }
 
   &#seal {
     background-image: url("../assets/attacks/seal.png");
     animation: play24 1.5s steps(24);
+    &.attack--no-animation {
+      background-position: -4000px;
+    }
   }
 
   &#water {
     background-image: url("../assets/attacks/water.png");
     animation: play11 1s steps(11);
+    &.attack--no-animation {
+      background-position: -800px;
+    }
   }
 
   &#defense {
     background-image: url("../assets/attacks/defense.png");
     animation: play16 1.5s steps(16);
+    &.attack--no-animation {
+      background-position: -1000px;
+    }
   }
 
   &#defense_success {
@@ -48,16 +69,29 @@
   &#boost {
     background-image: url("../assets/attacks/boost.png");
     animation: play8 1s steps(8);
+    &.attack--no-animation {
+      background-position: -1000px;
+    }
   }
 
   &#mirror {
     background-image: url("../assets/attacks/mirror.png");
     animation: play16 1.5s steps(16);
+    &.attack--no-animation {
+      background-position: -1600px;
+    }
   }
 
   &#heal {
     background-image: url("../assets/attacks/heal.png");
     animation: play8 1s steps(8);
+    &.attack--no-animation {
+      background-position: 0px;
+    }
+  }
+
+  &--no-animation {
+    animation: none !important;
   }
 }
 
