@@ -15,7 +15,7 @@ export default function Room({
     onCompleteEnemyWord = () => {},
     onKeyStroke,
     monsterDistance,
-    defense,
+    playerBuffs,
   },
   monk,
   mission,
@@ -87,7 +87,11 @@ export default function Room({
 
   return (
     <div className="room" style={{ backgroundImage: `url(${background})` }}>
-      <Attack enemyPos={enemyPos} defense={defense} ref={attackRef} />
+      <Attack
+        enemyPos={enemyPos}
+        defense={playerBuffs.defense}
+        ref={attackRef}
+      />
       <div
         className="room__enemy"
         ref={enemyRef}

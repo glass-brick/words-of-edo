@@ -39,20 +39,36 @@ function useHP(initialHP) {
   return [hp, (hp) => setHP(Math.round(hp))];
 }
 
+function getPlayerDamageFunction(baseDamage, distance) {
+  return baseDamage * (10 - distance);
+}
+
+function useBuffState(initialState = {}) {
+  const [buffs, setBuffs] = useState(initialState);
+
+  const setBuffsObject = useCallback((newBuffValues) => {
+    setBuffs((buffs) => ({ ...buffs, ...newBuffValues }));
+  }, []);
+
+  return [buffs, setBuffsObject];
+}
+
 export default function useBattleState({ monk, mission, onMissionEnd }) {
   const { monster } = mission;
   const [hp, setHP] = useHP(monk.hp);
   const [monsterHp, setMonsterHP] = useHP(monster.hp);
+  const [objectiveHP, setObjectiveHP] = useHP(mission.objectiveHP);
   const [monsterDistance, setMonsterDistance] = useState(
     data.utils.maxStartingDistance
   );
   const [enemySpell, setEnemySpell] = useState(null);
   const [log, addToLog] = useLog(5);
-  const [defense, setDefense] = useState(null);
-  const [defenseMirror, setDefenseMirror] = useState(null);
-  const [defenseBoosted, setDefenseBoosted] = useState(null);
-  const [boost, setBoost] = useState(null);
-  const [objectiveHP, setObjectiveHP] = useState(mission.objectiveHP);
+  const [playerBuffs, setPlayerBuffs] = useBuffState({
+    defense: null,
+    defenseMirror: null,
+    defenseBoosted: null,
+    boosted: null,
+  });
   const [monkItems, setMonkItems] = useState(monk.items);
   const [usedItems, setUsedItems] = useState([]);
   const [battleRunning, setBattleRunning] = useState(true);
@@ -73,13 +89,15 @@ export default function useBattleState({ monk, mission, onMissionEnd }) {
 
   function onCompleteWord(spellUsed) {
     if (spellUsed) {
-      setDefenseMirror(null);
-      setDefenseBoosted(null);
-      setDefense(null);
+      setPlayerBuffs({
+        defense: null,
+        defenseMirror: null,
+        defenseBoosted: null,
+      });
       let boosted = false;
-      if (boost && boost >= spellUsed.level) {
+      if (playerBuffs.boost && playerBuffs.boost >= spellUsed.level) {
         boosted = true;
-        if (spellUsed.special !== "boost") setBoost(null);
+        if (spellUsed.special !== "boost") setPlayerBuffs({ boosted: null });
       }
       attackOnOpponent(spellUsed, boosted);
     } else {
@@ -104,8 +122,8 @@ export default function useBattleState({ monk, mission, onMissionEnd }) {
           // Defense does nothing against a spell that is not being cast
           if (enemySpell) {
             addToLog("You feel protected");
-            setDefense(spellUsed.level);
-            if (boosted) setDefenseBoosted(boosted);
+            setPlayerBuffs({ defense: spellUsed.level });
+            if (boosted) setPlayerBuffs({ defenseBoosted: boosted });
           } else {
             addToLog("There is nothing to protect against!");
           }
@@ -113,8 +131,8 @@ export default function useBattleState({ monk, mission, onMissionEnd }) {
         case "defense_mirror":
           // Defense does nothing against a spell that is not being cast
           if (enemySpell) {
-            setDefenseMirror(spellUsed.level);
-            if (boosted) setDefenseBoosted(boosted);
+            setPlayerBuffs({ defenseMirror: spellUsed.level });
+            if (boosted) setPlayerBuffs({ defenseBoosted: boosted });
           }
           break;
         case "push":
@@ -145,7 +163,7 @@ export default function useBattleState({ monk, mission, onMissionEnd }) {
           break;
         case "boost":
           addToLog("You feel stronger than ever!");
-          setBoost(spellUsed.level);
+          setPlayerBuffs({ boosted: spellUsed.level });
           break;
       }
     }
@@ -172,21 +190,23 @@ export default function useBattleState({ monk, mission, onMissionEnd }) {
 
   function onCompleteEnemyWord(spellUsed) {
     let damage = getPlayerDamageFunction(spellUsed.damage, monsterDistance);
-    let boosted = defenseBoosted
-      ? data.utils.boostMultipliers[defenseBoosted]
+    let boosted = playerBuffs.defenseBoosted
+      ? data.utils.boostMultipliers[playerBuffs.defenseBoosted]
       : 1;
-    if (defense) {
-      damage *= data.utils.defenseMultipliers[defense] / boosted;
-      setDefense(null);
+    if (playerBuffs.defense) {
+      damage *= data.utils.defenseMultipliers[playerBuffs.defense] / boosted;
+      setPlayerBuffs({ defense: null });
       addToLog("Your words protected you!");
       addToLog("The protection vanishes");
     }
-    if (defenseMirror) {
+    if (playerBuffs.defenseMirror) {
       setMonsterHP(
         monsterHp -
-          data.utils.mirrorMultipliers[defenseMirror] * damage * boosted
+          data.utils.mirrorMultipliers[playerBuffs.defenseMirror] *
+            damage *
+            boosted
       );
-      setDefenseMirror(null);
+      setPlayerBuffs({ defenseMirror: null });
       addToLog("Your words turned the attack back on the monster!");
       addToLog("The mirror vanishes");
     }
@@ -199,10 +219,6 @@ export default function useBattleState({ monk, mission, onMissionEnd }) {
 
     setHP(hp - damage);
     setEnemySpell(null);
-  }
-
-  function getPlayerDamageFunction(baseDamage, distance) {
-    return baseDamage * (10 - distance);
   }
 
   function onKeyStroke() {
@@ -290,6 +306,6 @@ export default function useBattleState({ monk, mission, onMissionEnd }) {
     enemySpell,
     objectiveHP,
     monkItems,
-    defense,
+    playerBuffs,
   };
 }
