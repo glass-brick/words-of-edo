@@ -45,12 +45,11 @@ export function useGlobalKeypress(onPress) {
 
 export const useLocalStorageObjectState = (key, initialState = {}) => {
   const valueString = window.localStorage.getItem(key);
-  const valueArray = valueString ? JSON.parse(valueString) : initialState;
-  const [valueState, setValueState] = useState(valueArray);
+  const valueObject = valueString ? JSON.parse(valueString) : initialState;
+  const [valueState, setValueState] = useState(valueObject);
 
   useEffect(() => {
-    if (valueState.length === 0) window.localStorage.removeItem(key);
-    else window.localStorage.setItem(key, JSON.stringify(valueState));
+    window.localStorage.setItem(key, JSON.stringify(valueState));
   }, [key, valueState]);
 
   return [valueState, setValueState];
