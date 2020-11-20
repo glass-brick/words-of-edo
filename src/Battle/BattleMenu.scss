@@ -1,0 +1,60 @@
+@import "../globals.scss";
+
+.bottom-menu {
+  position: absolute;
+  bottom: 1em;
+  right: 1em;
+  background-color: $orange;
+  display: grid;
+  color: $darkblue;
+  border-top: 1px solid $white;
+  border-left: 1px solid $white;
+
+  font-size: 20px;
+  font-weight: 600;
+
+  grid-template-columns: 200px 300px;
+  grid-template-rows: 30px 60px 60px 120px;
+  grid-template-areas:
+    "spell spell"
+    "hp objective-data"
+    "hp objective"
+    "log log";
+  gap: 1px 1px;
+
+  & > * {
+    border-bottom: 1px solid $white;
+    border-right: 1px solid $white;
+  }
+
+  &__spell {
+    user-select: none;
+    grid-area: spell;
+    cursor: pointer;
+    &:hover {
+      background: $yellow;
+    }
+  }
+  &__hp {
+    grid-area: hp;
+  }
+  &__objective-data {
+    grid-area: objective-data;
+  }
+  &__objective {
+    grid-area: objective;
+  }
+  &__log {
+    grid-area: log;
+    font-size: 16px;
+    font-weight: normal;
+    list-style: none;
+    padding-left: 20px;
+  }
+
+  &__square {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}

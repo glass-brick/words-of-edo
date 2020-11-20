@@ -25,7 +25,7 @@ import missionWidow from "./assets/backgrounds/missionWidow.png";
 import missionShop from "./assets/backgrounds/missionShop.png";
 import missionBoss from "./assets/backgrounds/missionBoss.png";
 
-const spells = {
+export const spells = {
   roku: {
     name: "roku",
     level: 1,
@@ -359,7 +359,7 @@ const spells = {
   },
 };
 
-const items = {
+export const items = {
   watama_kimono: {
     name: "watama_kimono",
     displayName: "Watama kimono",
@@ -372,7 +372,7 @@ const items = {
   },
 };
 
-const monsters = {
+export const monsters = {
   aka_manto_v1: {
     name: "aka_manto_v1",
     displayName: "Aka Manto",
@@ -533,7 +533,7 @@ const monsters = {
   },
 };
 
-const utils = {
+export const utils = {
   minStartingDistance: 4,
   maxStartingDistance: 7,
   defenseMultipliers: { 1: 0.7, 2: 0.4, 3: 0.2 },
@@ -542,7 +542,7 @@ const utils = {
   boostMultipliers: { 1: 1.3, 2: 1.6, 3: 2 },
 };
 
-const missionPool = {
+export const missionPool = {
   0: {
     name: 0,
     unlockedBy: [],
@@ -1115,9 +1115,9 @@ const missionPool = {
   },
 };
 
-const startingMissions = [0];
+export const startingMissions = [0];
 
-const monk = {
+export const monk = {
   hp: 1000,
   spells: [
     spells.roku,
@@ -1136,12 +1136,4 @@ const monk = {
   missionBeaten: [],
 };
 
-export default {
-  missionPool,
-  monsters,
-  startingMissions,
-  spells,
-  utils,
-  monk,
-  spellList: Object.values(spells),
-};
+export const spellList = Object.values(spells);

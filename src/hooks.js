@@ -30,17 +30,24 @@ export function usePrevious(value) {
   return ref.current;
 }
 
-export function useGlobalKeypress(onPress) {
+export function useGlobalEvent(event, eventHandler) {
   useEffect(() => {
-    const handler = (e) => {
+    document.addEventListener(event, eventHandler);
+
+    return () => document.removeEventListener(event, eventHandler);
+  }, [eventHandler, event]);
+}
+
+export function useGlobalKeypress(onPress) {
+  const handler = useCallback(
+    (e) => {
       e.preventDefault();
       onPress(e);
-    };
+    },
+    [onPress]
+  );
 
-    document.addEventListener("keydown", handler);
-
-    return () => document.removeEventListener("keydown", handler);
-  }, [onPress]);
+  useGlobalEvent("keydown", handler);
 }
 
 export const useLocalStorageObjectState = (key, initialState = {}) => {

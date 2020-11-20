@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import edo from "../assets/backgrounds/edo.png";
 import "./Menu.scss";
-import SpellBook from "../Battle/SpellBook";
+import SpellBook from "../Common/SpellBook";
 import { Howl } from "howler";
 import mainMenuTheme from "../assets/music/main_menu.mp3";
 import WordBubble from "../Common/WordBubble";

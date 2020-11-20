@@ -1,6 +1,6 @@
 /* eslint-disable default-case */
 import { useState, useCallback, useEffect } from "react";
-import data from "../data.js";
+import * as data from "../data";
 
 // Music & Sound
 import { Howl } from "howler";
@@ -25,11 +25,8 @@ function useLog(maxLines) {
   return [log, addToLog];
 }
 
-const possibleMusic = [musicSrc];
-
-let musicChoice = Math.floor(Math.random() * possibleMusic.length);
 const music = new Howl({
-  src: [possibleMusic[musicChoice]],
+  src: [musicSrc],
   loop: true,
 });
 

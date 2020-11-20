@@ -1,8 +1,12 @@
-import { useRef } from "react";
+import { useCallback, useRef } from "react";
 import arrowLeft from "../assets/icons/arrow_left.png";
 import cx from "classnames";
 import "./SpellBook.scss";
-import { useGlobalKeypress, useTransitionState } from "../hooks";
+import {
+  useGlobalEvent,
+  useGlobalKeypress,
+  useTransitionState,
+} from "../hooks";
 
 function Spell({ spell }) {
   return (
@@ -51,6 +55,18 @@ export default function SpellBook({ spells, show, onClose }) {
     if (e.code === "ArrowLeft" && canGoLeft) setCurrentPage(currentPage - 1);
     if (e.code === "ArrowRight" && canGoRight) setCurrentPage(currentPage + 1);
   });
+
+  useGlobalEvent(
+    "click",
+    useCallback(
+      (e) => {
+        if (show && !ref.current.contains(e.target)) {
+          onClose();
+        }
+      },
+      [onClose, show]
+    )
+  );
   return (
     <div
       className={cx("spellbook", {

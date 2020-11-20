@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import Menu from "./Menu/Menu";
-import data from "./data";
+import * as data from "./data";
 import Tutorial from "./Tutorial/Tutorial";
 import BattleWrapper from "./Battle/BattleWrapper";
 import { Howler } from "howler";
