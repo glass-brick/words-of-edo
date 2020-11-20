@@ -1,9 +1,4 @@
-import React, {
-  forwardRef,
-  useState,
-  useImperativeHandle,
-  useEffect,
-} from "react";
+import { forwardRef, useState, useImperativeHandle, useEffect } from "react";
 import "./Attacks.scss";
 import cuttingSound from "../assets/attack_sounds/cut.wav";
 import fireSound from "../assets/attack_sounds/fireball.wav";
@@ -79,7 +74,7 @@ function useSpellOnPlace() {
   return [spellIsActive && spellCast, triggerSpell];
 }
 
-let Attack = ({ enemyPos, defense }, ref) => {
+const Attack = ({ enemyPos, defense }, ref) => {
   const [spellOnPlayer, triggerSpellOnPlayer] = useSpellOnPlace();
   const [spellOnEnemy, triggerSpellOnEnemy] = useSpellOnPlace();
   const [auxPlayerSpell, triggerAuxPlayerSpell] = useSpellOnPlace();
@@ -144,6 +139,4 @@ let Attack = ({ enemyPos, defense }, ref) => {
   );
 };
 
-Attack = forwardRef(Attack);
-
-export default Attack;
+export default forwardRef(Attack);

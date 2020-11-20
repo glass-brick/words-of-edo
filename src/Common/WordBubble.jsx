@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from "react";
+import { useState, useCallback } from "react";
 import { createPortal } from "react-dom";
 import { useGlobalKeypress, useIsMounted } from "../hooks";
 

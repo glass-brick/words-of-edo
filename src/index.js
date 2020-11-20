@@ -1,13 +1,13 @@
-import React from "react";
+import { StrictMode } from "react";
 import ReactDOM from "react-dom";
 import "./index.scss";
 import Game from "./Game";
 import * as serviceWorker from "./serviceWorker";
 
 ReactDOM.render(
-  <React.StrictMode>
+  <StrictMode>
     <Game />
-  </React.StrictMode>,
+  </StrictMode>,
   document.getElementById("root")
 );
 

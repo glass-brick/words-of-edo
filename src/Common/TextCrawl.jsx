@@ -1,11 +1,11 @@
-import React, { useState, useEffect, useCallback } from "react";
+import { isValidElement, useState, useEffect, useCallback } from "react";
 import * as ReactIs from "react-is";
 import { useGlobalKeypress, useInterval, usePrevious } from "../hooks";
 
 function getTextLength(text) {
   if (typeof text === "undefined") return 0;
   if (typeof text === "string") return text.length;
-  if (React.isValidElement(text) && typeof text.props.children === "string")
+  if (isValidElement(text) && typeof text.props.children === "string")
     return text.props.children.length;
 
   console.error(text);

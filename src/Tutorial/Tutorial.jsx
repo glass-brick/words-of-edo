@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback } from "react";
 import "./Tutorial.scss";
 import arrowLeft from "../assets/icons/arrow_left.png";
 import WordBubble from "../Common/WordBubble";

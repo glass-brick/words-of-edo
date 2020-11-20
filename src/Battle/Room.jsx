@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef, useCallback } from "react";
+import { useEffect, useState, useRef, useCallback } from "react";
 import "./Room.scss";
 import priest from "../assets/sprites/priest.png";
 import { createPortal } from "react-dom";

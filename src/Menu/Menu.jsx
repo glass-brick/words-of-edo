@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import edo from "../assets/backgrounds/edo.png";
 import "./Menu.scss";
 import SpellBook from "../Battle/SpellBook";

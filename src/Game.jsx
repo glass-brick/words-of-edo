@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from "react";
+import { useState, useEffect } from "react";
 import Menu from "./Menu/Menu";
 import data from "./data";
 import Tutorial from "./Tutorial/Tutorial";

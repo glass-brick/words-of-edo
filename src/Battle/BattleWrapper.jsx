@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import Battle from "./Battle";
 import "./BattleWrapper.scss";
 import gameOverTheme from "../assets/music/game_over.mp3";
@@ -67,14 +67,14 @@ export default function BattleWrapper({ onMissionEnd, ...props }) {
               : "But you didn't manage to accomplish the objective..."}
           </div>
           {savedMissionResult.mission.rewards.spells.map((spell, i) => (
-            <React.Fragment key={i}>
+            <Fragment key={i}>
               <div className="battle__subtitle">
                 You can see a vision where {spell.description.toLowerCase()}
               </div>
               <div className="battle__subtitle">
                 You learned {spell.displayName.toUpperCase()}!
               </div>
-            </React.Fragment>
+            </Fragment>
           ))}
           <div data-cursor-id="returnToMenu" className="button">
             Continue
